@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.example.choutidemo.ui.gallery.GalleryFragment;
 import com.example.choutidemo.ui.home.HomeFragment;
 import com.example.choutidemo.ui.login.LoginActivity;
+import com.example.choutidemo.ui.login.RegisterActivity;
 import com.example.choutidemo.ui.slideshow.SlideshowFragment;
 import com.example.choutidemo.ui.slideshow.SlideshowFragment1;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
             // Toast.makeText(getBaseContext(),"没有登陆",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, LoginActivity.class);
             super.startActivity(intent);
+            finish();
         }
         SharedPreferences.Editor prefsEditor = appPrefs.edit();
 

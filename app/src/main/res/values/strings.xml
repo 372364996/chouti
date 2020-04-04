@@ -9,10 +9,11 @@
     <string name="menu_home">我的课程</string>
     <string name="menu_gallery">收藏老师</string>
     <string name="menu_slideshow">我的资料</string>
-    <string name="title_activity_login">登陆</string>
-    <string name="input_loginphone">手机号登陆</string>
-    <string name="input_password">登陆密码</string>
-    <string name="btn_login">登陆</string>
+    <string name="title_activity_login">登录</string>
+    <string name="input_loginphone">手机号登录</string>
+    <string name="input_password">登录密码</string>
+    <string name="btn_login">登录</string>
+    <string name="btn_register">注册</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>

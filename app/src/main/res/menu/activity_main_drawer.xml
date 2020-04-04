@@ -6,43 +6,33 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
             android:title="我的课程" />
         <item
             android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
             android:title="收藏老师" />
         <item
             android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="我的资料" />
         <item
             android:id="@+id/nav_slideshow1"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="我的钱包" />
         <item
             android:id="@+id/nav_slideshow2"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="更改密码" />
         <item
             android:id="@+id/nav_slideshow3"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="清理缓存" />
         <item
             android:id="@+id/nav_slideshow4"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="关于韩知" />
         <item
             android:id="@+id/nav_slideshow5"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="联系助教" />
         <item
             android:id="@+id/nav_slideshow6"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="当前版本号:20200202" />
         <item
             android:id="@+id/nav_slideshow7"
-            android:icon="@drawable/ic_menu_slideshow"
             android:title="退出登陆" />
     </group>
 </menu>
