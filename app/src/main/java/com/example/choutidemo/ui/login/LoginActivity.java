@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -80,8 +81,8 @@ public class LoginActivity extends AppCompatActivity {
 
             public void LoginGet() throws IOException {
                 dialog = ProgressDialog.show(LoginActivity.this, "", "正在登录...");
-                String name = usernameEditText.getText().toString();
-                String password = passwordEditText.getText().toString();
+                final String name = usernameEditText.getText().toString();
+                final String password = passwordEditText.getText().toString();
                 String path = "http://hanzhiapp.hdlebaobao.cn/home/applogin?phone=" + name + "&password=" + password;
                 System.out.println(path);
                 System.out.println("用户名：" + name);
@@ -106,7 +107,15 @@ public class LoginActivity extends AppCompatActivity {
                                                                     @Override
                                                                     public void run() {
                                                                         if (result.contains("true")) {
+                                                                            //登录成功后将用户名密码保存到SharedPreferences中
+                                                                            SharedPreferences.Editor editor = getSharedPreferences("LoginInfo", MODE_PRIVATE).edit();
+                                                                            editor.putString("userName", name);
+                                                                            editor.putString("password", password);
+                                                                            editor.apply();
                                                                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                                                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                                            startActivity(intent);
+                                                                            finish();
                                                                         } else {
                                                                             Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
                                                                         }
