@@ -2,28 +2,22 @@ package com.example.choutidemo;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Menu;
-import android.widget.Toast;
 
-import com.example.choutidemo.ui.gallery.GalleryFragment;
-import com.example.choutidemo.ui.home.HomeFragment;
+import com.example.choutidemo.ui.yuyue.YuYueFragment;
 import com.example.choutidemo.ui.login.LoginActivity;
 import com.example.choutidemo.ui.login.RegisterActivity;
-import com.example.choutidemo.ui.slideshow.SlideshowFragment;
-import com.example.choutidemo.ui.slideshow.SlideshowFragment1;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.choutidemo.ui.mine.MineFragment;
+import com.example.choutidemo.ui.selectclass.SelectClassFragment;
+import com.example.choutidemo.ui.teachers.TeacherFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.hjm.bottomtabbar.BottomTabBar;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.core.view.GravityCompat;
+import androidx.appcompat.app.ActionBar;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -54,20 +48,26 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);                   //传入ToolBar实例
+        ActionBar actionBar = getSupportActionBar();    //得到ActionBar实例
+        if (actionBar != null){
+            //显示导航按钮
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //设置导航按钮图片
+           actionBar.setHomeAsUpIndicator(R.drawable.ic_action_menu);
+        }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_slideshow1, R.id.nav_slideshow7)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_home)
                 .setDrawerLayout(drawer)
                 .build();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+//      //  NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+//        NavigationUI.setupWithNavController(navigationView, navController);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = getSharedPreferences("LoginInfo", MODE_PRIVATE).edit();
                         editor.clear();
                         editor.commit();
-                        intent  =new Intent(MainActivity.this, LoginActivity.class);
+                        intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                         break;
@@ -94,12 +94,12 @@ public class MainActivity extends AppCompatActivity {
         //初始化Fragment
         bottomTabBar.init(getSupportFragmentManager())
                 .setImgSize(50, 50)   //图片大小
-                .setFontSize(12)            //字体大小
-                .setTabPadding(4, 6, 10)//选项卡的间距
-                .addTabItem("首页", R.drawable.hanzhilogo, GalleryFragment.class)
-                .addTabItem("分类", R.drawable.tabimg, HomeFragment.class)
-                .addTabItem("发现", R.drawable.ic_menu_camera, SlideshowFragment.class)
-                .addTabItem("我的", R.drawable.ic_menu_camera, SlideshowFragment1.class)
+                .setFontSize(12)//字体大小
+                .setTabPadding(20, 6, 10)//选项卡的间距
+                .addTabItem("外教", R.drawable.ic_menu_camera, TeacherFragment.class)
+                .addTabItem("预约", R.drawable.ic_menu_camera, YuYueFragment.class)
+                .addTabItem("选择课程", R.drawable.ic_menu_camera, SelectClassFragment.class)
+                .addTabItem("我的", R.drawable.ic_menu_camera, MineFragment.class)
                 .isShowDivider(true)  //是否包含分割线
                 .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
                     @Override

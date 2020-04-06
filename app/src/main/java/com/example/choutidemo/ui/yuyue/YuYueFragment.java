@@ -1,4 +1,4 @@
-package com.example.choutidemo.ui.gallery;
+package com.example.choutidemo.ui.yuyue;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,22 +14,23 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.choutidemo.R;
 
-public class GalleryFragment extends Fragment {
+public class YuYueFragment extends Fragment {
 
-    private GalleryViewModel galleryViewModel;
+    private YuYueViewModel yuYueViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        galleryViewModel =
-                ViewModelProviders.of(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
-        final TextView textView = root.findViewById(R.id.text_gallery);
-        galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        yuYueViewModel =
+                ViewModelProviders.of(this).get(YuYueViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_yuyue, container, false);
+        final TextView textView = root.findViewById(R.id.text_yuyue);
+        yuYueViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
         });
+
         return root;
     }
 }

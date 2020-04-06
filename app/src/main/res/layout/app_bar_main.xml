@@ -25,6 +25,9 @@
         android:id="@+id/bottom_tab_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:tab_selected_color="#03DAC5"
+        app:tab_unselected_color="#ababab"
+
         >
     </com.hjm.bottomtabbar.BottomTabBar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

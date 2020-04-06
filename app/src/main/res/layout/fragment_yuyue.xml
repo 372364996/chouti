@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.slideshow.SlideshowFragment1">
+    tools:context=".ui.yuyue.YuYueFragment">
 
     <TextView
-        android:id="@+id/text_slideshow1"
+        android:id="@+id/text_yuyue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

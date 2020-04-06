@@ -1,16 +1,16 @@
-package com.example.choutidemo.ui.gallery;
+package com.example.choutidemo.ui.teachers;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class TeacherViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public TeacherViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is gallery fragment");
+        mText.setValue("外教");
     }
 
     public LiveData<String> getText() {

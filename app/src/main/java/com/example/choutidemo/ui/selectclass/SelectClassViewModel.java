@@ -1,16 +1,16 @@
-package com.example.choutidemo.ui.slideshow;
+package com.example.choutidemo.ui.selectclass;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class SlideshowViewModel1 extends ViewModel {
+public class SelectClassViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public SlideshowViewModel1() {
+    public SelectClassViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is slideshow1 fragment");
+        mText.setValue("选择课程");
     }
 
     public LiveData<String> getText() {

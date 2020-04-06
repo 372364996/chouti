@@ -4,7 +4,7 @@
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_dialog_email"
+        android:icon="@drawable/ic_action_qianbao"
         android:title="钱包"
         app:showAsAction="ifRoom" />
 </menu>
