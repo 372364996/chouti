@@ -9,19 +9,21 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:elevation="0dp"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#03DAC5"
-            app:popupTheme="@style/AppTheme.ToolBarTheme" />
+            app:popupTheme="@style/AppTheme.ToolBarTheme"
+            app:titleTextAppearance="@style/Toolbar.TitleText" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
+
     <com.hjm.bottomtabbar.BottomTabBar
         android:id="@+id/bottom_tab_bar"
         android:layout_width="match_parent"
@@ -29,6 +31,5 @@
         app:tab_selected_color="#03DAC5"
         app:tab_unselected_color="#ababab"
 
-        >
-    </com.hjm.bottomtabbar.BottomTabBar>
+        ></com.hjm.bottomtabbar.BottomTabBar>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
