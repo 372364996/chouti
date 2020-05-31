@@ -130,34 +130,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 }
                 );
 
-//                Call call = client.newCall(request);
-//
-//                Response response = call.execute();
-//
-//                if (response.isSuccessful()) {
-//                    dialog.dismiss();
-//                    // 请求成功
-//                    String respData = response.body().string();
-//                    Log.d("Body", respData);
-//                    try {
-//                        JSONObject object = new JSONObject(respData);
-//                        String res = object.getString("success");
-//
-//                        Log.d("Main", "resp " + res);
-//                        if (res == "false") {
-//                            Toast.makeText(LoginActivity.this, "账号或密码错误", Toast.LENGTH_SHORT).show();
-//                        } else {
-//                            Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-//                            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-//                            startActivity(intent);
-//                        }
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
-//                response.body().close();
             }
 
             //Post请求
