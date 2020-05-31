@@ -3,10 +3,12 @@ package com.example.choutidemo.ui.teachers;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,11 +31,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TeacherFragment extends Fragment {
+public class TeacherFragment extends Fragment implements ListViewAdapter.InnerItemOnclickListener, AdapterView.OnItemClickListener {
 
     private TeacherViewModel teacherViewModel;
     private ListView listView;
-
+    private  View  teacherListViewHeader;
+    private ListViewAdapter mAdapter;
     //private Toolbar toolbar;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,8 +45,14 @@ public class TeacherFragment extends Fragment {
                 ViewModelProviders.of(this).get(TeacherViewModel.class);
         View root = inflater.inflate(R.layout.fragment_teacher, container, false);
         listView = (ListView) root.findViewById(R.id.teacherlist);
+       teacherListViewHeader= inflater.inflate(R.layout.teacherlistviewheader, null);
         List<Map<String, Object>> list = getData();
-        listView.setAdapter(new ListViewAdapter(getActivity(), list));
+
+        mAdapter = new ListViewAdapter(getContext(), list);
+        listView.setAdapter(mAdapter);
+        listView.addHeaderView(teacherListViewHeader);
+        listView.setOnItemClickListener(this);
+        mAdapter.setOnInnerItemOnClickListener(this);
         return root;
     }
 
@@ -66,73 +75,24 @@ public class TeacherFragment extends Fragment {
         }
         return list;
     }
-}
-
-class ListViewAdapter extends BaseAdapter {
-
-    private List<Map<String, Object>> data;
-    private LayoutInflater layoutInflater;
-    private Context context;
-
-    public ListViewAdapter(Context context, List<Map<String, Object>> data) {
-        this.context = context;
-        this.data = data;
-        this.layoutInflater = LayoutInflater.from(context);
-    }
-
-    /**
-     * 组件集合，对应list.xml中的控件
-     *
-     * @author Administrator
-     */
-    public final class Zujian {
-        public ImageView image;
-        public TextView title;
-        public Button view;
-        public TextView info;
-    }
 
     @Override
-    public int getCount() {
-        return data.size();
-    }
+    public void itemClick(View v) {
+        int position;
+        position = (Integer) v.getTag();
+        switch (v.getId()) {
+            case R.id.zan:
+                Log.e("内部item--1-->", position + "");
+                break;
 
-    /**
-     * 获得某一位置的数据
-     */
-    @Override
-    public Object getItem(int position) {
-        return data.get(position);
-    }
-
-    /**
-     * 获得唯一标识
-     */
-    @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        Zujian zujian = null;
-        if (convertView == null) {
-            zujian = new Zujian();
-            //获得组件，实例化组件
-            convertView = layoutInflater.inflate(R.layout.listview, null);
-            // zujian.image=(ImageView)convertView.findViewById(R.id.image);
-            zujian.title = (TextView) convertView.findViewById(R.id.title);
-            zujian.view = (Button) convertView.findViewById(R.id.view);
-            zujian.info = (TextView) convertView.findViewById(R.id.info);
-            convertView.setTag(zujian);
-        } else {
-            zujian = (Zujian) convertView.getTag();
+            default:
+                break;
         }
-        //绑定数据
-        // zujian.image.setBackgroundResource((Integer)data.get(position).get("image"));
-        zujian.title.setText((String) data.get(position).get("title"));
-        zujian.info.setText((String) data.get(position).get("info"));
-        return convertView;
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.e("整体item----->", position + "");
+    }
 }
+

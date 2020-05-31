@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.view.View;
 
+import com.example.choutidemo.ui.teachers.ListViewAdapter;
 import com.example.choutidemo.ui.yuyue.YuYueFragment;
 import com.example.choutidemo.ui.login.LoginActivity;
 import com.example.choutidemo.ui.login.RegisterActivity;
@@ -26,7 +28,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ListViewAdapter.InnerItemOnclickListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private BottomTabBar bottomTabBar;
@@ -41,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
         /*判断是否登陆,获取存储在SharedPreferences中的信息*/
         SharedPreferences appPrefs = getSharedPreferences("LoginInfo", MODE_PRIVATE);
         String userName = appPrefs.getString("userName", "");
-        if (userName == null || userName == "") {
-            // Toast.makeText(getBaseContext(),"没有登陆",Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, LoginActivity.class);
-            super.startActivity(intent);
-            finish();
-        }
+//        if (userName == null || userName == "") {
+//            // Toast.makeText(getBaseContext(),"没有登陆",Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(this, LoginActivity.class);
+//            super.startActivity(intent);
+//            finish();
+//        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);                   //传入ToolBar实例
         ActionBar actionBar = getSupportActionBar();    //得到ActionBar实例
@@ -121,5 +123,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    @Override
+    public void itemClick(View v) {
+
     }
 }
