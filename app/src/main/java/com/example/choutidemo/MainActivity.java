@@ -98,10 +98,10 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.I
                 .setImgSize(50, 50)   //图片大小
                 .setFontSize(12)//字体大小
                 .setTabPadding(20, 6, 10)//选项卡的间距
-                .addTabItem("外教", R.drawable.ic_menu_camera, TeacherFragment.class)
-                .addTabItem("预约", R.drawable.ic_menu_camera, YuYueFragment.class)
-                .addTabItem("选择课程", R.drawable.ic_menu_camera, SelectClassFragment.class)
-                .addTabItem("我的", R.drawable.ic_menu_camera, MineFragment.class)
+                .addTabItem("外教", R.drawable.ic_teacher_tab, TeacherFragment.class)
+                .addTabItem("预约", R.drawable.ic_yuyue_tab, YuYueFragment.class)
+                .addTabItem("选择课程", R.drawable.ic_selectclass_tab, SelectClassFragment.class)
+                .addTabItem("我的", R.drawable.ic_mine_tab, MineFragment.class)
                 .isShowDivider(true)  //是否包含分割线
                 .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
                     @Override
