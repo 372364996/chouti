@@ -6,12 +6,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 class MyFragmentPagerAdapter extends FragmentPagerAdapter {
     private String[] mTitles = new String[]{"体验课", "初级","中级","中高级", "高级", "发音"};
+    private  Integer id;
     public MyFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
     }
     @Override
     public Fragment getItem(int position) {
-        return new SelectClassItemFragment();
+        return new SelectClassItemFragment(position);
     }
     @Override
     public int getCount() {

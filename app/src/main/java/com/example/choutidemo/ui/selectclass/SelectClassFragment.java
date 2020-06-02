@@ -40,14 +40,6 @@ public class SelectClassFragment extends Fragment {
         mViewPager.setAdapter(myFragmentPagerAdapter);
         //将TabLayout和ViewPager绑定在一起，相互影响，解放了开发人员对双方变动事件的监听
         mTabLayout.setupWithViewPager(mViewPager);
-//        //指定Tab的位置
-//        one = mTabLayout.getTabAt(0);
-//        two = mTabLayout.getTabAt(1);
-//        three = mTabLayout.getTabAt(2);
-//        //给tab设置图标
-//        one.setIcon(R.mipmap.ic_launcher);
-//        two.setIcon(R.mipmap.ic_launcher);
-//        three.setIcon(R.mipmap.ic_launcher);
         return root;
     }
 
