@@ -43,12 +43,12 @@ public class MainActivity extends AppCompatActivity implements ListViewAdapter.I
         /*判断是否登陆,获取存储在SharedPreferences中的信息*/
         SharedPreferences appPrefs = getSharedPreferences("LoginInfo", MODE_PRIVATE);
         String userName = appPrefs.getString("userName", "");
-//        if (userName == null || userName == "") {
-//            // Toast.makeText(getBaseContext(),"没有登陆",Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(this, LoginActivity.class);
-//            super.startActivity(intent);
-//            finish();
-//        }
+        if (userName == null || userName == "") {
+            // Toast.makeText(getBaseContext(),"没有登陆",Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, LoginActivity.class);
+            super.startActivity(intent);
+            finish();
+        }
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);                   //传入ToolBar实例
         ActionBar actionBar = getSupportActionBar();    //得到ActionBar实例

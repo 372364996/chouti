@@ -59,13 +59,10 @@ public class TeacherFragment extends Fragment implements ListViewAdapter.InnerIt
         View root = inflater.inflate(R.layout.fragment_teacher, container, false);
         listView = (ListView) root.findViewById(R.id.teacherlist);
         teacherListViewHeader = inflater.inflate(R.layout.teacherlistviewheader, null);
-        List<Map<String, Object>> list = getData();
-
-        mAdapter = new ListViewAdapter(getContext(), list);
-        listView.setAdapter(mAdapter);
+        getData(this, this);
         listView.addHeaderView(teacherListViewHeader);
-        listView.setOnItemClickListener(this);
-        mAdapter.setOnInnerItemOnClickListener(this);
+//        listView.setOnItemClickListener(this);
+//        mAdapter.setOnInnerItemOnClickListener(this);
         return root;
     }
 
@@ -77,7 +74,7 @@ public class TeacherFragment extends Fragment implements ListViewAdapter.InnerIt
         return super.onCreateAnimation(transit, enter, nextAnim);
     }
 
-    public List<Map<String, Object>> getData() {
+    public List<Map<String, Object>> getData(final ListViewAdapter.InnerItemOnclickListener innerItemOnclickListener, final AdapterView.OnItemClickListener onItemClickListener) {
         final List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         OkHttpClient client = new OkHttpClient();
         String path = "http://hanzhiapp.hdlebaobao.cn/teacher/GetTeacherList?userid=2";
@@ -97,6 +94,7 @@ public class TeacherFragment extends Fragment implements ListViewAdapter.InnerIt
 
                                                 getActivity().runOnUiThread(
                                                         new Runnable() {
+                                                            @RequiresApi(api = Build.VERSION_CODES.N)
                                                             @Override
                                                             public void run() {
                                                                 try {
@@ -115,6 +113,11 @@ public class TeacherFragment extends Fragment implements ListViewAdapter.InnerIt
 
                                                                         list.add(map);
                                                                     }
+//                                                                    list.stream().filter(x->"b".equals(x.get("tags")));
+                                                                    mAdapter = new ListViewAdapter(getContext(), list);
+                                                                    mAdapter.setOnInnerItemOnClickListener(innerItemOnclickListener);
+                                                                    listView.setOnItemClickListener(onItemClickListener);
+                                                                    listView.setAdapter(mAdapter);
                                                                 } catch (JSONException e) {
                                                                     e.printStackTrace();
                                                                 }
