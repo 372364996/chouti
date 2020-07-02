@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.example.choutidemo.ui.selectclass.SelectClassItemFragment;
 
 class YuYueFragmentPagerAdapter extends FragmentPagerAdapter {
-    private String[] mTitles = new String[]{"体验课", "初级","中级","中高级", "高级", "发音"};
+    private String[] mTitles = new String[]{"周一", "周二","周三","周四", "周五", "周六", "周日"};
     private  Integer id;
     public YuYueFragmentPagerAdapter(FragmentManager fm) {
         super(fm);

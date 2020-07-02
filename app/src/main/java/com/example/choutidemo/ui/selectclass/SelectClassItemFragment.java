@@ -88,7 +88,7 @@ public class SelectClassItemFragment extends Fragment {
                                                                 map.put("Name", object.getString("Name"));
                                                                 map.put("Img", "http://hanzhimgr.hdlebaobao.cn" + object.getString("Img"));
                                                                 map.put("TypeId", object.getString("ClassType"));
-                                                                Log.e("课程类型ID"+object.getString("ClassType"),"ViewPagerId"+id);
+                                                                //Log.e("课程类型ID"+object.getString("ClassType"),"ViewPagerId"+id);
                                                                 if (object.getInt("ClassType")-1 == id) {
                                                                     list.add(map);
                                                                 }
