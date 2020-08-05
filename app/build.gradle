@@ -26,6 +26,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    allprojects {
+        repositories {
+            jcenter()
+            maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        }
+    }
+    buildscript {
+        repositories {
+            maven{ url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        }
+    }
 }
 
 dependencies {
