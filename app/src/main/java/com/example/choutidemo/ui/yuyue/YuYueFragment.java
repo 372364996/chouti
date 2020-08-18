@@ -50,7 +50,7 @@ YuYueFragmentPagerAdapter  yuYueFragmentPagerAdapter;
         for (Date item : dateList) {
             tabLayout.addTab(tabLayout.newTab().setText(Utils.dateToWeek(df.format(item))));
         }
-        mViewPager = root.findViewById(R.id.vp_main);
+        mViewPager = root.findViewById(R.id.yy_vp_main);
         yuYueFragmentPagerAdapter = new YuYueFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         //使用适配器将ViewPager与Fragment绑定在一起
         mViewPager.setAdapter(yuYueFragmentPagerAdapter);

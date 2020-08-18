@@ -34,7 +34,7 @@ public class SelectClassFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_selectclass, container, false);
         mTabLayout = root.findViewById(R.id.tabs);
-        mViewPager = root.findViewById(R.id.vp_main);
+        mViewPager = root.findViewById(R.id.sc_vp_main);
         myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         //使用适配器将ViewPager与Fragment绑定在一起
         mViewPager.setAdapter(myFragmentPagerAdapter);
