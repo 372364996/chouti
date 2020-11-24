@@ -54,7 +54,7 @@ YuYueFragmentPagerAdapter  yuYueFragmentPagerAdapter;
         yuYueFragmentPagerAdapter = new YuYueFragmentPagerAdapter(getActivity().getSupportFragmentManager());
         //使用适配器将ViewPager与Fragment绑定在一起
         mViewPager.setAdapter(yuYueFragmentPagerAdapter);
-        //将TabLayout和ViewPager绑定在一起，相互影响，解放了开发人员对双方变动事件的监听
+        //将TabLayout和ViewPager绑定在一起，相互影响，解放了开发人员对双方变动事件的监听。
         tabLayout.setupWithViewPager(mViewPager);
         return root;
     }
