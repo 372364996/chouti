@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+android {
+  compileSdkVersion rootProject.compileSdkVersion
+  buildToolsVersion rootProject.buildToolsVersion
+
+  defaultConfig {
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
+    versionCode 1
+    versionName "1.0"
+
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+//  buildTypes {
+//    release {
+//      minifyEnabled false
+//      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//    }
+//  }
+}
+task makeJar(type: Copy) {
+  delete 'build/libs/rsalibrary.jar' //删除已经存在的jar包
+  from('build/intermediates/bundles/debug/')//从该目录下加载要打包的文件
+  into('build/libs/')//jar包的保存目录
+  include('classes.jar')//设置过滤，只打包classes文件
+  rename('classes.jar', 'rsalibrary.jar')//重命名，mylibrary.jar 根据自己的需求设置
+}
+makeJar.dependsOn(build)
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
+    exclude group: 'com.android.support', module: 'support-annotations'
+  })
+  testImplementation 'junit:junit:4.12'
+}

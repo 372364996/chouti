@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.choutidemo">
+    package="com.hanzhi.chouti">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -13,15 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".ui.teachers.TeacherInfo"></activity>
+            android:name="com.hanzhi.chouti.ui.teachers.TeacherInfo"></activity>
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name="com.hanzhi.chouti.ui.login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ui.login.RegisterActivity"
+            android:name="com.hanzhi.chouti.ui.login.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.hanzhi.chouti.MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

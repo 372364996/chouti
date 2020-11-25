@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.choutidemo.ui.home.HomeFragment"
+        android:name="com.hanzhi.chouti.ui.home.HomeFragment"
         android:label="123"
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/nav_teacher"
-        android:name="com.example.choutidemo.ui.teachers.TeacherFragment"
+        android:name="com.hanzhi.chouti.ui.teachers.TeacherFragment"
         android:label="123"
         tools:layout="@layout/fragment_teacher"/>
 

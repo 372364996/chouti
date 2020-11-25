@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">BaseLibrary</string>
+    <!--验证码发送监听器-->
+    <string name="auth_code_get_auth_code">获取验证码</string>
+    <string name="auth_code_count_down_timer" formatted="false">（%d秒）</string>
+    <string name="auth_code_tick_text" formatted="false">%s%s</string>
+    <!--OSS上传文件-->
+    <string name="activate_detail_upload_failure" >上传失败</string>
+    <string name="activate_detail_upload_success">上传成功</string>
+    <!--空页面使用（无网络，无数据）-->
+    <string name="empty_network_error">抱歉网络不给力，请稍后重试</string>
+    <string name="empty_no_data">抱歉，暂无数据</string>
+    <string name="no_network_toast">请检查您的网络</string>
+    <string name="team_search_hint">请输入姓名或手机号</string>
+    <!--无网络窗口-->
+    <string name="network_bar_hint">网络不给力，请检查网络设置。</string>
+    <!--拍照选择框-->
+    <string name="photograph">拍照</string>
+    <string name="photograph_video">拍摄</string>
+    <string name="photo_album_select">从相册选择</string>
+    <!--其他-->
+    <string name="progress_text">加载中...</string>
+    <!--WebView使用-->
+    <string name="affirm_alert_save_image">保存图片</string>
+    <string name="affirm_alert_image_permission_retry">拒绝读写手机存储权限将无法保存图片,是否重新申请？</string>
+    <string name="affirm_alert_image_permission_denied">拒绝读写手机存储权限无法保存图片，去设置</string>
+    <string name="save_success">保存成功</string>
+
+</resources>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="titleText" format = "string" />
+    <attr name="titleTextCustomColor" format="color" />
+    <attr name="titleTextSize" format="dimension" />
+    <attr name="titleMinEms" format="integer" />
+
+    <declare-styleable name="HorizontalTextView">
+        <attr name="android:textColor" />
+        <attr name="android:gravity" />
+        <attr name="android:focusable"/>
+        <attr name="android:inputType"/>
+        <attr name="android:hint"/>
+        <attr name="android:textSize"/>
+        <attr name="android:text"/>
+        <attr name="android:drawableRight"/>
+        <attr name="contentPaddingLeft"/>
+        <attr name="contentPaddingRight"/>
+        <attr name="contentPaddingTop"/>
+        <attr name="contentPaddingBottom"/>
+        <attr name="contentPadding"/>
+        <attr name="titleText" />
+        <attr name="titleTextCustomColor"/>
+        <attr name="titleTextSize"/>
+        <attr name="titleMinEms"/>
+        <attr name="titleDrawableLeft" format="integer" />
+        <attr name="buttonText" format="string"/>
+        <attr name="buttonTextColor" format="color"/>
+        <attr name="buttonTextSize" format="dimension"/>
+        <attr name="buttonBackground" format="reference"/>
+        <attr name="buttonPaddingLeft" format="dimension"/>
+        <attr name="buttonPaddingRight" format="dimension"/>
+        <attr name="buttonPaddingTop" format="dimension"/>
+        <attr name="buttonPaddingBottom" format="dimension"/>
+        <attr name="buttonVisible" >
+            <flag name="visible" value="0x00000000"/>
+            <flag name="gone" value="0x00000008"/>
+            <flag name="invisible" value="0x00000004"/>
+        </attr>
+
+    </declare-styleable>
+
+</resources>

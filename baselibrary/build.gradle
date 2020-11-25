@@ -1,0 +1,136 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.jakewharton.butterknife'
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api "androidx.appcompat:appcompat:$appcompatVersion"
+    api 'com.google.android.material:material:1.2.0'
+    api 'androidx.constraintlayout:constraintlayout:1.1.3'
+    api 'androidx.viewpager2:viewpager2:1.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    /*AgentWeb*/
+    api 'com.just.agentweb:agentweb:4.1.2'
+
+    // (必选)
+    api 'com.just.agentweb:filechooser:4.1.2'
+
+    // (可选)
+    api 'com.download.library:Downloader:4.1.2'
+    /*BaseRecyclerViewAdapterHelper*/
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
+    api "androidx.recyclerview:recyclerview:$recycleViewVersion"
+    /*EventBus*/
+    api "org.greenrobot:eventbus:$eventBusVersion"
+    /*Glide*/
+    api "com.github.bumptech.glide:glide:$glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glideVersion"
+    /*json解析*/
+    api 'com.alibaba:fastjson:1.1.72.android'
+
+    /*基于RxJava2+Retrofit2实现简单易用的网络请求框架*/
+    api 'com.zhouyou:rxeasyhttp:2.1.5'
+    /* butterknife */
+    api "com.jakewharton:butterknife:$butterknife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife"
+    // ViewModel and LiveData
+    api "android.arch.lifecycle:extensions:$lifecycleVersion"
+
+    // alternatively - just ViewModel
+    api "android.arch.lifecycle:viewmodel:$lifecycleVersion"
+
+    // use -ktx for Kotlin
+
+    // alternatively - just LiveData
+    api "android.arch.lifecycle:livedata:$lifecycleVersion"
+
+    // alternatively - Lifecycles only (no ViewModel or LiveData).
+
+    //     Support library depends on this lightweight import
+    api "android.arch.lifecycle:runtime:$lifecycleVersion"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycleVersion"
+
+    // alternately - if using Java8, use the following instead of compiler
+    api "android.arch.lifecycle:common-java8:$lifecycleVersion"
+
+    // optional - ReactiveStreams support for LiveData
+    api "android.arch.lifecycle:reactivestreams:$lifecycleVersion"
+
+    // optional - Test helpers for LiveData
+    testImplementation "android.arch.core:core-testing:$lifecycleVersion"
+
+    /*RX的权限申请库*/
+    api 'com.github.tbruyelle:rxpermissions:0.10.2'
+
+    // 基础依赖包，必须要依赖
+    api 'com.gyf.immersionbar:immersionbar:3.0.0'
+
+    // fragment快速实现（可选）
+    api 'com.gyf.immersionbar:immersionbar-components:3.0.0'
+    //阿里云OSS
+    api 'com.aliyun.dpa:oss-android-sdk:2.8.5'
+    //多图片选择器
+
+    //    implementation project(path: ':picture_library')
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
+
+    //检查更新
+    api 'com.github.yjfnypeu:UpdatePlugin:3.1.3'
+    //PushSDK必须依赖基础组件库，所以需要加入对应依赖
+    api 'com.umeng.umsdk:common:9.1.0'
+
+    // (必选)
+    api 'com.umeng.umsdk:utdid:1.5.2'
+    api 'com.umeng.umsdk:asms:1.1.3'
+
+    // asms包依赖(必选)
+    api 'com.umeng.umsdk:crash:0.0.4'
+
+    // native crash包依赖(必选)
+
+    //oaid采集库
+    api 'com.umeng.umsdk:oaid_lenovo:1.0.0'
+
+    // (可选)
+    api 'com.umeng.umsdk:oaid_mi:1.0.0'
+
+    // (可选)
+    api 'com.umeng.umsdk:oaid_oppo:1.0.4'
+
+    // (可选)
+    api 'com.umeng.umsdk:oaid_vivo:1.0.0.1'
+    api 'com.qmuiteam:qmui:2.0.0-alpha10'
+    // 获取设备信息
+    api 'com.github.nisrulz:easydeviceinfo-base:2.4.1'
+    //小红点
+    api 'q.rorbin:badgeview:1.1.3'
+    //时间选择器，省市区三级联动
+    api 'com.contrarywind:Android-PickerView:4.1.8'
+    api project(path: ':SearchViewLibrary')
+    api project(path: ':rsalibrary')
+    api project(path: ':ShortcutBadger')
+}

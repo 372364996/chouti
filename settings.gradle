@@ -1,2 +1,6 @@
+include ':SearchViewLibrary'
+include ':baselibrary'
+include ':rsalibrary'
+include ':ShortcutBadger'
 rootProject.name='choutidemo'
 include ':app'
