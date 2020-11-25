@@ -38,8 +38,9 @@ public class YuYueFragment extends Fragment {
     private YuYueViewModel yuYueViewModel;
     private BottomTabBar bottomTabBar;
     TabLayout tabLayout;
-ViewPager mViewPager;
-YuYueFragmentPagerAdapter  yuYueFragmentPagerAdapter;
+    ViewPager mViewPager;
+    YuYueFragmentPagerAdapter yuYueFragmentPagerAdapter;
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_yuyue, container, false);
@@ -63,7 +64,8 @@ YuYueFragmentPagerAdapter  yuYueFragmentPagerAdapter;
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("预约");
+        if (toolbar != null)
+            toolbar.setTitle("预约");
         return super.onCreateAnimation(transit, enter, nextAnim);
     }
 

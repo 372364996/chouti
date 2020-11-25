@@ -1,6 +1,7 @@
 package com.example.choutidemo.ui.teachers;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.choutidemo.R;
+import com.example.choutidemo.ui.login.LoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -154,6 +156,8 @@ public class TeacherFragment extends Fragment implements ListViewAdapter.InnerIt
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.e("整体item----->", position + "");
+        Intent intent = new Intent(getContext(), TeacherInfo.class);
+        super.startActivity(intent);
     }
 }
 
