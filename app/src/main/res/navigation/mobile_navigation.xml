@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/nav_teacher"
-        android:name="com.hanzhi.chouti.ui.teachers.TeacherFragment"
+        android:name="com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment"
         android:label="123"
         tools:layout="@layout/fragment_teacher"/>
 

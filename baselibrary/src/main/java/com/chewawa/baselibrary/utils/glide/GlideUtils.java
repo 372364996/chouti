@@ -58,7 +58,7 @@ public class GlideUtils {
 			return "";
 		}
 		if(!path.contains("http")){
-			return  OSSUtils.getInstance().getPublicObjectURL(path);
+			return  "http://hanzhiapp.hdlebaobao.cn/"+path;
 		}
 		return path.trim();
 	}

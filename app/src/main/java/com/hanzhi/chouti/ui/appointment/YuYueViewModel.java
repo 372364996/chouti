@@ -1,4 +1,4 @@
-package com.hanzhi.chouti.ui.yuyue;
+package com.hanzhi.chouti.ui.appointment;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,10 +1,12 @@
-package com.hanzhi.chouti.ui.yuyue;
+package com.hanzhi.chouti.ui.appointment.adapter;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-class YuYueFragmentPagerAdapter extends FragmentPagerAdapter {
+import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeChildFragment;
+
+public class YuYueFragmentPagerAdapter extends FragmentPagerAdapter {
     private String[] mTitles = new String[]{"周一", "周二","周三","周四", "周五", "周六", "周日"};
     private  Integer id;
     public YuYueFragmentPagerAdapter(FragmentManager fm) {
@@ -12,7 +14,7 @@ class YuYueFragmentPagerAdapter extends FragmentPagerAdapter {
     }
     @Override
     public Fragment getItem(int position) {
-        return new YuYueItemFragment(position);
+        return AppointmentTimeChildFragment.newInstance(position);
     }
     @Override
     public int getCount() {

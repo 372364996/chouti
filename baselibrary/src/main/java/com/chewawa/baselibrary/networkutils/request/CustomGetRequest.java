@@ -27,6 +27,8 @@ import com.zhouyou.http.callback.CallBack;
 import com.zhouyou.http.exception.ApiException;
 import com.zhouyou.http.request.GetRequest;
 
+import java.util.Map;
+
 import io.reactivex.disposables.Disposable;
 
 
@@ -43,6 +45,10 @@ public class CustomGetRequest extends GetRequest {
     }
     public CustomGetRequest params(String key, String value){
         super.params(key, value);
+        return this;
+    }
+    public CustomGetRequest params(Map<String, String> keyValues){
+        super.params(keyValues);
         return this;
     }
     public Disposable execute(final ApiCallBack callBack) {

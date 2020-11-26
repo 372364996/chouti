@@ -93,12 +93,4 @@ public class MineFragment extends Fragment {
 
     }
 
-    @Nullable
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("我的");
-        return super.onCreateAnimation(transit, enter, nextAnim);
-    }
-
 }

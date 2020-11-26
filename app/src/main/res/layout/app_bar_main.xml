@@ -1,35 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="#03DAC5"
-            app:popupTheme="@style/AppTheme.ToolBarTheme"
-            app:titleTextAppearance="@style/Toolbar.TitleText" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <include layout="@layout/content_main" />
-
+    <include layout="@layout/view_toolbar_lay"/>
     <com.hjm.bottomtabbar.BottomTabBar
         android:id="@+id/bottom_tab_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_lay"
         app:tab_selected_color="#03DAC5"
         app:tab_unselected_color="#ababab"
 
         ></com.hjm.bottomtabbar.BottomTabBar>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <include layout="@layout/content_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar_lay"
+        android:layout_above="@+id/bottom_tab_bar"/>
+
+
+</RelativeLayout>

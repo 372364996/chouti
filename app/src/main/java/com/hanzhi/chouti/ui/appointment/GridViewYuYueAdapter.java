@@ -1,4 +1,4 @@
-package com.hanzhi.chouti.ui.yuyue;
+package com.hanzhi.chouti.ui.appointment;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -43,7 +43,7 @@ public class GridViewYuYueAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(
                     R.layout.gridview_yuyue_item, null);
             holder = new ViewHolder();
-            holder.tv = convertView.findViewById(R.id.time);
+            holder.tv = convertView.findViewById(R.id.tv_time);
             //holder.iv = convertView.findViewById(R.id.class_image);
             convertView.setTag(holder);// 如果convertView为空就 把holder赋值进去
         } else {

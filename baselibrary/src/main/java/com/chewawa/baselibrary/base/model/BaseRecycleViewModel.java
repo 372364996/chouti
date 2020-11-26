@@ -36,13 +36,11 @@ public class BaseRecycleViewModel extends BaseModelImpl implements BaseRecycleVi
       }
     PageBean pageEntity = new PageBean();
     pageEntity.setPageIndex(page);
-    Map<String, Object> map = new HashMap<>();
-    map.put("paging", JSON.toJSON(pageEntity));
-    map.put("page", page);
-    map.put("pageIndex", page);
-    map.put("Model", JSON.toJSON(pageEntity));
+    Map<String, String> map = new HashMap<>();
+    map.put("size", "20");
+    map.put("index", String.valueOf(page));
     map.putAll(params);
-      Disposable disposable = HttpManager.post(url).upJsonObject(map).execute(new ApiCallBack() {
+      Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
           @Override
           public void onError(int status, String message) {
               listener.onListDataFailure(message);

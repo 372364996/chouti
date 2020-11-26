@@ -1,4 +1,4 @@
-package com.hanzhi.chouti.ui.yuyue;
+package com.hanzhi.chouti.ui.appointment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

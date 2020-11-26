@@ -6,6 +6,7 @@
     <string name="nav_header_subtitle"></string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="main_tab_teacher">外教</string>
     <string name="menu_home">我的课程</string>
     <string name="menu_gallery">收藏老师</string>
     <string name="menu_slideshow">我的资料</string>

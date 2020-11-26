@@ -6,6 +6,9 @@ import android.content.Context;
 import androidx.multidex.MultiDex;
 
 import com.chewawa.baselibrary.BaseApplication;
+import com.hanzhi.chouti.network.Constants;
+import com.hanzhi.chouti.utils.CommonUtil;
+import com.hanzhi.chouti.utils.SysApplicationUtils;
 
 /**
  * @class describe
@@ -13,6 +16,7 @@ import com.chewawa.baselibrary.BaseApplication;
  * @time 2020/8/5 14:18
  */
 public class SysApplication extends BaseApplication {
+    protected SysApplicationUtils applicationUtils;
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
@@ -21,6 +25,9 @@ public class SysApplication extends BaseApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        applicationUtils = new SysApplicationUtils(this);
+        String baseUrl = CommonUtil.getDomainName(Constants.BASE_IP);
+        applicationUtils.initHttpClient(baseUrl, null);
     }
 
     @Override

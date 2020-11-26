@@ -40,12 +40,4 @@ public class SelectClassFragment extends Fragment {
         return root;
     }
 
-    @Nullable
-    @Override
-    public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
-        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("选择课程");
-        return super.onCreateAnimation(transit, enter, nextAnim);
-    }
-
 }

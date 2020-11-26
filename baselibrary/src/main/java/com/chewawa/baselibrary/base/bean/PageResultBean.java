@@ -29,7 +29,7 @@ public class PageResultBean<T> implements Serializable{
   public int pageNumber;
   @JSONField(name = "PageIndex")
   public int pageIndex;
-  @JSONField(name = "DataList")
+  @JSONField(name = "data")
   public List<T> dataList;
   @JSONField(name = "List")
   public List<T> list;  //兼容延保订单列表接口，如果接口更改为上面的统一分页信息形式，可删除

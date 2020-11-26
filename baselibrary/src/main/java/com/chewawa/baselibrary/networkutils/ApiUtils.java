@@ -13,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
  * @version 1.0
  */
 public class ApiUtils {
-  public static final String DEFAULT = "/api/";
+  public static final String DEFAULT = "/";
   @StringDef({DEFAULT})
   @Retention(RetentionPolicy.SOURCE)
   public @interface UrlType{
