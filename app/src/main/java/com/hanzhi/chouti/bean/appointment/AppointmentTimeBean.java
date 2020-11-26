@@ -1,4 +1,4 @@
-package com.hanzhi.chouti.bean.teachers;
+package com.hanzhi.chouti.bean.appointment;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -20,16 +20,16 @@ public class AppointmentTimeBean implements BaseCheckRecycleViewAdapter.CheckIte
      * CreateTime : /Date(1522105495567)/
      */
 
-    private int IsCanUse;
+    private boolean IsCanUse;
     private String Time;
     private String Date;
     private boolean isChecked;
 
-    public int getIsCanUse() {
+    public boolean getIsCanUse() {
         return IsCanUse;
     }
 
-    public void setIsCanUse(int isCanUse) {
+    public void setIsCanUse(boolean isCanUse) {
         IsCanUse = isCanUse;
     }
 
@@ -75,14 +75,14 @@ public class AppointmentTimeBean implements BaseCheckRecycleViewAdapter.CheckIte
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.IsCanUse);
+        dest.writeByte(this.IsCanUse ? (byte) 1 : (byte) 0);
         dest.writeString(this.Time);
         dest.writeString(this.Date);
         dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
     }
 
     protected AppointmentTimeBean(Parcel in) {
-        this.IsCanUse = in.readInt();
+        this.IsCanUse = in.readByte() != 0;
         this.Time = in.readString();
         this.Date = in.readString();
         this.isChecked = in.readByte() != 0;

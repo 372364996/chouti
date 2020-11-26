@@ -34,6 +34,7 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
     ViewPager mViewPager;
     YuYueFragmentPagerAdapter yuYueFragmentPagerAdapter;
     private CommonTabPagerAdapter adapter;
+    List<AppointmentTabBean> list;
     @Override
     protected View setContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_yuyue, container, false);
@@ -68,6 +69,7 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
 
     @Override
     public void setTabList(List<AppointmentTabBean> list, List<String> titleList) {
+        this.list = list;
         adapter =
                 new CommonTabPagerAdapter(getChildFragmentManager(), titleList.size()
                         , titleList,this.getContext());
@@ -75,11 +77,14 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(list.size());
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.setTabMode(TabLayout.MODE_FIXED);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
 
     @Override
     public Fragment getFragment(int position) {
-        return AppointmentTimeChildFragment.newInstance(position);
+        if(list == null){
+            return AppointmentTimeChildFragment.newInstance("");
+        }
+        return AppointmentTimeChildFragment.newInstance(list.get(position).getDate());
     }
 }

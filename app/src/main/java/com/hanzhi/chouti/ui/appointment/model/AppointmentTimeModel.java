@@ -25,7 +25,7 @@ import io.reactivex.disposables.Disposable;
 public class AppointmentTimeModel extends BaseModelImpl implements AppointmentTimeContract.Model {
     @Override
     public void getTabList(AppointmentTimeContract.OnGetTabListListener listener) {
-        String url = Constants.HOME_DATA_URL;
+        String url = Constants.GET_CLASS_TIME_TAB_URL;
         Map<String, Object> map = new HashMap<>();
         Disposable disposable = HttpManager.post(url).upJsonObject(map).execute(new ApiCallBack() {
             @Override

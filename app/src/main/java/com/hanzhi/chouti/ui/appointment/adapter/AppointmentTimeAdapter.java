@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat;
 import com.chewawa.baselibrary.base.BaseCheckRecycleViewAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewHolder;
 import com.hanzhi.chouti.R;
-import com.hanzhi.chouti.bean.teachers.AppointmentTimeBean;
+import com.hanzhi.chouti.bean.appointment.AppointmentTimeBean;
 
 import butterknife.BindView;
 

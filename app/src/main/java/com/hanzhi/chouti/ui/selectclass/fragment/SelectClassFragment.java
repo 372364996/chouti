@@ -1,4 +1,4 @@
-package com.hanzhi.chouti.ui.selectclass;
+package com.hanzhi.chouti.ui.selectclass.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +15,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.hanzhi.chouti.R;
 import com.google.android.material.tabs.TabLayout;
+import com.hanzhi.chouti.ui.selectclass.MyFragmentPagerAdapter;
+import com.hanzhi.chouti.ui.selectclass.SelectClassViewModel;
 
 public class SelectClassFragment extends Fragment {
 

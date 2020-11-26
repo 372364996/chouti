@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.hanzhi.chouti.ui.login.LoginActivity;
 import com.hanzhi.chouti.ui.login.RegisterActivity;
 import com.hanzhi.chouti.ui.mine.MineFragment;
-import com.hanzhi.chouti.ui.selectclass.SelectClassFragment;
+import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
 import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
 import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hjm.bottomtabbar.BottomTabBar;

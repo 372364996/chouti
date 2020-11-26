@@ -14,7 +14,7 @@ public class YuYueFragmentPagerAdapter extends FragmentPagerAdapter {
     }
     @Override
     public Fragment getItem(int position) {
-        return AppointmentTimeChildFragment.newInstance(position);
+        return AppointmentTimeChildFragment.newInstance(mTitles[position]);
     }
     @Override
     public int getCount() {

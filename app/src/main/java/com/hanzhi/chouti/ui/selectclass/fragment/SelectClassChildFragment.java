@@ -1,4 +1,4 @@
-package com.hanzhi.chouti.ui.appointment.fragment;
+package com.hanzhi.chouti.ui.selectclass.fragment;
 
 import android.os.Bundle;
 
@@ -18,13 +18,13 @@ import java.util.Map;
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/26 17:24
  */
-public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<AppointmentTimeBean> {
-    public static final String Date = "date";
+public class SelectClassChildFragment extends BaseRecycleViewFragment<ClassBean> {
+    public static final String ID = "id";
     String date;
-    public static AppointmentTimeChildFragment newInstance(String date) {
-        AppointmentTimeChildFragment appointmentTimeChildFragment = new AppointmentTimeChildFragment();
+    public static SelectClassChildFragment newInstance(int id) {
+        SelectClassChildFragment selectClassChildFragment = new SelectClassChildFragment();
         Bundle args = new Bundle();
-        args.putString(Date, date);
+        args.putString(ID, id);
         appointmentTimeChildFragment.setArguments(args);
         return appointmentTimeChildFragment;
     }
@@ -36,7 +36,7 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
     @Override
     protected Map<String, Object> getParams() {
         params.put("size", 200);
-        params.put("date", date);
+        params.put("id", id);
         return params;
     }
 
@@ -44,23 +44,22 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
     public void initView() {
         super.initView();
         if(getArguments() != null){
-            date = getArguments().getString(Date);
+            id = getArguments().getString(ID);
         }
-        setEnableLoadMore(false);
     }
 
     @Override
-    protected Class<AppointmentTimeBean> getResultClass() {
-        return AppointmentTimeBean.class;
+    protected Class<ClassBean> getResultClass() {
+        return ClassBean.class;
     }
 
     @Override
-    protected BaseRecycleViewAdapter<AppointmentTimeBean> getAdapter() {
-        return new AppointmentTimeAdapter();
+    protected BaseRecycleViewAdapter<ClassBean> getAdapter() {
+        return new SelectClassAdapter();
     }
 
     @Override
     protected RecyclerView.LayoutManager getLayoutManager() {
-        return new GridLayoutManager(getActivity(), 5);
+        return new GridLayoutManager(getActivity(), 3);
     }
 }
