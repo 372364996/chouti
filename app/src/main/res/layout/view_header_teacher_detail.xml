@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="7dp"
+        android:background="@drawable/teacher_listview_item_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingTop="15dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_head_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/hanzhilogo" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@id/iv_head_img"
+                android:textColor="#484848"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/iv_ranking"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_below="@id/tv_title"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@id/tv_school_name"
+                android:src="@drawable/xingxing" />
+
+            <TextView
+                android:id="@+id/tv_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@id/iv_ranking"
+                android:text="0.0"
+                android:textColor="#484848"
+                android:textSize="13sp"></TextView>
+
+            <TextView
+                android:id="@+id/tv_school_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_title"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:layout_toRightOf="@id/iv_head_img"
+                tools:text="庆熙大学"
+                android:textColor="#484848"
+                android:textSize="13sp"></TextView>
+
+            <TextView
+                android:id="@+id/tv_teacher_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_school_name"
+                android:layout_marginTop="-25dp"
+                android:layout_toRightOf="@id/tv_title"
+                tools:text="金河斌"
+                android:textColor="#484848"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/cb_appraise"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/zan" />
+
+            <ImageView
+                android:id="@+id/iv_playing"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="70dp"
+                android:src="@drawable/bofang" />
+
+            <TextView
+                android:id="@+id/tv_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_head_img"
+                android:layout_marginTop="15dp"
+                android:ellipsize="end"
+                android:inputType="textMultiLine"
+                android:singleLine="false"
+                tools:text="金河斌金河斌金河斌金河斌金河斌金河斌"
+                android:textColor="#484848"
+                android:textSize="14sp" />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

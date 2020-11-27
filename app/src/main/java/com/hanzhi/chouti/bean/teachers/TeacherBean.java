@@ -30,6 +30,7 @@ public class TeacherBean implements Parcelable {
     private String Tags;
     private String AvgScore;
     private int UserId;
+    private String University;
 
     public int getId() {
         return Id;
@@ -103,6 +104,14 @@ public class TeacherBean implements Parcelable {
         this.UserId = UserId;
     }
 
+    public String getUniversity() {
+        return University;
+    }
+
+    public void setUniversity(String university) {
+        University = university;
+    }
+
     public TeacherBean() {
     }
 
@@ -122,6 +131,7 @@ public class TeacherBean implements Parcelable {
         dest.writeString(this.Tags);
         dest.writeString(this.AvgScore);
         dest.writeInt(this.UserId);
+        dest.writeString(this.University);
     }
 
     protected TeacherBean(Parcel in) {
@@ -134,6 +144,7 @@ public class TeacherBean implements Parcelable {
         this.Tags = in.readString();
         this.AvgScore = in.readString();
         this.UserId = in.readInt();
+        this.University = in.readString();
     }
 
     public static final Creator<TeacherBean> CREATOR = new Creator<TeacherBean>() {

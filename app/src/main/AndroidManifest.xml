@@ -14,15 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.hanzhi.chouti.ui.teachers.TeacherInfo"></activity>
+            android:name="com.hanzhi.chouti.ui.teachers.TeacherInfoActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_select_class"></activity>
         <activity
             android:name="com.hanzhi.chouti.ui.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.hanzhi.chouti.ui.login.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.hanzhi.chouti.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,6 +35,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.teachers.TeacherActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_select_teacher"/>
+        <activity android:name=".ui.selectclass.SelectClassActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_select_class"/>
+        <activity android:name=".ui.appointment.AppointmentTimeActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_select_time"/>
     </application>
 
 </manifest>

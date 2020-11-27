@@ -4,42 +4,79 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.widget.GridView;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.hanzhi.chouti.R;
+import com.chewawa.baselibrary.base.NBaseFragment;
+import com.chewawa.baselibrary.view.viewpager.CommonTabPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
-import com.hanzhi.chouti.ui.selectclass.MyFragmentPagerAdapter;
-import com.hanzhi.chouti.ui.selectclass.SelectClassViewModel;
+import com.hanzhi.chouti.R;
+import com.hanzhi.chouti.bean.ClassApplyBean;
+import com.hanzhi.chouti.bean.selectclass.ClassTabBean;
+import com.hanzhi.chouti.ui.selectclass.contract.SelectClassContract;
+import com.hanzhi.chouti.ui.selectclass.presenter.SelectClassPresenter;
 
-public class SelectClassFragment extends Fragment {
+import java.util.List;
 
-    private SelectClassViewModel selectClassViewModel;
-    private GridView gridView;
-    private TabLayout mTabLayout;
-    private ViewPager mViewPager;
-    private MyFragmentPagerAdapter myFragmentPagerAdapter;
-    private TabLayout.Tab one;
-    private TabLayout.Tab two;
-    private TabLayout.Tab three;
+import butterknife.BindView;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+public class SelectClassFragment extends NBaseFragment<SelectClassPresenter> implements SelectClassContract.View, CommonTabPagerAdapter.TabPagerListener {
+
+    @BindView(R.id.tabs)
+    TabLayout mTabLayout;
+    @BindView(R.id.sc_vp_main)
+    ViewPager mViewPager;
+    ClassApplyBean classApplyBean;
+    private CommonTabPagerAdapter adapter;
+    List<ClassTabBean> list;
+    public static SelectClassChildFragment newInstance(ClassApplyBean classApplyBean) {
+        SelectClassChildFragment selectClassChildFragment = new SelectClassChildFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("classApplyBean", classApplyBean);
+        selectClassChildFragment.setArguments(args);
+        return selectClassChildFragment;
+    }
+    @Override
+    protected View setContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_selectclass, container, false);
-        mTabLayout = root.findViewById(R.id.tabs);
-        mViewPager = root.findViewById(R.id.sc_vp_main);
-        myFragmentPagerAdapter = new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager());
-        //使用适配器将ViewPager与Fragment绑定在一起
-        mViewPager.setAdapter(myFragmentPagerAdapter);
-        //将TabLayout和ViewPager绑定在一起，相互影响，解放了开发人员对双方变动事件的监听
-        mTabLayout.setupWithViewPager(mViewPager);
         return root;
     }
 
+    @Override
+    public void initView() {
+        super.initView();
+        if(getArguments() != null){
+            classApplyBean = getArguments().getParcelable("classApplyBean");
+        }
+    }
+
+    @Override
+    protected void prepareData() {
+        lifecyclePresenter.getTabList();
+    }
+
+    @Override
+    public SelectClassPresenter initPresenter() {
+        return new SelectClassPresenter(this);
+    }
+
+    @Override
+    public void setTabList(List<ClassTabBean> list, List<String> titleList) {
+        this.list = list;
+        adapter =
+                new CommonTabPagerAdapter(getChildFragmentManager(), titleList.size()
+                        , titleList,this.getContext());
+        adapter.setListener(this);
+        mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(list.size());
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+    }
+
+    @Override
+    public Fragment getFragment(int position) {
+        return SelectClassChildFragment.newInstance(list.get(position).getId(), classApplyBean);
+    }
 }

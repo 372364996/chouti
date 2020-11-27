@@ -13,15 +13,11 @@ import com.chewawa.baselibrary.base.NBaseFragment;
 import com.chewawa.baselibrary.view.viewpager.CommonTabPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 import com.hanzhi.chouti.R;
+import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.appointment.AppointmentTabBean;
-import com.hanzhi.chouti.ui.appointment.adapter.YuYueFragmentPagerAdapter;
 import com.hanzhi.chouti.ui.appointment.contract.AppointmentTimeContract;
 import com.hanzhi.chouti.ui.appointment.presenter.AppointmentTimePresenter;
-import com.hanzhi.chouti.utils.Utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -32,9 +28,16 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
     TabLayout tabLayout;
     @BindView(R.id.yy_vp_main)
     ViewPager mViewPager;
-    YuYueFragmentPagerAdapter yuYueFragmentPagerAdapter;
     private CommonTabPagerAdapter adapter;
     List<AppointmentTabBean> list;
+    ClassApplyBean classApplyBean;
+    public static AppointmentTimeFragment newInstance(ClassApplyBean classApplyBean) {
+        AppointmentTimeFragment appointmentTimeFragment = new AppointmentTimeFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("classApplyBean", classApplyBean);
+        appointmentTimeFragment.setArguments(args);
+        return appointmentTimeFragment;
+    }
     @Override
     protected View setContentView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_yuyue, container, false);
@@ -44,17 +47,9 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
     @Override
     public void initView() {
         super.initView();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式;
-        Date d = new Date();//获取当前时间
-//        List<Date> dateList = Utils.getBetweenDates(d, new Date(d.getTime() + 13 * 24 * 60 * 60 * 1000));
-//        for (Date item : dateList) {
-//            tabLayout.addTab(tabLayout.newTab().setText(Utils.dateToWeek(df.format(item))));
-//        }
-//        yuYueFragmentPagerAdapter = new YuYueFragmentPagerAdapter(getActivity().getSupportFragmentManager());
-//        //使用适配器将ViewPager与Fragment绑定在一起
-//        mViewPager.setAdapter(yuYueFragmentPagerAdapter);
-//        //将TabLayout和ViewPager绑定在一起，相互影响，解放了开发人员对双方变动事件的监听。
-//        tabLayout.setupWithViewPager(mViewPager);
+        if(getArguments() != null){
+            classApplyBean = getArguments().getParcelable("classApplyBean");
+        }
     }
 
     @Override
@@ -83,8 +78,8 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
     @Override
     public Fragment getFragment(int position) {
         if(list == null){
-            return AppointmentTimeChildFragment.newInstance("");
+            return AppointmentTimeChildFragment.newInstance("", classApplyBean);
         }
-        return AppointmentTimeChildFragment.newInstance(list.get(position).getDate());
+        return AppointmentTimeChildFragment.newInstance(list.get(position).getDate(), classApplyBean);
     }
 }

@@ -6,6 +6,7 @@
     <color name="theme_color">@color/red</color>
     <color name="color_button_primary">@color/colorPrimary</color>
     <color name="color_toolbar_bg">@color/white</color>
+    <color name="color_title_color">@color/colorPrimary</color>
     <!--背景色-->
     <color name="app_bg">#f7f7f7</color>
     <color name="bar_bg">#ffffff</color>

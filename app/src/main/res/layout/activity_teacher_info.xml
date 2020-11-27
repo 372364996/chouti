@@ -1,135 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/app_bg">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <LinearLayout
+        android:layout_height="wrap_content">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="7dp"
-            android:layout_marginRight="7dp"
-            android:background="@drawable/teacher_listview_item_bg"
-            android:orientation="vertical">
-
-            <RelativeLayout
+            android:layout_height="match_parent"
+            app:contentScrim="@color/transparent"
+            app:scrimVisibleHeightTrigger="@dimen/dp_80"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            android:minHeight="?attr/qmui_topbar_height">
+            <include layout="@layout/view_header_teacher_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp">
+                android:orientation="vertical"
+                android:scaleType="centerInside"
+                android:layout_marginTop="?attr/qmui_topbar_height"
+                android:fitsSystemWindows="false"></include>
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/image"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/hanzhilogo" />
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_toRightOf="@id/image"
-                    android:textColor="#484848"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/xingxing"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_below="@id/title"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_toRightOf="@id/school_name"
-                    android:src="@drawable/xingxing" />
-
-                <TextView
-                    android:id="@+id/score"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/title"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_toRightOf="@id/xingxing"
-                    android:text="5.0"
-                    android:textColor="#484848"
-                    android:textSize="13sp"></TextView>
-
-                <TextView
-                    android:id="@+id/school_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/title"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"
-                    android:layout_toRightOf="@id/image"
-                    android:text="庆熙大学"
-                    android:textColor="#484848"
-                    android:textSize="13sp"></TextView>
-
-                <TextView
-                    android:id="@+id/teacher_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_toRightOf="@id/title"
-                    android:text="金河斌"
-                    android:textColor="#484848"
-                    android:textSize="18sp" />
-
-                <ImageView
-                    android:id="@+id/zan"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="20dp"
-                    android:src="@drawable/zan" />
-
-                <ImageView
-                    android:id="@+id/bofang"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginRight="70dp"
-                    android:src="@drawable/bofang" />
-
-                <TextView
-                    android:id="@+id/info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/image"
-                    android:layout_marginTop="15dp"
-                    android:ellipsize="end"
-                    android:inputType="textMultiLine"
-                    android:singleLine="false"
-                    android:text="金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌金河斌"
-                    android:textColor="#484848"
-                    android:textSize="14sp" />
-
-            </RelativeLayout>
-
-            <LinearLayout
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="?attr/qmui_topbar_height"
+                android:background="@color/white"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <include layout="@layout/view_toolbar_lay"/>
+            </androidx.appcompat.widget.Toolbar>
 
-                <FrameLayout
-                    android:id="@+id/teacher_info_selectedtime"
-                    android:layout_width="match_parent"
-                    android:layout_height="600dp"
-                    android:layout_weight="1"></FrameLayout>
-            </LinearLayout>
-        </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-
-    </LinearLayout>
-
-
-</ScrollView>
+    </com.google.android.material.appbar.AppBarLayout>
+    <FrameLayout
+        android:id="@+id/teacher_info_selected_time"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"></FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

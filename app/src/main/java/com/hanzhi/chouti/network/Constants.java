@@ -37,14 +37,16 @@ public class Constants extends BaseConstants {
     public static final String STORE_TYPE_URL = "DaoShop/GetStoreType";
     /*获取教师列表*/
     public static final String GET_TEACHER_LIST_URL = "teacher/GetTeacherListV2";
+    /*获取教师详情*/
+    public static final String GET_TEACHER_DETAIL_URL = "teacher/GetTeacherDetailsV2";
     /*获取课程时间列表*/
     public static final String GET_CLASS_TIME_URL = "teacher/GetAllTeacherTimeV2";
     /*获取课程时间Tab列表*/
     public static final String GET_CLASS_TIME_TAB_URL = "teacher/GetLast14DayDateV2";
-    /*权益用户身份选择列表*/
-    public static final String EQUITIES_IDENTITY_LIST = "DaoShop/GetStoreEquityType";
-    /*权益使用限制列表*/
-    public static final String EQUITIES_RESTRICT_LIST = "DaoShop/GetStoreRestrict";
+    /*获取课程列表*/
+    public static final String GET_CLASS_URL = "class/GetClassListV2";
+    /*获取课程Tab列表*/
+    public static final String GET_CLASS_TAB_URL = "class/GetClassListMenuV2";
     /*权益服务内容列表*/
     public static final String EQUITIES_SERVICE_CONTENT_LIST = "DaoShop/GetStoreProject";
     /*权益优惠力度列表*/

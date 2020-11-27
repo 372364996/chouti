@@ -7,6 +7,6 @@
     android:background="@color/color_toolbar_bg"
     app:qmui_topbar_text_btn_color_state_list="@color/color_button_primary"
     app:qmui_topbar_text_btn_text_size="@dimen/sp_14"
-    app:qmui_topbar_title_color="@color/white">
+    app:qmui_topbar_title_color="@color/color_title_color">
 
 </com.qmuiteam.qmui.widget.QMUITopBar>

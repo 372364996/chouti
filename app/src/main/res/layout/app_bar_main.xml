@@ -6,7 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include layout="@layout/view_toolbar_lay"/>
+    <com.qmuiteam.qmui.widget.QMUITopBar
+        android:id="@+id/toolbar_lay"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/qmui_topbar_height"
+        android:background="@color/color_button_primary"
+        app:qmui_topbar_text_btn_color_state_list="@color/color_button_primary"
+        app:qmui_topbar_text_btn_text_size="@dimen/sp_14"
+        app:qmui_topbar_title_color="@color/white">
+
+    </com.qmuiteam.qmui.widget.QMUITopBar>
     <com.hjm.bottomtabbar.BottomTabBar
         android:id="@+id/bottom_tab_bar"
         android:layout_width="match_parent"

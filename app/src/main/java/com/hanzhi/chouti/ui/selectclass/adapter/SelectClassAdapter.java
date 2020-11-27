@@ -1,16 +1,12 @@
 package com.hanzhi.chouti.ui.selectclass.adapter;
 
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.core.content.ContextCompat;
-
-import com.chewawa.baselibrary.base.BaseCheckRecycleViewAdapter;
+import com.chewawa.baselibrary.base.BaseRecycleViewAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewHolder;
 import com.hanzhi.chouti.R;
-import com.hanzhi.chouti.bean.appointment.AppointmentTimeBean;
 import com.hanzhi.chouti.bean.selectclass.ClassBean;
 
 import butterknife.BindView;
@@ -20,7 +16,7 @@ import butterknife.BindView;
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/26 16:58
  */
-public class SelectClassAdapter extends BaseCheckRecycleViewAdapter<ClassBean> {
+public class SelectClassAdapter extends BaseRecycleViewAdapter<ClassBean> {
 
     @Override
     public int getConvertViewId(int viewType) {
@@ -33,7 +29,10 @@ public class SelectClassAdapter extends BaseCheckRecycleViewAdapter<ClassBean> {
     }
 
     public static class ViewHolder extends BaseRecycleViewHolder<ClassBean, SelectClassAdapter> {
-
+        @BindView(R.id.iv_class_image)
+        ImageView ivClassImage;
+        @BindView(R.id.tv_name)
+        TextView tvName;
         public ViewHolder(SelectClassAdapter adapter, View itemView) {
             super(adapter, itemView);
         }
@@ -43,6 +42,8 @@ public class SelectClassAdapter extends BaseCheckRecycleViewAdapter<ClassBean> {
             if (data == null) {
                 return;
             }
+            tvName.setText(data.getName());
+            glideUtils.loadImage(data.getImg(), ivClassImage, R.drawable.book_image);
         }
     }
 }

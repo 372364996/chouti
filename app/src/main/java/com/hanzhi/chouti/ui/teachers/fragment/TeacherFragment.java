@@ -1,36 +1,34 @@
 package com.hanzhi.chouti.ui.teachers.fragment;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewFragment;
 import com.hanzhi.chouti.R;
+import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.teachers.TeacherBean;
 import com.hanzhi.chouti.network.Constants;
-import com.hanzhi.chouti.ui.teachers.TeacherInfo;
+import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeChildFragment;
+import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassChildFragment;
+import com.hanzhi.chouti.ui.teachers.TeacherInfoActivity;
 import com.hanzhi.chouti.ui.teachers.adapter.TeacherAdapter;
+import com.hanzhi.chouti.utils.RequestParamsUtils;
 
 import java.util.Map;
 
 public class TeacherFragment extends BaseRecycleViewFragment<TeacherBean>  {
-
+    ClassApplyBean classApplyBean;
+    public static TeacherFragment newInstance(ClassApplyBean classApplyBean) {
+        TeacherFragment teacherFragment = new TeacherFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("classApplyBean", classApplyBean);
+        teacherFragment.setArguments(args);
+        return teacherFragment;
+    }
     @Override
     protected String getUrl() {
         return Constants.GET_TEACHER_LIST_URL;
@@ -38,8 +36,16 @@ public class TeacherFragment extends BaseRecycleViewFragment<TeacherBean>  {
 
     @Override
     protected Map<String, Object> getParams() {
-        params.put("userid", 2);
+        params.putAll(RequestParamsUtils.getClassApplyParams(classApplyBean));
         return params;
+    }
+
+    @Override
+    public void initView() {
+        super.initView();
+        if(getArguments() != null){
+            classApplyBean = getArguments().getParcelable("classApplyBean");
+        }
     }
 
     @Override
@@ -62,8 +68,15 @@ public class TeacherFragment extends BaseRecycleViewFragment<TeacherBean>  {
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
         Log.e("整体item----->", position + "");
-        Intent intent = new Intent(getContext(), TeacherInfo.class);
-        super.startActivity(intent);
+        TeacherBean teacherBean = (TeacherBean) adapter.getItem(position);
+        if(teacherBean == null){
+            return;
+        }
+        if(classApplyBean == null){
+            classApplyBean = new ClassApplyBean();
+        }
+        classApplyBean.setTeacherId(teacherBean.getUserId());
+        TeacherInfoActivity.start(getActivity(), classApplyBean);
     }
 }
 

@@ -1,0 +1,48 @@
+package com.hanzhi.chouti.ui.teachers.model;
+
+import android.text.TextUtils;
+
+import com.alibaba.fastjson.JSONObject;
+import com.chewawa.baselibrary.base.model.BaseModelImpl;
+import com.chewawa.baselibrary.networkutils.HttpManager;
+import com.chewawa.baselibrary.networkutils.bean.ResultBean;
+import com.chewawa.baselibrary.networkutils.callback.ApiCallBack;
+import com.hanzhi.chouti.bean.appointment.AppointmentTabBean;
+import com.hanzhi.chouti.bean.teachers.TeacherBean;
+import com.hanzhi.chouti.network.Constants;
+import com.hanzhi.chouti.ui.teachers.contract.TeacherInfoContract;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import io.reactivex.disposables.Disposable;
+
+/**
+ * @class describe
+ * @anthor nanfeifei email:18600752302@163.com
+ * @time 2020/11/27 17:21
+ */
+public class TeacherInfoModel extends BaseModelImpl implements TeacherInfoContract.Model {
+    @Override
+    public void getTeacherInfo(int teacherId, TeacherInfoContract.OnGetTeacherInfoListener listener) {
+        String url = Constants.GET_TEACHER_DETAIL_URL;
+        Map<String, String> map = new HashMap<>();
+        map.put("teacherId", String.valueOf(teacherId));
+        Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
+            @Override
+            public void onError(int status, String message) {
+                listener.onGetTeacherInfoFailure(message);
+            }
+
+            @Override
+            public void onSuccess(ResultBean resultBean) {
+                if(!TextUtils.isEmpty(resultBean.getData())){
+                    TeacherBean teacherBean = JSONObject.parseObject(resultBean.getData(), TeacherBean.class);
+                    listener.onGetTeacherInfoSuccess(teacherBean);
+                }
+            }
+        });
+        disposableList.add(disposable);
+    }
+}

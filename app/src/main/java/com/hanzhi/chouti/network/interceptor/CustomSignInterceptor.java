@@ -37,7 +37,6 @@ import java.util.TreeMap;
  * 版本： v1.0<br>
  */
 public class CustomSignInterceptor extends BaseCustomDynamicInterceptor<CustomSignInterceptor> {
-    public final static String STORE_ID = "StoreId";
     private String sourceCode;
     public CustomSignInterceptor(String sourceCode){
         this.sourceCode = sourceCode;
@@ -49,7 +48,7 @@ public class CustomSignInterceptor extends BaseCustomDynamicInterceptor<CustomSi
             dynamicMap.put(ComParamContact.Common.TIMESTAMP, String.valueOf(System.currentTimeMillis()));
         }
         dynamicMap.put(ComParamContact.Common.ACCESSTOKEN, CommonUtil.getToken());
-        dynamicMap.put(STORE_ID, String.valueOf(CommonUtil.getStoreId()));
+        dynamicMap.put("userId", "2");
 //        if (isAccessToken()) {//是否添加token
 //            String acccess = TokenManager.getInstance().getAuthModel().getAccessToken();
 //            dynamicMap.put(ComParamContact.Common.ACCESSTOKEN, acccess);
@@ -66,7 +65,7 @@ public class CustomSignInterceptor extends BaseCustomDynamicInterceptor<CustomSi
         JSONObject jsonObject = JSONObject.parseObject(json);
         jsonObject.put("SourceCode", sourceCode);
         jsonObject.put("DeviceToken", BaseCommonUtil.getDeviceToken());
-        jsonObject.put(STORE_ID, String.valueOf(CommonUtil.getStoreId()));
+        jsonObject.put("userId", "2");
         return jsonObject.toJSONString();
 //        return requestStr;
     }

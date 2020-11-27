@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">韩知教育</string>
+    <!--页面标题-->
+    <string name="title_teacher_detail">师资详情</string>
+    <string name="title_select_time">选择时间</string>
+    <string name="title_select_teacher">选择教师</string>
+    <string name="title_select_class">选择课程</string>
+
+    <!--课程详情-->
+    <string name="class_detail_submit">确认课程</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">韩知小助手</string>
