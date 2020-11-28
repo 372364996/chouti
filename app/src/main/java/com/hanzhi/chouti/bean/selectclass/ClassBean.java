@@ -3,6 +3,10 @@ package com.hanzhi.chouti.bean.selectclass;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class ClassBean implements Parcelable {
 
     /**
@@ -28,6 +32,8 @@ public class ClassBean implements Parcelable {
     private boolean IsAudition;
     private int ClassType;
     private String StartTime;
+    private List<ClassMaterialsBean> classMaterials;
+
 
     public int getId() {
         return Id;
@@ -109,6 +115,112 @@ public class ClassBean implements Parcelable {
         StartTime = startTime;
     }
 
+    public ClassBean() {
+    }
+
+    public List<ClassMaterialsBean> getClassMaterials() {
+        return classMaterials;
+    }
+
+    public void setClassMaterials(List<ClassMaterialsBean> classMaterials) {
+        this.classMaterials = classMaterials;
+    }
+
+    public static class ClassMaterialsBean implements Parcelable {
+        /**
+         * Id : 12868
+         * ClassId : 1377
+         * CreateTime : /Date(1603436024200)/
+         * Url : http://hanzhimgr.hdlebaobao.cn/Upload/4d257822-1925-4abd-a745-4731fc49d704.jpg
+         * Sort : 0
+         */
+
+        @SerializedName("Id")
+        private int IdX;
+        private int ClassId;
+        @SerializedName("CreateTime")
+        private String CreateTimeX;
+        private String Url;
+        private int Sort;
+
+        public int getIdX() {
+            return IdX;
+        }
+
+        public void setIdX(int IdX) {
+            this.IdX = IdX;
+        }
+
+        public int getClassId() {
+            return ClassId;
+        }
+
+        public void setClassId(int ClassId) {
+            this.ClassId = ClassId;
+        }
+
+        public String getCreateTimeX() {
+            return CreateTimeX;
+        }
+
+        public void setCreateTimeX(String CreateTimeX) {
+            this.CreateTimeX = CreateTimeX;
+        }
+
+        public String getUrl() {
+            return Url;
+        }
+
+        public void setUrl(String Url) {
+            this.Url = Url;
+        }
+
+        public int getSort() {
+            return Sort;
+        }
+
+        public void setSort(int Sort) {
+            this.Sort = Sort;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(this.IdX);
+            dest.writeInt(this.ClassId);
+            dest.writeString(this.CreateTimeX);
+            dest.writeString(this.Url);
+            dest.writeInt(this.Sort);
+        }
+
+        public ClassMaterialsBean() {
+        }
+
+        protected ClassMaterialsBean(Parcel in) {
+            this.IdX = in.readInt();
+            this.ClassId = in.readInt();
+            this.CreateTimeX = in.readString();
+            this.Url = in.readString();
+            this.Sort = in.readInt();
+        }
+
+        public static final Creator<ClassMaterialsBean> CREATOR = new Creator<ClassMaterialsBean>() {
+            @Override
+            public ClassMaterialsBean createFromParcel(Parcel source) {
+                return new ClassMaterialsBean(source);
+            }
+
+            @Override
+            public ClassMaterialsBean[] newArray(int size) {
+                return new ClassMaterialsBean[size];
+            }
+        };
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -126,9 +238,7 @@ public class ClassBean implements Parcelable {
         dest.writeByte(this.IsAudition ? (byte) 1 : (byte) 0);
         dest.writeInt(this.ClassType);
         dest.writeString(this.StartTime);
-    }
-
-    public ClassBean() {
+        dest.writeTypedList(this.classMaterials);
     }
 
     protected ClassBean(Parcel in) {
@@ -142,9 +252,10 @@ public class ClassBean implements Parcelable {
         this.IsAudition = in.readByte() != 0;
         this.ClassType = in.readInt();
         this.StartTime = in.readString();
+        this.classMaterials = in.createTypedArrayList(ClassMaterialsBean.CREATOR);
     }
 
-    public static final Parcelable.Creator<ClassBean> CREATOR = new Parcelable.Creator<ClassBean>() {
+    public static final Creator<ClassBean> CREATOR = new Creator<ClassBean>() {
         @Override
         public ClassBean createFromParcel(Parcel source) {
             return new ClassBean(source);

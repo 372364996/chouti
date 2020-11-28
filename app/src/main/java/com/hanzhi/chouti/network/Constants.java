@@ -47,8 +47,8 @@ public class Constants extends BaseConstants {
     public static final String GET_CLASS_URL = "class/GetClassListV2";
     /*获取课程Tab列表*/
     public static final String GET_CLASS_TAB_URL = "class/GetClassListMenuV2";
-    /*权益服务内容列表*/
-    public static final String EQUITIES_SERVICE_CONTENT_LIST = "DaoShop/GetStoreProject";
+    /*获取课程详情*/
+    public static final String GET_CLASS_DETAIL_LIST = "class/GetClassMaterialsV2";
     /*权益优惠力度列表*/
     public static final String EQUITIES_DISCOUNT_LIST = "DaoShop/GetStoreEquityDiscount";
     /*权益管理列表*/

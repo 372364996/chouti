@@ -5,9 +5,16 @@
     <string name="title_select_time">选择时间</string>
     <string name="title_select_teacher">选择教师</string>
     <string name="title_select_class">选择课程</string>
+    <string name="title_class_detail">课程详情</string>
+    <string name="title_class_apply">申请</string>
 
     <!--课程详情-->
     <string name="class_detail_submit">确认课程</string>
+
+    <!--课程申请-->
+    <string name="class_apply_tips_title">注意事项</string>
+    <string name="class_apply_submit">确认申请</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">韩知小助手</string>

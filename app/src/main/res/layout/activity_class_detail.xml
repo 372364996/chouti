@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include layout="@layout/view_toolbar_lay"/>
     <Button
         android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_12"
+        android:layout_marginBottom="@dimen/dp_12"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"
         android:background="@drawable/rectangle_round_corner6_primary"
         android:layout_alignParentBottom="true"
         android:textColor="@color/white"
@@ -17,9 +22,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_submit"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        android:gravity="right"
         android:textColor="@color/text_color_99"
-        android:textSize="@dimen/sp_12"/>
-    <androidx.core.widget.ContentLoadingProgressBar
+        android:textSize="@dimen/sp_12"
+        tools:text="@string/app_name"/>
+    <ProgressBar
+        android:id="@+id/progress_horizontal"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_2" />
+        android:layout_height="@dimen/dp_4"
+        android:layout_above="@+id/tv_page"
+        android:progressDrawable="@drawable/progressbar_bg"
+        android:layout_marginLeft="@dimen/dp_8"
+        android:layout_marginRight="@dimen/dp_8"/>
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_class_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/progress_horizontal"
+        android:layout_marginBottom="@dimen/dp_32"
+        android:layout_below="@+id/toolbar_lay">
+
+    </androidx.viewpager.widget.ViewPager>
 </RelativeLayout>

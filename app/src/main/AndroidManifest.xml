@@ -44,6 +44,9 @@
         <activity android:name=".ui.appointment.AppointmentTimeActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_select_time"/>
+        <activity android:name=".ui.selectclass.ClassDetailActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_class_detail"/>
     </application>
 
 </manifest>

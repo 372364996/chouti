@@ -14,6 +14,7 @@ import com.hanzhi.chouti.bean.appointment.AppointmentTimeBean;
 import com.hanzhi.chouti.bean.selectclass.ClassBean;
 import com.hanzhi.chouti.network.Constants;
 import com.hanzhi.chouti.ui.appointment.adapter.AppointmentTimeAdapter;
+import com.hanzhi.chouti.ui.selectclass.ClassDetailActivity;
 import com.hanzhi.chouti.ui.selectclass.adapter.SelectClassAdapter;
 import com.hanzhi.chouti.utils.RequestParamsUtils;
 
@@ -76,5 +77,14 @@ public class SelectClassChildFragment extends BaseRecycleViewFragment<ClassBean>
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
+        ClassBean classBean = (ClassBean) adapter.getItem(position);
+        if(classBean == null){
+            return;
+        }
+        if(classApplyBean == null){
+            classApplyBean = new ClassApplyBean();
+        }
+        classApplyBean.setClassId(classBean.getId());
+        ClassDetailActivity.start(getActivity(), classApplyBean);
     }
 }
