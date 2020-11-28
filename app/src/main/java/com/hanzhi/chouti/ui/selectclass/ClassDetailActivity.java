@@ -3,6 +3,8 @@ package com.hanzhi.chouti.ui.selectclass;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import com.chewawa.baselibrary.base.NBaseActivity;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.selectclass.ClassBean;
+import com.hanzhi.chouti.ui.appointment.AppointmentTimeActivity;
 import com.hanzhi.chouti.ui.selectclass.adapter.ClassDetailAdapter;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassDetailContract;
 import com.hanzhi.chouti.ui.selectclass.presenter.ClassDetailPresenter;
@@ -21,6 +24,7 @@ import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * @class 课程详情
@@ -98,5 +102,20 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+    @OnClick(R.id.btn_submit)
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.btn_submit:{
+                if(classApplyBean == null){
+                    return;
+                }
+                if(TextUtils.isEmpty(classApplyBean.getDateTimeStr())){
+                    AppointmentTimeActivity.start(ClassDetailActivity.this, classApplyBean);
+                    return;
+                }
+                break;
+            }
+        }
     }
 }
