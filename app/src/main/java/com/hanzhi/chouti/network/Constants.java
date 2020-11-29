@@ -49,88 +49,16 @@ public class Constants extends BaseConstants {
     public static final String GET_CLASS_TAB_URL = "class/GetClassListMenuV2";
     /*获取课程详情*/
     public static final String GET_CLASS_DETAIL_LIST = "class/GetClassMaterialsV2";
-    /*权益优惠力度列表*/
-    public static final String EQUITIES_DISCOUNT_LIST = "DaoShop/GetStoreEquityDiscount";
-    /*权益管理列表*/
-    public static final String EQUITIES_LIST_URL = "DaoShop/EquityList";
-    /*店铺基本信息修改*/
-    public static final String STORE_BASIC_INFO_EDIT_URL = "DaoShop/EditBaseInfo";
-    /*获取店铺服务列表*/
-    public static final String STORE_SERVICE_URL = "DaoShop/GetStoreProject";
-    /*店铺成员*/
-    public static final String STORE_MEMBER_LIST_URL = "DaoShop/GetStoreStaff";
-    /*添加店铺成员*/
-    public static final String ADD_STORE_MEMBER_URL = "DaoShop/AddStoreStaff";
-    /*编辑店铺成员信息*/
-    public static final String EDIT_STORE_MEMBER_URL = "DaoShop/EditStoreStaff";
-    /*删除店铺成员*/
-    public static final String DELETE_STORE_MEMBER_URL = "DaoShop/DeleteStoreStaff";
-    /*维修单*/
-    public static final String REPAIR_BILL_URL = "DaoShopOrder/GetClaimOrder";
-    /*新增店铺权益*/
-    public static final String ADD_STORE_EQUITIES_URL = "DaoShop/AddStoreEquity";
-    /*编辑店铺权益*/
-    public static final String EDIT_STORE_EQUITIES_URL = "DaoShop/EditStoreEquity";
-    /*下线店铺权益*/
-    public static final String REMOVE_STORE_EQUITIES_URL = "DaoShop/StoreEquityOffline";
-    /*引流列表筛选列表*/
-    public static final String CUSTOMER_LIST_FILTER_DATA_URL = "DaoShop/FlowListData";
-    /*引流列表*/
-    public static final String CUSTOMER_LIST_URL = "DaoShop/FlowList";
-    /*预约单*/
-    public static final String RESERVATION_LIST_URL = "DaoShopOrder/GetMaintainOrder";
-    /*获取预约保养单详情*/
-    public static final String RESERVATION_LIST_DETAIL_URL = "DaoShopOrder/MaintainOrderDetails";
-    /*确认接收保养预约单*/
-    public static final String ACCEPT_RESERVATION_URL = "DaoShopOrder/ConfirmMaintainOrder";
-    /*获取预约保养单出厂资料*/
-    public static final String GET_RESERVATION_PHOTO_URL = "DaoShopOrder/GetMaintainFile";
-    /*保存预约保养单出厂资料*/
-    public static final String SAVE_RESERVATION_PHOTO_URL = "DaoShopOrder/MaintainUploadFile";
-    /*结款记录*/
-    public static final String MONEY_RECORD_URL = "DaoShopOrder/MaintainOrderPayRecord";
-    /*设置页信息获取*/
-    public static final String SETTING_PAGE_URL = "DaoShop/GetSetAboutInfo";
-    /*获取店铺图库*/
-    public static final String GET_STORE_PHOTO_URL = "DaoShop/GetStoreImgList";
-    /*添加店铺图片*/
-    public static final String ADD_STORE_PHOTO_URL = "DaoShop/AddStoreImg";
-    /*删除店铺图片*/
-    public static final String DELETE_STORE_PHOTO_URL = "DaoShop/DeleteStoreImg";
-    /*营业执照OCR识别*/
-    public static final String OCR_BUSINESS_LICENSE_URL = "DaoShopUser/BusinessLicense";
-    /*编辑店铺合作信息*/
-    public static final String EDIT_STORE_COOPERATIVE_INFO_URL = "DaoShop/EditCooperationInfo";
-    /*编辑店铺营业信息*/
-    public static final String EDIT_STORE_BUSINESS_INFO_URL = "DaoShop/EditBusinessInfo";
-    /*获取所有门店列表*/
-    public static final String GET_STORE_LIST_URL = "DaoShop/AllStoreList";
-
-
-
-    /**
-     * SharedPreferences的键值
-     *
-     * @author nanfeifei
-     * @since 2016年7月21日上午11:07:12
-     * @version 1.0
-     */
-    public final static class SpKey {
-        public static final String KEY_IS_ONE_START = "IsOneStart";
-        public static final String KEY_BASE_IP = "baseIp";
-        public static final String KEY_SPLASH_INFO = "SplashInfo";
-        public static final String RESULT_DATA_KEY = "data_";
-        public static final String RESULT_VERSION_KEY = "v_";
-        public static final String KEY_APP_CONTENTS = "AppContentsV2";
-        public static final String KEY_UNREAD_MESSAGE_COUNT= "unreadMessageCount";
-        public static final String KEY_PUSH_OPEN = "push_open_status";
-        public static final String KEY_MOBILE = "mobile";
-        public static final String KEY_TOKEN = "token";
-        public static final String KEY_PRIVACY_POLICY = "isAgree";
-        public static final String KEY_SHOW_BIND_WEICHAT = "isShowBindWeichat";
-        public static final String KEY_DEVICE_TOKEN = "deviceToken";
-        public static final String KEY_DOMAIN_NAME = "domain_name";
-    }
+    /*获取我的课程Tab列表*/
+    public static final String GET_MY_CLASS_TAB_URL = "order/GetMyOrderListMenuV2";
+    /*获取我的课程列表*/
+    public static final String GET_MY_CLASS_URL = "order/GetMyOrderListByUserIdV2";
+    /*获取课程确认提示信息*/
+    public static final String GET_CLASS_APPLY_TIPS = "classcard/GetApplyClassNotesV2";
+    /*获取用户课程卡列表*/
+    public static final String GET_CLASS_CARD_LIST = "classcard/MyClassCardV2";
+    /*提交课程申请*/
+    public static final String SUBMIT_CLASS_APPLY = "class/CreateOrderV2";
     /**
      * Bundle的key
      */

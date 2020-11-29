@@ -25,10 +25,6 @@ public class SelectClassActivity extends NBaseActivity {
         starter.putExtra("classApplyBean", classApplyBean);
         context.startActivity(starter);
     }
-    @Override
-    public boolean transparentStatusBar() {
-        return true;
-    }
 
     @Override
     public int initLoadResId() {

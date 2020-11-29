@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import com.chewawa.baselibrary.base.NBaseActivity;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.ClassApplyBean;
-import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
+import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 
 
 /**
@@ -25,10 +25,6 @@ public class AppointmentTimeActivity extends NBaseActivity {
         starter.putExtra("classApplyBean", classApplyBean);
         context.startActivity(starter);
     }
-    @Override
-    public boolean transparentStatusBar() {
-        return true;
-    }
 
     @Override
     public int initLoadResId() {
@@ -42,7 +38,7 @@ public class AppointmentTimeActivity extends NBaseActivity {
         if (savedInstanceState != null)
             mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
         if (mContent == null) {
-            mContent = SelectClassFragment.newInstance(classApplyBean);
+            mContent = AppointmentTimeFragment.newInstance(classApplyBean);
         }
     }
 

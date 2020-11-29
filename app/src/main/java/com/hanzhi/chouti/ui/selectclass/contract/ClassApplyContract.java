@@ -2,7 +2,9 @@ package com.hanzhi.chouti.ui.selectclass.contract;
 
 import com.chewawa.baselibrary.base.contract.BaseContract;
 import com.hanzhi.chouti.bean.ClassApplyBean;
-import com.hanzhi.chouti.bean.selectclass.ClassBean;
+import com.hanzhi.chouti.bean.ClassCardBean;
+
+import java.util.List;
 
 /**
  * @class describe
@@ -12,17 +14,30 @@ import com.hanzhi.chouti.bean.selectclass.ClassBean;
 public interface ClassApplyContract {
     interface Model {
         void getClassApplyData(int classId, int teacherId, String dateTime, OnGetClassApplyDataListener listener);
+        void getClassCardList(OnGetClassCardListListener listener);
+        void submitClassApply(ClassApplyBean classApplyBean, int classCardId, OnSubmitClassApplyListener listener);
     }
     interface OnGetClassApplyDataListener{
-        void onGetClassApplyDataSuccess(ClassBean classBean);
+        void onGetClassApplyDataSuccess(String message);
         void onGetClassApplyDataFailure(String message);
     }
-
+    interface OnGetClassCardListListener{
+        void onGetClassCardListSuccess(List<ClassCardBean> list);
+        void onGetClassCardListFailure(String message);
+    }
+    interface OnSubmitClassApplyListener{
+        void onSubmitClassApplySuccess(String message);
+        void onSubmitClassApplyFailure(String message);
+    }
     interface View extends BaseContract.View {
-        void setClassApplyData(ClassBean classBean);
+        void setClassApplyData(String message);
+        void setClassCardList(List<ClassCardBean> list);
+        void submitClassApplySuccess();
     }
 
     interface Presenter {
         void getClassApplyData(ClassApplyBean classApplyBean);
+        void getClassCardList();
+        void submitClassApply(ClassApplyBean classApplyBean, int classCardId);
     }
 }

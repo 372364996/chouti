@@ -3,7 +3,6 @@ package com.hanzhi.chouti.ui.appointment.adapter;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -49,12 +48,19 @@ public class AppointmentTimeAdapter extends BaseCheckRecycleViewAdapter<Appointm
                 return;
             }
             tvTime.setText(data.getTime());
-            if(data.isChecked()){
-                tvTime.setTextColor(ContextCompat.getColor(context, R.color.color_red));
-                tvTime.setBackgroundResource(R.drawable.rectangle_round_corner6_light_primary);
-            }else {
+            if(data.getIsCanUse()){
+                cbCheck.setClickable(true);
                 tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_33));
-                tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
+                if(data.isChecked()){
+                    tvTime.setTextColor(ContextCompat.getColor(context, R.color.color_red));
+                    tvTime.setBackgroundResource(R.drawable.rectangle_round_corner6_light_primary);
+                }else {
+                    tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_33));
+                    tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
+                }
+            }else {
+                cbCheck.setClickable(false);
+                tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_99));
             }
             getAdapter().handleCompoundButton(cbCheck, data);
             cbCheck.setVisibility(View.GONE);

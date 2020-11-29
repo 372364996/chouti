@@ -4,19 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/view_toolbar_lay"/>
-    <Button
-        android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height_44"
-        android:layout_marginTop="@dimen/dp_12"
-        android:layout_marginBottom="@dimen/dp_12"
-        android:layout_marginLeft="@dimen/dp_8"
-        android:layout_marginRight="@dimen/dp_8"
-        android:background="@drawable/rectangle_round_corner6_primary"
-        android:layout_alignParentBottom="true"
-        android:textColor="@color/white"
-        android:textSize="@dimen/sp_14"
-        android:text="@string/class_detail_submit"/>
     <TextView
         android:id="@+id/tv_page"
         android:layout_width="match_parent"
@@ -24,6 +11,8 @@
         android:layout_above="@+id/btn_submit"
         android:layout_marginLeft="@dimen/dp_16"
         android:layout_marginRight="@dimen/dp_16"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp_12"
         android:gravity="right"
         android:textColor="@color/text_color_99"
         android:textSize="@dimen/sp_12"

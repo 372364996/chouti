@@ -10,10 +10,21 @@
 
     <!--课程详情-->
     <string name="class_detail_submit">确认课程</string>
-
+    <!--预约时间-->
+    <string name="appointment_time_no_checked_tips">请选择上课时间</string>
+    <string name="appointment_time_submit">确认时间</string>
     <!--课程申请-->
     <string name="class_apply_tips_title">注意事项</string>
     <string name="class_apply_submit">确认申请</string>
+    <string name="class_apply_table_title">课程申请表</string>
+    <string name="class_apply_table_copyright">韩知</string>
+    <string name="class_apply_residue_num" formatted="false">剩余%d次</string>
+    <string name="class_apply_use_info">使用此券 * 1</string>
+    <!--我的课程-->
+    <string name="my_class_have_apply">已申请</string>
+    <string name="my_class_have_class">已上课</string>
+    <string name="my_class_reapply">重新申请</string>
+    <string name="my_class_cancel">取消课程</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

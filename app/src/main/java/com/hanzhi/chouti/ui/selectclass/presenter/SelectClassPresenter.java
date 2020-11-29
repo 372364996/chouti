@@ -2,10 +2,7 @@ package com.hanzhi.chouti.ui.selectclass.presenter;
 
 import com.chewawa.baselibrary.base.presenter.BasePresenterImpl;
 import com.chewawa.baselibrary.utils.ToastUtils;
-import com.hanzhi.chouti.bean.appointment.AppointmentTabBean;
 import com.hanzhi.chouti.bean.selectclass.ClassTabBean;
-import com.hanzhi.chouti.ui.appointment.contract.AppointmentTimeContract;
-import com.hanzhi.chouti.ui.appointment.model.AppointmentTimeModel;
 import com.hanzhi.chouti.ui.selectclass.contract.SelectClassContract;
 import com.hanzhi.chouti.ui.selectclass.model.SelectClassModel;
 
@@ -35,7 +32,6 @@ public class SelectClassPresenter extends BasePresenterImpl<SelectClassContract.
 
     @Override
     public void onGetTabListSuccess(List<ClassTabBean> list) {
-        view.hideProgressDialog();
         if(list == null){
             return;
         }
@@ -52,7 +48,6 @@ public class SelectClassPresenter extends BasePresenterImpl<SelectClassContract.
     @Override
     public void onGetTabListFailure(String message) {
         ToastUtils.showToast(message);
-        view.hideProgressDialog();
 
     }
 }

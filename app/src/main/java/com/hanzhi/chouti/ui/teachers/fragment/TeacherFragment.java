@@ -1,7 +1,7 @@
 package com.hanzhi.chouti.ui.teachers.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -12,8 +12,8 @@ import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.teachers.TeacherBean;
 import com.hanzhi.chouti.network.Constants;
-import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeChildFragment;
-import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassChildFragment;
+import com.hanzhi.chouti.ui.selectclass.ClassApplyActivity;
+import com.hanzhi.chouti.ui.selectclass.SelectClassActivity;
 import com.hanzhi.chouti.ui.teachers.TeacherInfoActivity;
 import com.hanzhi.chouti.ui.teachers.adapter.TeacherAdapter;
 import com.hanzhi.chouti.utils.RequestParamsUtils;
@@ -76,7 +76,15 @@ public class TeacherFragment extends BaseRecycleViewFragment<TeacherBean>  {
             classApplyBean = new ClassApplyBean();
         }
         classApplyBean.setTeacherId(teacherBean.getUserId());
-        TeacherInfoActivity.start(getActivity(), classApplyBean);
+        classApplyBean.setTeacherName(teacherBean.getName());
+        if(TextUtils.isEmpty(classApplyBean.getDateTimeStr())){
+            TeacherInfoActivity.start(getActivity(), classApplyBean);
+        }else if(classApplyBean.getClassId() == 0){
+            SelectClassActivity.start(getActivity(), classApplyBean);
+        }else {
+            ClassApplyActivity.start(getActivity(), classApplyBean);
+        }
+
     }
 }
 

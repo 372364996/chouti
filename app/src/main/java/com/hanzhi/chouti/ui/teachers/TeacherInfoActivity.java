@@ -18,7 +18,6 @@ import com.hanzhi.chouti.ui.teachers.contract.TeacherInfoContract;
 import com.hanzhi.chouti.ui.teachers.presenter.TeacherInfoPresenter;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -43,7 +42,6 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
     @BindView(R.id.tv_info)
     TextView tvInfo;
     private Fragment mContent;
-    int teacherId;
     ClassApplyBean classApplyBean;
     public static void start(Context context, ClassApplyBean classApplyBean) {
         Intent starter = new Intent(context, TeacherInfoActivity.class);
@@ -67,7 +65,6 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
     }
     @Override
     protected void initView() {
-        teacherId = getIntent().getIntExtra("teacherId", 0);
         initToolBar();
         toolbarLay.setTitle(R.string.title_teacher_detail);
 //        //必需继承FragmentActivity,嵌套fragment只需要这行代码
@@ -84,7 +81,10 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
     @Override
     protected void prepareData() {
         super.prepareData();
-        presenter.getTeacherInfo(teacherId);
+        if(classApplyBean != null){
+            presenter.getTeacherInfo(classApplyBean.getTeacherId());
+        }
+
     }
 
     @Override
@@ -98,7 +98,7 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
 
     @Override
     public void setTeacherInfo(TeacherBean teacherBean) {
-        imageLoaderUtils.loadImage(teacherBean.getHeadImg(), ivHeadImg, 0);
+        imageLoaderUtils.loadImage(teacherBean.getHeadImg(), ivHeadImg, R.drawable.hanzhilogo);
         tvTeacherName.setText(teacherBean.getName());
         tvSchoolName.setText(teacherBean.getUniversity());
         tvScore.setText(teacherBean.getAvgScore());

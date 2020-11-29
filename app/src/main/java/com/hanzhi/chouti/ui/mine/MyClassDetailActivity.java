@@ -1,10 +1,7 @@
-package com.hanzhi.chouti.ui.selectclass;
+package com.hanzhi.chouti.ui.mine;
 
 import android.content.Context;
 import android.content.Intent;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -12,24 +9,19 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.chewawa.baselibrary.base.NBaseActivity;
 import com.hanzhi.chouti.R;
-import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.selectclass.ClassBean;
-import com.hanzhi.chouti.ui.appointment.AppointmentTimeActivity;
 import com.hanzhi.chouti.ui.selectclass.adapter.ClassDetailAdapter;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassDetailContract;
 import com.hanzhi.chouti.ui.selectclass.presenter.ClassDetailPresenter;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 /**
  * @class 课程详情
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/28 13:58
  */
-public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> implements ClassDetailContract.View, ViewPager.OnPageChangeListener {
-    @BindView(R.id.btn_submit)
-    Button btnSubmit;
+public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> implements ClassDetailContract.View, ViewPager.OnPageChangeListener {
     @BindView(R.id.tv_page)
     TextView tvPage;
     @BindView(R.id.progress_horizontal)
@@ -37,21 +29,21 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
     @BindView(R.id.vp_class_detail)
     ViewPager vpClassDetail;
     ClassDetailAdapter classDetailAdapter;
-    ClassApplyBean classApplyBean;
+    int classId;
     ClassBean classBean;
-    public static void start(Context context, ClassApplyBean classApplyBean) {
-        Intent starter = new Intent(context, ClassDetailActivity.class);
-        starter.putExtra("classApplyBean", classApplyBean);
+    public static void start(Context context, int classId) {
+        Intent starter = new Intent(context, MyClassDetailActivity.class);
+        starter.putExtra("classId", classId);
         context.startActivity(starter);
     }
     @Override
     public int initLoadResId() {
-        return R.layout.activity_class_detail;
+        return R.layout.activity_my_class_detail;
     }
 
     @Override
     protected void initView() {
-        classApplyBean = getIntent().getParcelableExtra("classApplyBean");
+        classId = getIntent().getIntExtra("classId", 0);
         initToolBar();
         toolbarLay.setTitle(R.string.title_class_detail);
         vpClassDetail.addOnPageChangeListener(this);
@@ -60,9 +52,7 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
     @Override
     protected void prepareData() {
         super.prepareData();
-        if(classApplyBean != null){
-            presenter.getClassDetailData(classApplyBean.getClassId());
-        }
+        presenter.getClassDetailData(classId);
     }
 
     @Override
@@ -98,21 +88,5 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
     @Override
     public void onPageScrollStateChanged(int state) {
 
-    }
-    @OnClick(R.id.btn_submit)
-    public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.btn_submit:{
-                if(classApplyBean == null){
-                    classApplyBean = new ClassApplyBean();
-                }
-                if(TextUtils.isEmpty(classApplyBean.getDateTimeStr())){
-                    AppointmentTimeActivity.start(ClassDetailActivity.this, classApplyBean);
-                }else {
-                    ClassApplyActivity.start(ClassDetailActivity.this, classApplyBean);
-                }
-                break;
-            }
-        }
     }
 }

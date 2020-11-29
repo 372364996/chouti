@@ -10,10 +10,8 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewFragment;
 import com.hanzhi.chouti.bean.ClassApplyBean;
-import com.hanzhi.chouti.bean.appointment.AppointmentTimeBean;
 import com.hanzhi.chouti.bean.selectclass.ClassBean;
 import com.hanzhi.chouti.network.Constants;
-import com.hanzhi.chouti.ui.appointment.adapter.AppointmentTimeAdapter;
 import com.hanzhi.chouti.ui.selectclass.ClassDetailActivity;
 import com.hanzhi.chouti.ui.selectclass.adapter.SelectClassAdapter;
 import com.hanzhi.chouti.utils.RequestParamsUtils;
@@ -85,6 +83,7 @@ public class SelectClassChildFragment extends BaseRecycleViewFragment<ClassBean>
             classApplyBean = new ClassApplyBean();
         }
         classApplyBean.setClassId(classBean.getId());
+        classApplyBean.setClassName(classBean.getName());
         ClassDetailActivity.start(getActivity(), classApplyBean);
     }
 }

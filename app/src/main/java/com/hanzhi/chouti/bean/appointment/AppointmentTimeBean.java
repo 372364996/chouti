@@ -23,6 +23,7 @@ public class AppointmentTimeBean implements BaseCheckRecycleViewAdapter.CheckIte
     private boolean IsCanUse;
     private String Time;
     private String Date;
+    private String DateTimeStr;
     private boolean isChecked;
 
     public boolean getIsCanUse() {
@@ -47,6 +48,14 @@ public class AppointmentTimeBean implements BaseCheckRecycleViewAdapter.CheckIte
 
     public void setDate(String date) {
         Date = date;
+    }
+
+    public String getDateTimeStr() {
+        return DateTimeStr;
+    }
+
+    public void setDateTimeStr(String dateTimeStr) {
+        DateTimeStr = dateTimeStr;
     }
 
     @Override
@@ -78,6 +87,7 @@ public class AppointmentTimeBean implements BaseCheckRecycleViewAdapter.CheckIte
         dest.writeByte(this.IsCanUse ? (byte) 1 : (byte) 0);
         dest.writeString(this.Time);
         dest.writeString(this.Date);
+        dest.writeString(this.DateTimeStr);
         dest.writeByte(this.isChecked ? (byte) 1 : (byte) 0);
     }
 
@@ -85,6 +95,7 @@ public class AppointmentTimeBean implements BaseCheckRecycleViewAdapter.CheckIte
         this.IsCanUse = in.readByte() != 0;
         this.Time = in.readString();
         this.Date = in.readString();
+        this.DateTimeStr = in.readString();
         this.isChecked = in.readByte() != 0;
     }
 

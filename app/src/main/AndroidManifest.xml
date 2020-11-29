@@ -3,7 +3,18 @@
     package="com.hanzhi.chouti">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    // 如果你的场景中涉及读取外部存储，需添加如下权限：
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    // 如果你使用的是 Android 10.0 及以上设备，还需要添加如下权限：
+    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
     <application
         android:name=".SysApplication"
         android:allowBackup="true"
@@ -11,6 +22,7 @@
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -28,6 +40,7 @@
         <activity
             android:name="com.hanzhi.chouti.MainActivity"
             android:screenOrientation="portrait"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,6 +63,9 @@
         <activity android:name=".ui.selectclass.ClassApplyActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_class_apply"/>
+        <activity android:name=".ui.mine.MyClassDetailActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_class_detail"/>
     </application>
 
 </manifest>

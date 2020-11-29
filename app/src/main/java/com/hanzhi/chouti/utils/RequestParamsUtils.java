@@ -13,17 +13,17 @@ import java.util.Map;
  * @time 2020/11/27 21:16
  */
 public class RequestParamsUtils {
-    public static Map<String, Object> getClassApplyParams(ClassApplyBean classApplyBean){
-        Map<String, Object> map = new HashMap<>();
+    public static Map<String, String> getClassApplyParams(ClassApplyBean classApplyBean){
+        Map<String, String> map = new HashMap<>();
         if(classApplyBean != null){
             if(classApplyBean.getClassId() != 0){
-                map.put("classId", classApplyBean.getClassId());
+                map.put("classId", String.valueOf(classApplyBean.getClassId()));
             }
             if(classApplyBean.getTeacherId() != 0){
-                map.put("teacherId", classApplyBean.getTeacherId());
+                map.put("teacherId", String.valueOf(classApplyBean.getTeacherId()));
             }
             if(!TextUtils.isEmpty(classApplyBean.getDateTimeStr())){
-                map.put("dateTimeStr", classApplyBean.getDateTimeStr());
+                map.put("classTime", classApplyBean.getDateTimeStr());
             }
         }
         return map;

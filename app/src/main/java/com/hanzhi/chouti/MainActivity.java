@@ -10,18 +10,19 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
 import com.google.android.material.navigation.NavigationView;
+import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.chouti.ui.login.LoginActivity;
 import com.hanzhi.chouti.ui.login.RegisterActivity;
-import com.hanzhi.chouti.ui.mine.MineFragment;
+import com.hanzhi.chouti.ui.mine.fragment.MyClassFragment;
 import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
 import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
-import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hjm.bottomtabbar.BottomTabBar;
+import com.hjm.bottomtabbar.custom.CustomFragmentTabHost;
 import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import butterknife.BindView;
@@ -38,9 +39,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.drawer_layout)
     DrawerLayout drawerLayout;
     private AppBarConfiguration mAppBarConfiguration;
-
+    int tabIndex;
     private Intent intent;
-
+    public static void startMainActivity(FragmentActivity activity, int pos) {
+        Intent intent = new Intent(activity, MainActivity.class);
+        intent.putExtra("tab_index", pos);
+        activity.startActivity(intent);
+    }
+    @Override protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (intent != null) {
+            tabIndex = intent.getIntExtra("tab_index", 0);
+            ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(tabIndex);
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addTabItem(getString(R.string.main_tab_teacher), R.drawable.ic_teacher_tab, TeacherFragment.class)
                 .addTabItem("预约", R.drawable.ic_yuyue_tab, AppointmentTimeFragment.class)
                 .addTabItem("选择课程", R.drawable.ic_selectclass_tab, SelectClassFragment.class)
-                .addTabItem("我的", R.drawable.ic_mine_tab, MineFragment.class)
+                .addTabItem("我的", R.drawable.ic_mine_tab, MyClassFragment.class)
                 .isShowDivider(true)  //是否包含分割线
                 .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
                     @Override

@@ -12,58 +12,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <RelativeLayout
+            <com.hanzhi.chouti.view.WrapContentHeightViewPager
+                android:id="@+id/vp_class_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dp_16">
-                <TextView
-                    android:id="@+id/tv_use_num"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/green"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingRight="@dimen/dp_8"
-                    android:paddingTop="@dimen/dp_12"
-                    android:paddingBottom="@dimen/dp_12"
-                    android:textColor="@color/text_color_33"
-                    android:textSize="@dimen/sp_18"
-                    tools:text="测试"/>
+                />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="@dimen/dp_32"
-                    android:paddingRight="@dimen/dp_32"
-                    android:layout_below="@+id/tv_use_num">
-                    <TextView
-                        android:id="@+id/tv_residue_num"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:textColor="@color/text_color_33"
-                        android:textSize="@dimen/sp_18"
-                        tools:text="测试"/>
-                    <TextView
-                        android:id="@+id/tv_use_info"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/tv_residue_num"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/dp_16"
-                        android:textColor="@color/text_color_66"
-                        android:textSize="@dimen/sp_16"
-                        tools:text="测试"/>
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_toLeftOf="@+id/tv_use_info"
-                        android:layout_marginTop="@dimen/dp_48"
-                        android:layout_marginBottom="@dimen/dp_16"
-                        android:scaleType="fitStart"
-                        android:src="@mipmap/ic_launcher"/>
-                </RelativeLayout>
-            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,31 +29,30 @@
                     android:id="@+id/ll_title_lay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/green"
-                    android:paddingLeft="@dimen/dp_8"
-                    android:paddingRight="@dimen/dp_8"
-                    android:paddingTop="@dimen/dp_12"
-                    android:paddingBottom="@dimen/dp_12"
+                    android:background="@drawable/card_top_bg"
+                    android:padding="@dimen/dp_12"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp_22"
-                        tools:text="测试"/>
+                        android:text="@string/class_apply_table_title"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:textColor="@color/white"
                         android:textSize="@dimen/sp_22"
-                        tools:text="测试"/>
+                        android:text="@string/class_apply_table_copyright"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/card_bottom_bg"
                     android:layout_below="@+id/ll_title_lay"
-                    android:padding="@dimen/dp_16"
+                    android:padding="@dimen/dp_12"
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
                     <TextView
@@ -113,7 +66,7 @@
                         android:id="@+id/tv_session_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_2"
                         android:textColor="@color/text_color_99"
                         android:textSize="@dimen/sp_16"
                         tools:text="测试"/>
@@ -121,7 +74,8 @@
                         android:id="@+id/tv_class_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/dp_6"
+                        android:layout_marginTop="@dimen/dp_2"
+                        android:layout_marginBottom="@dimen/dp_12"
                         android:textColor="@color/text_color_99"
                         android:textSize="@dimen/sp_16"
                         tools:text="测试"/>
@@ -130,10 +84,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_12"
                 android:gravity="center_horizontal"
                 android:textColor="@color/red"
-                android:textSize="@dimen/sp_22"
+                android:textSize="@dimen/sp_18"
                 android:text="@string/class_apply_tips_title"/>
             <TextView
                 android:id="@+id/tv_tips"
@@ -143,12 +97,12 @@
                 android:layout_marginLeft="@dimen/dp_18"
                 android:layout_marginRight="@dimen/dp_18"
                 android:textColor="@color/text_color_99"
-                android:textSize="@dimen/sp_14"
+                android:textSize="@dimen/sp_12"
                 android:text="@string/class_apply_tips_title"/>
             <Button
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/button_height_44"
                 android:layout_margin="@dimen/dp_16"
                 android:background="@drawable/rectangle_round_corner6_primary"
                 android:textColor="@color/white"
