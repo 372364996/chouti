@@ -88,6 +88,7 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
         footerView = inflater.inflate(R.layout.view_footer_submit, null);
         btnSubmit = footerView.findViewById(R.id.btn_submit);
         btnSubmit.setOnClickListener(this);
+        footerView.setVisibility(View.GONE);
         return footerView;
     }
 
@@ -95,6 +96,12 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
         ((AppointmentTimeAdapter)adapter).clickItem(position, false);
+    }
+
+    @Override
+    public void setListData(boolean isRefresh, List list, boolean isShowMore) {
+        super.setListData(isRefresh, list, isShowMore);
+        footerView.setVisibility(View.VISIBLE);
     }
 
     @Override

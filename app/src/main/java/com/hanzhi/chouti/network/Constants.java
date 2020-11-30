@@ -59,6 +59,10 @@ public class Constants extends BaseConstants {
     public static final String GET_CLASS_CARD_LIST = "classcard/MyClassCardV2";
     /*提交课程申请*/
     public static final String SUBMIT_CLASS_APPLY = "class/CreateOrderV2";
+    /*重新申请课程*/
+    public static final String REAPPLY_CLASS_APPLY = "class/CreateOrderV2";
+    /*取消课程*/
+    public static final String CANCEL_CLASS_APPLY = "order/UserCancelOrderV2";
     /**
      * Bundle的key
      */

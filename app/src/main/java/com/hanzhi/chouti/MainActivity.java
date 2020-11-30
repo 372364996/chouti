@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.chouti.ui.login.LoginActivity;
 import com.hanzhi.chouti.ui.login.RegisterActivity;
+import com.hanzhi.chouti.ui.mine.fragment.MineFragment;
 import com.hanzhi.chouti.ui.mine.fragment.MyClassFragment;
 import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
 import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
@@ -121,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addTabItem(getString(R.string.main_tab_teacher), R.drawable.ic_teacher_tab, TeacherFragment.class)
                 .addTabItem("预约", R.drawable.ic_yuyue_tab, AppointmentTimeFragment.class)
                 .addTabItem("选择课程", R.drawable.ic_selectclass_tab, SelectClassFragment.class)
-                .addTabItem("我的", R.drawable.ic_mine_tab, MyClassFragment.class)
+                .addTabItem("我的", R.drawable.ic_mine_tab, MineFragment.class)
                 .isShowDivider(true)  //是否包含分割线
                 .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
                     @Override

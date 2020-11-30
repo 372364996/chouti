@@ -38,4 +38,23 @@ public class MyClassModel extends BaseModelImpl implements MyClassContract.Model
         });
         disposableList.add(disposable);
     }
+
+    @Override
+    public void cancelClass(int id, MyClassContract.OnCancelClassListener listener) {
+        String url = Constants.CANCEL_CLASS_APPLY;
+        Map<String, String> map = new HashMap<>();
+        map.put("number", String.valueOf(id));
+        Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
+            @Override
+            public void onError(int status, String message) {
+                listener.onCancelClassFailure(message);
+            }
+
+            @Override
+            public void onSuccess(ResultBean resultBean) {
+                listener.onCancelClassSuccess(resultBean.getMsg());
+            }
+        });
+        disposableList.add(disposable);
+    }
 }

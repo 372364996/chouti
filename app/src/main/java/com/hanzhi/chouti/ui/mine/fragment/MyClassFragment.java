@@ -73,4 +73,9 @@ public class MyClassFragment extends NBaseFragment<MyClassPresenter> implements 
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
     }
+
+    @Override
+    public void refreshList() {
+
+    }
 }

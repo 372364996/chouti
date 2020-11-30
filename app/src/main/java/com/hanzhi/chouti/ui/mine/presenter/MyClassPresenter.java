@@ -9,7 +9,7 @@ import com.hanzhi.chouti.ui.mine.model.MyClassModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyClassPresenter extends BasePresenterImpl<MyClassContract.View, MyClassModel> implements MyClassContract.Presenter, MyClassContract.OnGetTabListListener {
+public class MyClassPresenter extends BasePresenterImpl<MyClassContract.View, MyClassModel> implements MyClassContract.Presenter, MyClassContract.OnGetTabListListener, MyClassContract.OnCancelClassListener {
     public MyClassPresenter(MyClassContract.View view) {
         super(view);
     }
@@ -22,6 +22,12 @@ public class MyClassPresenter extends BasePresenterImpl<MyClassContract.View, My
     @Override
     public void getTabList() {
         model.getTabList(this);
+    }
+
+    @Override
+    public void cancelClass(int id) {
+        view.showProgressDialog();
+        model.cancelClass(id, this);
     }
 
     @Override
@@ -41,6 +47,18 @@ public class MyClassPresenter extends BasePresenterImpl<MyClassContract.View, My
 
     @Override
     public void onGetTabListFailure(String message) {
+        ToastUtils.showToast(message);
+    }
+
+    @Override
+    public void onCancelClassSuccess(String message) {
+        view.hideProgressDialog();
+        ToastUtils.showToast(message);
+    }
+
+    @Override
+    public void onCancelClassFailure(String message) {
+        view.hideProgressDialog();
         ToastUtils.showToast(message);
     }
 }

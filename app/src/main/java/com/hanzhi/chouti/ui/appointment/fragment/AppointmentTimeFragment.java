@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,6 +24,8 @@ import com.hanzhi.chouti.ui.appointment.presenter.AppointmentTimePresenter;
 import java.util.List;
 
 import butterknife.BindView;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresenter> implements AppointmentTimeContract.View, CommonTabPagerAdapter.TabPagerListener {
 
@@ -72,9 +77,18 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
         mViewPager.setAdapter(adapter);
         mViewPager.setOffscreenPageLimit(list.size());
         tabLayout.setupWithViewPager(mViewPager);
+        for (int i = 0; i < titleList.size(); i++) {
+            setTabItem(i, titleList);
+        }
         tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
+    public void setTabItem(int position, List<String> titleList) {
+        View view = LayoutInflater.from(getActivity()).inflate(R.layout.item_tab_week, null);
+        TextView textView = view.findViewById(R.id.tab_name);
+        textView.setText(titleList.get(position));
+        tabLayout.getTabAt(position).setCustomView(view);
 
+    }
     @Override
     public Fragment getFragment(int position) {
         if(list == null){

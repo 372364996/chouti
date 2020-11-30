@@ -25,6 +25,12 @@
     <string name="my_class_have_class">已上课</string>
     <string name="my_class_reapply">重新申请</string>
     <string name="my_class_cancel">取消课程</string>
+    <string name="my_class_review">复习课程</string>
+    <!--我的-->
+    <string name="mine_table_my_class">我的课程</string>
+    <string name="mine_table_collect_teacher">收藏老师</string>
+    <string name="mine_table_my_profile">我的资料</string>
+    <string name="mine_table_my_wallet">我的钱包</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

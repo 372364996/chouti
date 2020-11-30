@@ -50,6 +50,8 @@ public class MyClassAdapter extends BaseRecycleViewAdapter<MyClassBean> {
         Button btnReapply;
         @BindView(R.id.btn_cancel)
         Button btnCancel;
+        @BindView(R.id.btn_review)
+        Button btnReview;
         public ViewHolder(MyClassAdapter adapter, View itemView) {
             super(adapter, itemView);
         }
@@ -65,7 +67,24 @@ public class MyClassAdapter extends BaseRecycleViewAdapter<MyClassBean> {
             tvTeacherLevel.setText(data.getClassTypeName());
             tvClassDate.setText(YMD_DOT.format(DateUtils.getDate(YMDS, data.getClassTime())));
             tvClassTime.setText(data.getStartAndEndTime());
-            addOnClickListener(R.id.btn_reapply, R.id.btn_cancel);
+            if(data.getStatus() == 0||data.getStatus() == 1){
+                btnCancel.setVisibility(View.VISIBLE);
+                btnReapply.setVisibility(View.GONE);
+                btnReview.setVisibility(View.GONE);
+            }else if(data.getStatus() == 2){
+                btnCancel.setVisibility(View.GONE);
+                btnReapply.setVisibility(View.VISIBLE);
+                btnReview.setVisibility(View.GONE);
+            }else if(data.getStatus() == 4){
+                btnCancel.setVisibility(View.GONE);
+                btnReapply.setVisibility(View.GONE);
+                btnReview.setVisibility(View.VISIBLE);
+            }else {
+                btnCancel.setVisibility(View.GONE);
+                btnReapply.setVisibility(View.GONE);
+                btnReview.setVisibility(View.GONE);
+            }
+            addOnClickListener(R.id.btn_reapply, R.id.btn_cancel, R.id.btn_review);
         }
     }
 }

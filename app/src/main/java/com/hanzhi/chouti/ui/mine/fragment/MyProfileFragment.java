@@ -1,17 +1,14 @@
-package com.hanzhi.chouti.ui.mine;
+package com.hanzhi.chouti.ui.mine.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.hanzhi.chouti.R;
@@ -27,15 +24,20 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MineFragment extends Fragment {
+public class MyProfileFragment extends Fragment {
 
     private TextView userName;
     private TextView userSex;
     private TextView level;
-
+    public static MyProfileFragment newInstance() {
+        MyProfileFragment myProfileFragment = new MyProfileFragment();
+        Bundle args = new Bundle();
+        myProfileFragment.setArguments(args);
+        return myProfileFragment;
+    }
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_mine, container, false);
+        View root = inflater.inflate(R.layout.fragment_my_profile, container, false);
         userName = root.findViewById(R.id.userName);
         userSex = root.findViewById(R.id.userSex);
         level = root.findViewById(R.id.level);

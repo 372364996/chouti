@@ -87,6 +87,15 @@
             android:textColor="@color/white"
             android:text="@string/my_class_reapply"/>
         <Button
+            android:id="@+id/btn_review"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_30"
+            android:background="@drawable/rectangle_round_corner3_dark_blue"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:textSize="@dimen/sp_14"
+            android:textColor="@color/white"
+            android:text="@string/my_class_review"/>
+        <Button
             android:id="@+id/btn_cancel"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dp_30"
