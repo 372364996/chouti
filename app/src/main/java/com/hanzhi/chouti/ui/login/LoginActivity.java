@@ -2,7 +2,6 @@ package com.hanzhi.chouti.ui.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -14,8 +13,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.alibaba.fastjson.JSONObject;
 import com.hanzhi.chouti.MainActivity;
 import com.hanzhi.chouti.R;
+import com.hanzhi.chouti.bean.login.UserBean;
+import com.hanzhi.chouti.utils.CommonUtil;
 
 import java.io.IOException;
 
@@ -102,10 +104,12 @@ public class LoginActivity extends AppCompatActivity {
                                                                     public void run() {
                                                                         if (result.contains("true")) {
                                                                             //登录成功后将用户名密码保存到SharedPreferences中
-                                                                            SharedPreferences.Editor editor = getSharedPreferences("LoginInfo", MODE_PRIVATE).edit();
-                                                                            editor.putString("userName", name);
-                                                                            editor.putString("password", password);
-                                                                            editor.apply();
+//                                                                            SharedPreferences.Editor editor = getSharedPreferences("LoginInfo", MODE_PRIVATE).edit();
+//                                                                            editor.putString("userName", name);
+//                                                                            editor.putString("password", password);
+//                                                                            editor.apply();
+                                                                            UserBean userBean = JSONObject.parseObject(result, UserBean.class);
+                                                                            CommonUtil.saveToken(String.valueOf(userBean.getId()));
                                                                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                                                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                                             startActivity(intent);

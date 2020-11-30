@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.hanzhi.chouti.R;
+import com.hanzhi.chouti.utils.CommonUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -50,7 +51,7 @@ public class MyProfileFragment extends Fragment {
     }
 
     public void init() throws IOException {
-        String path = "http://hanzhiapp.hdlebaobao.cn/user/GetUserById?userId=2";
+        String path = "http://hanzhiapp.hdlebaobao.cn/user/GetUserById?userId="+ CommonUtil.getToken();
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder().url(path).get().build();
         client.newCall(request).enqueue(new Callback() {

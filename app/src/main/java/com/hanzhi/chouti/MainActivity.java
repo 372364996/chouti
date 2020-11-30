@@ -19,9 +19,9 @@ import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.chouti.ui.login.LoginActivity;
 import com.hanzhi.chouti.ui.login.RegisterActivity;
 import com.hanzhi.chouti.ui.mine.fragment.MineFragment;
-import com.hanzhi.chouti.ui.mine.fragment.MyClassFragment;
 import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
 import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
+import com.hanzhi.chouti.utils.CommonUtil;
 import com.hjm.bottomtabbar.BottomTabBar;
 import com.hjm.bottomtabbar.custom.CustomFragmentTabHost;
 import com.qmuiteam.qmui.widget.QMUITopBar;
@@ -59,10 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        /*判断是否登陆,获取存储在SharedPreferences中的信息*/
-        SharedPreferences appPrefs = getSharedPreferences("LoginInfo", MODE_PRIVATE);
-        String userName = appPrefs.getString("userName", "");
-        if (userName == null || userName == "") {
+        if (!CommonUtil.isLogin()) {
             // Toast.makeText(getBaseContext(),"没有登陆",Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, LoginActivity.class);
             super.startActivity(intent);

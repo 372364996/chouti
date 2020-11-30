@@ -48,7 +48,7 @@ public class CustomSignInterceptor extends BaseCustomDynamicInterceptor<CustomSi
             dynamicMap.put(ComParamContact.Common.TIMESTAMP, String.valueOf(System.currentTimeMillis()));
         }
         dynamicMap.put(ComParamContact.Common.ACCESSTOKEN, CommonUtil.getToken());
-        dynamicMap.put("userId", "2");
+        dynamicMap.put("userId", CommonUtil.getToken());
 //        if (isAccessToken()) {//是否添加token
 //            String acccess = TokenManager.getInstance().getAuthModel().getAccessToken();
 //            dynamicMap.put(ComParamContact.Common.ACCESSTOKEN, acccess);
@@ -65,7 +65,7 @@ public class CustomSignInterceptor extends BaseCustomDynamicInterceptor<CustomSi
         JSONObject jsonObject = JSONObject.parseObject(json);
         jsonObject.put("SourceCode", sourceCode);
         jsonObject.put("DeviceToken", BaseCommonUtil.getDeviceToken());
-        jsonObject.put("userId", "2");
+        jsonObject.put("userId", CommonUtil.getToken());
         return jsonObject.toJSONString();
 //        return requestStr;
     }

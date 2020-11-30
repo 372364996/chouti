@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -20,17 +18,16 @@ import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.appointment.AppointmentTabBean;
 import com.hanzhi.chouti.ui.appointment.contract.AppointmentTimeContract;
 import com.hanzhi.chouti.ui.appointment.presenter.AppointmentTimePresenter;
+import com.hanzhi.chouti.view.ColorTrackTabLayout;
 
 import java.util.List;
 
 import butterknife.BindView;
-import q.rorbin.badgeview.Badge;
-import q.rorbin.badgeview.QBadgeView;
 
 public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresenter> implements AppointmentTimeContract.View, CommonTabPagerAdapter.TabPagerListener {
 
     @BindView(R.id.tabs)
-    TabLayout tabLayout;
+    ColorTrackTabLayout tabLayout;
     @BindView(R.id.yy_vp_main)
     ViewPager mViewPager;
     private CommonTabPagerAdapter adapter;

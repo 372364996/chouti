@@ -42,7 +42,7 @@ public class SelectClassChildFragment extends BaseRecycleViewFragment<ClassBean>
 
     @Override
     protected Map<String, Object> getParams() {
-        params.put("size", 30);
+        params.put("size", 21);
         params.put("type", id);
         params.putAll(RequestParamsUtils.getClassApplyParams(classApplyBean));
         return params;

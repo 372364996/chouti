@@ -8,10 +8,8 @@
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         app:tabIndicatorColor="@null"
-        app:tabIndicatorHeight="0dp"
-        app:tabRippleColor="@color/transparent"></com.google.android.material.tabs.TabLayout>
+        app:tabIndicatorHeight="0dp"></com.google.android.material.tabs.TabLayout>
 
     <include layout="@layout/full_cut_off_rule" />
 

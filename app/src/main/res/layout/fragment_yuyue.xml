@@ -4,13 +4,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.tabs.TabLayout
+    <com.hanzhi.chouti.view.ColorTrackTabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="scrollable">
+        android:background="@color/white"
+        app:tabGravity="center"
+        app:tabPaddingEnd="2dp"
+        app:tabPaddingStart="2dp"
+        app:tabIndicatorColor="@null"
+        app:tabIndicatorHeight="0dp"
+        app:tabRippleColor="@color/transparent"
+        app:tabMode="scrollable"
+        android:forceHasOverlappingRendering="false">
 
-    </com.google.android.material.tabs.TabLayout>
+    </com.hanzhi.chouti.view.ColorTrackTabLayout>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/yy_vp_main"
