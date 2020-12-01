@@ -1,6 +1,7 @@
 package com.hanzhi.chouti.ui.teachers.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -35,8 +36,6 @@ public class TeacherAdapter extends BaseRecycleViewAdapter<TeacherBean> {
         CircleImageView image;
         @BindView(R.id.title)
         TextView title;
-        @BindView(R.id.xingxing)
-        ImageView xingxing;
         @BindView(R.id.score)
         TextView score;
         @BindView(R.id.zan)
@@ -54,11 +53,13 @@ public class TeacherAdapter extends BaseRecycleViewAdapter<TeacherBean> {
             if (data == null) {
                 return;
             }
-            glideUtils.loadImage(data.getHeadImg(), image, 0);
+            glideUtils.loadImage(data.getHeadImg(), image, R.drawable.hanzhilogo);
             title.setText(data.getName());
             info.setText(data.getDescription());
+            info.setVisibility(TextUtils.isEmpty(data.getDescription()) ? View.GONE : View.VISIBLE);
             tags.setText(data.getTags());
             score.setText(data.getAvgScore());
+            zan.setImageResource(data.isFans() ? R.drawable.favorites_fill : R.drawable.favorites);
         }
     }
 }

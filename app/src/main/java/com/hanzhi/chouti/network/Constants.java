@@ -39,6 +39,8 @@ public class Constants extends BaseConstants {
     public static final String GET_TEACHER_LIST_URL = "teacher/GetTeacherListV2";
     /*获取教师详情*/
     public static final String GET_TEACHER_DETAIL_URL = "teacher/GetTeacherDetailsV2";
+    /*收藏教师*/
+    public static final String COLLECT_TEACHER_APPLY = "teacher/AddEvaluationV2";
     /*获取课程时间列表*/
     public static final String GET_CLASS_TIME_URL = "teacher/GetAllTeacherTimeV2";
     /*获取课程时间Tab列表*/
@@ -53,6 +55,8 @@ public class Constants extends BaseConstants {
     public static final String GET_MY_CLASS_TAB_URL = "order/GetMyOrderListMenuV2";
     /*获取我的课程列表*/
     public static final String GET_MY_CLASS_URL = "order/GetMyOrderListByUserIdV2";
+    /*获取我的老师列表*/
+    public static final String GET_MY_TEACHER_URL = "teacher/GetMyTeachersByUserIdV2";
     /*获取课程确认提示信息*/
     public static final String GET_CLASS_APPLY_TIPS = "classcard/GetApplyClassNotesV2";
     /*获取用户课程卡列表*/
@@ -63,6 +67,7 @@ public class Constants extends BaseConstants {
     public static final String REAPPLY_CLASS_APPLY = "class/CreateOrderV2";
     /*取消课程*/
     public static final String CANCEL_CLASS_APPLY = "order/UserCancelOrderV2";
+
     /**
      * Bundle的key
      */

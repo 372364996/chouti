@@ -68,9 +68,9 @@ public class MineFragment extends NBaseFragment implements CommonTabPagerAdapter
         if(position == 0){
             return MyClassFragment.newInstance();
         }else if(position == 1){
-            return MyClassFragment.newInstance();
+            return CollectTeacherFragment.newInstance();
         }else if(position == 2){
-            MyProfileFragment.newInstance();
+            return MyProfileFragment.newInstance();
         }else if(position == 3){
             return MyClassFragment.newInstance();
         }

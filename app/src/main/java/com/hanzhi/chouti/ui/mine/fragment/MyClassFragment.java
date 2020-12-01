@@ -20,7 +20,11 @@ import com.hanzhi.chouti.ui.mine.presenter.MyClassPresenter;
 import java.util.List;
 
 import butterknife.BindView;
-
+/**
+ * @class 我的课程
+ * @anthor nanfeifei email:18600752302@163.com
+ * @time 2020/11/26 17:24
+ */
 public class MyClassFragment extends NBaseFragment<MyClassPresenter> implements CommonTabPagerAdapter.TabPagerListener, MyClassContract.View {
 
     @BindView(R.id.tabs)

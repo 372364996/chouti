@@ -45,4 +45,25 @@ public class TeacherInfoModel extends BaseModelImpl implements TeacherInfoContra
         });
         disposableList.add(disposable);
     }
+
+    @Override
+    public void collectTeacher(int teacherId, boolean isFans, TeacherInfoContract.OnCollectTeacherListener listener) {
+        String url = Constants.COLLECT_TEACHER_APPLY;
+        Map<String, String> map = new HashMap<>();
+        map.put("teacherId", String.valueOf(teacherId));
+        map.put("isFans", String.valueOf(isFans));
+        Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
+            @Override
+            public void onError(int status, String message) {
+                listener.onCollectTeacherFailure(message);
+            }
+
+            @Override
+            public void onSuccess(ResultBean resultBean) {
+                Boolean isFans = JSONObject.parseObject(resultBean.getData(), Boolean.class);
+                listener.onCollectTeacherSuccess(isFans);
+            }
+        });
+        disposableList.add(disposable);
+    }
 }

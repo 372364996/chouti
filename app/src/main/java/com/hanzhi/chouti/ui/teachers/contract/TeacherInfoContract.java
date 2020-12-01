@@ -11,17 +11,23 @@ import com.hanzhi.chouti.bean.teachers.TeacherBean;
 public interface TeacherInfoContract {
     interface Model {
         void getTeacherInfo(int teacherId, OnGetTeacherInfoListener listener);
+        void collectTeacher(int teacherId, boolean isFans, OnCollectTeacherListener listener);
     }
     interface OnGetTeacherInfoListener{
         void onGetTeacherInfoSuccess(TeacherBean teacherBean);
         void onGetTeacherInfoFailure(String message);
     }
-
+    interface OnCollectTeacherListener{
+        void onCollectTeacherSuccess(boolean isFans);
+        void onCollectTeacherFailure(String message);
+    }
     interface View extends BaseContract.View {
         void setTeacherInfo(TeacherBean teacherBean);
+        void collectSuccess(boolean isFans);
     }
 
     interface Presenter {
         void getTeacherInfo(int teacherId);
+        void collectTeacher(int teacherId, boolean isFans);
     }
 }

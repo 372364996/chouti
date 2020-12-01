@@ -325,11 +325,17 @@ public abstract class BaseRecycleViewFragment<T> extends NBaseFragment implement
         if (hasNetWork) {
             if (notDataView != null) {
                 setHeaderFooterEmpty(true, true);
+                if(notDataView.getParent()!=null){
+                    ((ViewGroup) notDataView.getParent()).removeView(notDataView);
+                }
                 baseRecycleViewAdapter.setEmptyView(notDataView);
             }
         } else {
             if (errorView != null) {
                 setHeaderFooterEmpty(true, true);
+                if(errorView.getParent()!=null){
+                    ((ViewGroup) errorView.getParent()).removeView(errorView);
+                }
                 baseRecycleViewAdapter.setEmptyView(errorView);
             }
         }

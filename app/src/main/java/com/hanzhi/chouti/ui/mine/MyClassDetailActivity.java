@@ -26,6 +26,7 @@ import com.hanzhi.chouti.ui.selectclass.contract.ClassDetailContract;
 import com.hanzhi.chouti.ui.selectclass.presenter.ClassDetailPresenter;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;
@@ -207,6 +208,17 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     @Override
     public void onPageScrollStateChanged(int state) {
 
+    }
+    @OnClick({R.id.remote_video_view_container, R.id.local_video_view_container})
+    public void onViewClick(View view){
+        switch (view.getId()){
+            case R.id.remote_video_view_container:{
+                break;
+            }
+            case R.id.local_video_view_container:{
+                break;
+            }
+        }
     }
     private void setupRemoteVideo(int uid) {
         // Only one remote video view is available for this

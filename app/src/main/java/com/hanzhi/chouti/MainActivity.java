@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         toolbarLay.addLeftImageButton(R.drawable.ic_action_menu, R.id.home_toolbar_drawer)
         .setOnClickListener(this);
-        toolbarLay.addRightImageButton(R.drawable.ic_action_qianbao, R.id.home_toolbar_drawer);
+        toolbarLay.addRightImageButton(R.drawable.ic_action_qianbao, R.id.home_toolbar_wallet);
         toolbarLay.setTitle(R.string.main_tab_teacher);
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);                   //传入ToolBar实例

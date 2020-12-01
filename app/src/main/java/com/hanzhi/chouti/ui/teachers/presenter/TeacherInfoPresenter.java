@@ -11,7 +11,7 @@ import com.hanzhi.chouti.ui.teachers.model.TeacherInfoModel;
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/27 17:21
  */
-public class TeacherInfoPresenter extends BasePresenterImpl<TeacherInfoContract.View, TeacherInfoModel> implements TeacherInfoContract.Presenter, TeacherInfoContract.OnGetTeacherInfoListener {
+public class TeacherInfoPresenter extends BasePresenterImpl<TeacherInfoContract.View, TeacherInfoModel> implements TeacherInfoContract.Presenter, TeacherInfoContract.OnGetTeacherInfoListener, TeacherInfoContract.OnCollectTeacherListener {
     public TeacherInfoPresenter(TeacherInfoContract.View view) {
         super(view);
     }
@@ -27,6 +27,12 @@ public class TeacherInfoPresenter extends BasePresenterImpl<TeacherInfoContract.
     }
 
     @Override
+    public void collectTeacher(int teacherId, boolean isFans) {
+        view.showProgressDialog();
+        model.collectTeacher(teacherId, isFans, this);
+    }
+
+    @Override
     public void onGetTeacherInfoSuccess(TeacherBean teacherBean) {
         if(teacherBean == null){
             return;
@@ -36,6 +42,18 @@ public class TeacherInfoPresenter extends BasePresenterImpl<TeacherInfoContract.
 
     @Override
     public void onGetTeacherInfoFailure(String message) {
+        ToastUtils.showToast(message);
+    }
+
+    @Override
+    public void onCollectTeacherSuccess(boolean isFans) {
+        view.hideProgressDialog();
+        view.collectSuccess(isFans);
+    }
+
+    @Override
+    public void onCollectTeacherFailure(String message) {
+        view.hideProgressDialog();
         ToastUtils.showToast(message);
     }
 }

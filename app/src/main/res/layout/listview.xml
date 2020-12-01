@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="170dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="7dp"
         android:layout_marginTop="7dp"
         android:layout_marginRight="7dp"
@@ -14,7 +15,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingTop="15dp">
             <de.hdodenhof.circleimageview.CircleImageView
@@ -34,24 +35,17 @@
                 android:textColor="#484848"
                 android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/xingxing"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_below="@id/title"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="4dp"
-                android:layout_toRightOf="@id/image"
-                android:src="@drawable/xingxing" />
-
             <TextView
                 android:id="@+id/score"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="4dp"
+                android:drawableLeft="@drawable/xingxing"
+                android:drawablePadding="@dimen/dp_8"
+                android:gravity="center"
                 android:layout_below="@id/title"
-                android:layout_toRightOf="@id/xingxing"
+                android:layout_toRightOf="@id/image"
                 android:text="5.0"
                 android:textColor="#adadad"
                 android:textSize="13sp"></TextView>
@@ -79,18 +73,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/image"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="@dimen/dp_8"
                 android:textColor="#adadad"
                 android:maxLines="2"
                 android:ellipsize="end"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="@string/title_class_apply"/>
 
             <TextView
                 android:id="@+id/tags"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20px"
-                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:layout_below="@+id/info"
+                android:layout_marginTop="@dimen/dp_8"
                 android:text="#上课前务必检查自己的网络状态"
                 android:maxLines="1"
                 android:ellipsize="end"

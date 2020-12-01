@@ -3,6 +3,8 @@ package com.hanzhi.chouti.bean.teachers;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * @class describe
  * @anthor nanfeifei email:18600752302@163.com
@@ -31,6 +33,8 @@ public class TeacherBean implements Parcelable {
     private String AvgScore;
     private int UserId;
     private String University;
+    @JSONField(name = "isFans")
+    private boolean fans;
 
     public int getId() {
         return Id;
@@ -112,6 +116,14 @@ public class TeacherBean implements Parcelable {
         University = university;
     }
 
+    public boolean isFans() {
+        return fans;
+    }
+
+    public void setFans(boolean fans) {
+        this.fans = fans;
+    }
+
     public TeacherBean() {
     }
 
@@ -132,6 +144,7 @@ public class TeacherBean implements Parcelable {
         dest.writeString(this.AvgScore);
         dest.writeInt(this.UserId);
         dest.writeString(this.University);
+        dest.writeByte(this.fans ? (byte) 1 : (byte) 0);
     }
 
     protected TeacherBean(Parcel in) {
@@ -145,6 +158,7 @@ public class TeacherBean implements Parcelable {
         this.AvgScore = in.readString();
         this.UserId = in.readInt();
         this.University = in.readString();
+        this.fans = in.readByte() != 0;
     }
 
     public static final Creator<TeacherBean> CREATOR = new Creator<TeacherBean>() {

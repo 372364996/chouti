@@ -3,7 +3,7 @@ package com.hanzhi.chouti.ui.teachers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.CheckBox;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,9 +13,13 @@ import com.chewawa.baselibrary.base.NBaseActivity;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.teachers.TeacherBean;
+import com.hanzhi.chouti.event.RefreshCollectTeacherEvent;
+import com.hanzhi.chouti.event.RefreshTeacherListEvent;
 import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.chouti.ui.teachers.contract.TeacherInfoContract;
 import com.hanzhi.chouti.ui.teachers.presenter.TeacherInfoPresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,17 +39,22 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
     TextView tvSchoolName;
     @BindView(R.id.tv_teacher_name)
     TextView tvTeacherName;
-    @BindView(R.id.cb_appraise)
-    CheckBox cbAppraise;
+    @BindView(R.id.iv_collect)
+    ImageView ivCollect;
     @BindView(R.id.iv_playing)
     ImageView ivPlaying;
     @BindView(R.id.tv_info)
     TextView tvInfo;
     private Fragment mContent;
     ClassApplyBean classApplyBean;
-    public static void start(Context context, ClassApplyBean classApplyBean) {
+    boolean isFans;
+    int from;
+    public static final int FROM_TEACHER_LIST = 1001;
+    public static final int FROM_COLLECT_LIST = 1002;
+    public static void start(Context context, ClassApplyBean classApplyBean, int from) {
         Intent starter = new Intent(context, TeacherInfoActivity.class);
         starter.putExtra("classApplyBean", classApplyBean);
+        starter.putExtra("from", from);
         context.startActivity(starter);
     }
 
@@ -65,6 +74,7 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
     }
     @Override
     protected void initView() {
+        from = getIntent().getIntExtra("from", 0);
         initToolBar();
         toolbarLay.setTitle(R.string.title_teacher_detail);
 //        //必需继承FragmentActivity,嵌套fragment只需要这行代码
@@ -92,16 +102,40 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
         return new TeacherInfoPresenter(this);
     }
 
-    @OnClick(R.id.iv_playing)
-    public void onViewClicked() {
+    @OnClick({R.id.iv_playing, R.id.iv_collect})
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.iv_playing:{
+                break;
+            }
+            case R.id.iv_collect:{
+                if(classApplyBean != null){
+                    presenter.collectTeacher(classApplyBean.getTeacherId(), !isFans);
+                }
+                break;
+            }
+        }
     }
 
     @Override
     public void setTeacherInfo(TeacherBean teacherBean) {
+        this.isFans = teacherBean.isFans();
+        ivCollect.setImageResource(isFans ? R.drawable.favorites_fill : R.drawable.favorites);
         imageLoaderUtils.loadImage(teacherBean.getHeadImg(), ivHeadImg, R.drawable.hanzhilogo);
         tvTeacherName.setText(teacherBean.getName());
         tvSchoolName.setText(teacherBean.getUniversity());
         tvScore.setText(teacherBean.getAvgScore());
         tvInfo.setText(teacherBean.getDescription());
+    }
+
+    @Override
+    public void collectSuccess(boolean isFans) {
+        this.isFans = isFans;
+        ivCollect.setImageResource(isFans ? R.drawable.favorites_fill : R.drawable.favorites);
+        if(FROM_COLLECT_LIST == from){
+            EventBus.getDefault().post(new RefreshCollectTeacherEvent());
+        }else {
+            EventBus.getDefault().post(new RefreshTeacherListEvent());
+        }
     }
 }
