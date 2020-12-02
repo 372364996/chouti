@@ -8,8 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.chewawa.baselibrary.base.NBaseActivity;
+import com.chewawa.baselibrary.view.viewpager.CommonTabPagerAdapter;
+import com.google.android.material.tabs.TabLayout;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.teachers.TeacherBean;
@@ -17,15 +20,19 @@ import com.hanzhi.chouti.event.RefreshCollectTeacherEvent;
 import com.hanzhi.chouti.event.RefreshTeacherListEvent;
 import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.chouti.ui.teachers.contract.TeacherInfoContract;
+import com.hanzhi.chouti.ui.teachers.fragment.AppraiseFragment;
 import com.hanzhi.chouti.ui.teachers.presenter.TeacherInfoPresenter;
 
 import org.greenrobot.eventbus.EventBus;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> implements TeacherInfoContract.View {
+public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> implements TeacherInfoContract.View, CommonTabPagerAdapter.TabPagerListener {
 
     @BindView(R.id.iv_head_img)
     CircleImageView ivHeadImg;
@@ -45,10 +52,14 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
     ImageView ivPlaying;
     @BindView(R.id.tv_info)
     TextView tvInfo;
-    private Fragment mContent;
+    @BindView(R.id.tab_layout)
+    TabLayout mTabLayout;
+    @BindView(R.id.view_pager)
+    ViewPager mViewPager;
     ClassApplyBean classApplyBean;
     boolean isFans;
     int from;
+    private CommonTabPagerAdapter adapter;
     public static final int FROM_TEACHER_LIST = 1001;
     public static final int FROM_COLLECT_LIST = 1002;
     public static void start(Context context, ClassApplyBean classApplyBean, int from) {
@@ -66,26 +77,26 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
     protected void beforeContentView(Bundle savedInstanceState) {
         super.beforeContentView(savedInstanceState);
         classApplyBean = getIntent().getParcelableExtra("classApplyBean");
-        if (savedInstanceState != null)
-            mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
-        if (mContent == null) {
-            mContent = AppointmentTimeFragment.newInstance(classApplyBean);
-        }
     }
     @Override
     protected void initView() {
         from = getIntent().getIntExtra("from", 0);
         initToolBar();
         toolbarLay.setTitle(R.string.title_teacher_detail);
-//        //必需继承FragmentActivity,嵌套fragment只需要这行代码
+        List<String> titleList = new ArrayList<>();
+        titleList.add(getString(R.string.teacher_detail_table_time));
+        titleList.add(getString(R.string.teacher_detail_table_appraise));
+        adapter = new CommonTabPagerAdapter(getSupportFragmentManager(), titleList.size()
+                , titleList, this);
+        adapter.setListener(this);
+        mViewPager.setAdapter(adapter);
+        mViewPager.setOffscreenPageLimit(titleList.size());
+        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
 //        getSupportFragmentManager()
 //                .beginTransaction()
-//                .replace(R.id.teacher_info_selected_time, AppointmentTimeFragment.newInstance(teacherId))
-//                .commitAllowingStateLoss();
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.teacher_info_selected_time, mContent)
-                .commit();
+//                .replace(R.id.teacher_info_selected_time, mContent)
+//                .commit();
     }
 
     @Override
@@ -137,5 +148,15 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
         }else {
             EventBus.getDefault().post(new RefreshTeacherListEvent());
         }
+    }
+
+    @Override
+    public Fragment getFragment(int position) {
+        if(position == 0){
+            return AppointmentTimeFragment.newInstance(classApplyBean);
+        }else if(position == 1){
+            return AppraiseFragment.newInstance(classApplyBean);
+        }
+        return AppointmentTimeFragment.newInstance(classApplyBean);
     }
 }

@@ -37,6 +37,8 @@ public class Constants extends BaseConstants {
     public static final String STORE_TYPE_URL = "DaoShop/GetStoreType";
     /*获取教师列表*/
     public static final String GET_TEACHER_LIST_URL = "teacher/GetTeacherListV2";
+    /*获取评价列表*/
+    public static final String GET_APPRAISE_LIST_URL = "order/GetOrderOfScoreByTeacherIdV2";
     /*获取教师详情*/
     public static final String GET_TEACHER_DETAIL_URL = "teacher/GetTeacherDetailsV2";
     /*收藏教师*/

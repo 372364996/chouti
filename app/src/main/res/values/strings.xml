@@ -15,7 +15,9 @@
     <string name="title_select_class">选择课程</string>
     <string name="title_class_detail">课程详情</string>
     <string name="title_class_apply">申请</string>
-
+    <!--教师镶嵌-->
+    <string name="teacher_detail_table_time">选择时间</string>
+    <string name="teacher_detail_table_appraise">学生评价</string>
     <!--课程详情-->
     <string name="class_detail_submit">确认课程</string>
     <!--预约时间-->
@@ -36,6 +38,8 @@
     <string name="my_class_cancel">取消课程</string>
     <string name="my_class_review">复习课程</string>
     <string name="my_class_tips_affirm">确认</string>
+    <string name="my_class_appraise_submit">提交</string>
+    <string name="my_class_appraise_title">请为本次外教满意度打分</string>
     <!--我的-->
     <string name="mine_table_my_class">我的课程</string>
     <string name="mine_table_collect_teacher">收藏老师</string>
