@@ -67,6 +67,8 @@ public class Constants extends BaseConstants {
     public static final String REAPPLY_CLASS_APPLY = "class/CreateOrderV2";
     /*取消课程*/
     public static final String CANCEL_CLASS_APPLY = "order/UserCancelOrderV2";
+    /*取消课程*/
+    public static final String JOIN_CLASS_APPLY = "order/IsCanEnterV2";
 
     /**
      * Bundle的key

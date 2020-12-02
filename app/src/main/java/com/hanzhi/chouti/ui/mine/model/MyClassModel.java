@@ -40,10 +40,10 @@ public class MyClassModel extends BaseModelImpl implements MyClassContract.Model
     }
 
     @Override
-    public void cancelClass(int id, MyClassContract.OnCancelClassListener listener) {
+    public void cancelClass(String orderId, MyClassContract.OnCancelClassListener listener) {
         String url = Constants.CANCEL_CLASS_APPLY;
         Map<String, String> map = new HashMap<>();
-        map.put("number", String.valueOf(id));
+        map.put("number", orderId);
         Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
             @Override
             public void onError(int status, String message) {
@@ -53,6 +53,25 @@ public class MyClassModel extends BaseModelImpl implements MyClassContract.Model
             @Override
             public void onSuccess(ResultBean resultBean) {
                 listener.onCancelClassSuccess(resultBean.getMsg());
+            }
+        });
+        disposableList.add(disposable);
+    }
+
+    @Override
+    public void joinClass(String orderId, MyClassContract.OnJoinClassListener listener) {
+        String url = Constants.JOIN_CLASS_APPLY;
+        Map<String, String> map = new HashMap<>();
+        map.put("number", orderId);
+        Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
+            @Override
+            public void onError(int status, String message) {
+                listener.onJoinClassListFailure(message);
+            }
+
+            @Override
+            public void onSuccess(ResultBean resultBean) {
+                listener.onJoinClassListSuccess(resultBean.getMsg());
             }
         });
         disposableList.add(disposable);

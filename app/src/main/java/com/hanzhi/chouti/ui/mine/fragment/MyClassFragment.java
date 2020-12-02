@@ -82,4 +82,14 @@ public class MyClassFragment extends NBaseFragment<MyClassPresenter> implements 
     public void refreshList() {
 
     }
+
+    @Override
+    public void joinClassSuccess() {
+
+    }
+
+    @Override
+    public void joinClassTips(String message) {
+
+    }
 }

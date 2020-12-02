@@ -9,7 +9,7 @@ import com.hanzhi.chouti.ui.mine.model.MyClassModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyClassPresenter extends BasePresenterImpl<MyClassContract.View, MyClassModel> implements MyClassContract.Presenter, MyClassContract.OnGetTabListListener, MyClassContract.OnCancelClassListener {
+public class MyClassPresenter extends BasePresenterImpl<MyClassContract.View, MyClassModel> implements MyClassContract.Presenter, MyClassContract.OnGetTabListListener, MyClassContract.OnCancelClassListener, MyClassContract.OnJoinClassListener {
     public MyClassPresenter(MyClassContract.View view) {
         super(view);
     }
@@ -25,9 +25,15 @@ public class MyClassPresenter extends BasePresenterImpl<MyClassContract.View, My
     }
 
     @Override
-    public void cancelClass(int id) {
+    public void cancelClass(String orderId) {
         view.showProgressDialog();
-        model.cancelClass(id, this);
+        model.cancelClass(orderId, this);
+    }
+
+    @Override
+    public void joinClass(String orderId) {
+        view.showProgressDialog();
+        model.joinClass(orderId, this);
     }
 
     @Override
@@ -60,5 +66,17 @@ public class MyClassPresenter extends BasePresenterImpl<MyClassContract.View, My
     public void onCancelClassFailure(String message) {
         view.hideProgressDialog();
         ToastUtils.showToast(message);
+    }
+
+    @Override
+    public void onJoinClassListSuccess(String message) {
+        view.hideProgressDialog();
+        view.joinClassSuccess();
+    }
+
+    @Override
+    public void onJoinClassListFailure(String message) {
+        view.hideProgressDialog();
+        view.joinClassTips(message);
     }
 }

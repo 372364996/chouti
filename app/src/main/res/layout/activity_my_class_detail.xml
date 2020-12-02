@@ -1,80 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <include layout="@layout/view_toolbar_lay"/>
-    <TextView
-        android:id="@+id/tv_page"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_submit"
-        android:layout_marginLeft="@dimen/dp_16"
-        android:layout_marginRight="@dimen/dp_16"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp_12"
-        android:gravity="right"
-        android:textColor="@color/text_color_99"
-        android:textSize="@dimen/sp_12"
-        tools:text="@string/app_name"/>
-    <ProgressBar
-        android:id="@+id/progress_horizontal"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_4"
-        android:layout_above="@+id/tv_page"
-        android:progressDrawable="@drawable/progressbar_bg"
-        android:layout_marginLeft="@dimen/dp_8"
-        android:layout_marginRight="@dimen/dp_8"/>
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/vp_class_detail"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/progress_horizontal"
-        android:layout_marginBottom="@dimen/dp_32"
-        android:layout_below="@+id/toolbar_lay">
+    android:layout_height="match_parent">
 
-    </androidx.viewpager.widget.ViewPager>
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include layout="@layout/view_toolbar_lay" />
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar_lay">
+        android:layout_below="@+id/toolbar_lay"
+        android:scrollbars="none">
+
         <RelativeLayout
-            android:id="@+id/remote_video_view_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.5"
-            app:layout_constraintDimensionRatio="4:3"
-            android:background="@color/remoteBackground">
-            <ImageView
-                android:layout_width="@dimen/local_back_icon_size"
-                android:layout_height="@dimen/local_back_icon_size"
-                android:layout_centerInParent="true"
-                android:src="@drawable/icon_agora_large"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_video_lay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <FrameLayout
+                    android:id="@+id/local_video_view_container"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/localBackground"
+                    android:visibility="visible"
+                    app:layout_constraintDimensionRatio="h,4:3"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/remote_video_view_container"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.5">
+
+                    <ImageView
+                        android:layout_width="@dimen/local_back_icon_size"
+                        android:layout_height="@dimen/local_back_icon_size"
+                        android:layout_gravity="center"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/icon_agora_large" />
+                </FrameLayout>
+
+                <View
+                    android:id="@+id/view_cut_off"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintLeft_toRightOf="@+id/local_video_view_container"
+                    app:layout_constraintRight_toLeftOf="@+id/remote_video_view_container"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RelativeLayout
+                    android:id="@+id/remote_video_view_container"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@color/remoteBackground"
+                    android:visibility="visible"
+                    app:layout_constraintDimensionRatio="h,4:3"
+                    app:layout_constraintLeft_toRightOf="@+id/local_video_view_container"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.5">
+
+                    <ImageView
+                        android:layout_width="@dimen/local_back_icon_size"
+                        android:layout_height="@dimen/local_back_icon_size"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/icon_agora_large" />
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.hanzhi.chouti.view.WrapContentHeightViewPager
+                android:id="@+id/vp_class_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/cl_video_lay">
+
+            </com.hanzhi.chouti.view.WrapContentHeightViewPager>
+
+            <ProgressBar
+                android:id="@+id/progress_horizontal"
+                style="@android:style/Widget.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_4"
+                android:layout_below="@+id/vp_class_detail"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_marginLeft="@dimen/dp_8"
+                android:layout_marginRight="@dimen/dp_8"
+                android:progressDrawable="@drawable/progressbar_bg" />
+
+            <TextView
+                android:id="@+id/tv_page"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/progress_horizontal"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginRight="@dimen/dp_16"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:gravity="right"
+                android:textColor="@color/text_color_99"
+                android:textSize="@dimen/sp_12"
+                tools:text="@string/app_name" />
         </RelativeLayout>
-        <FrameLayout
-            android:id="@+id/local_video_view_container"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent="0.5"
-            app:layout_constraintDimensionRatio="4:3"
-            android:background="@color/localBackground"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="@dimen/local_back_icon_size"
-                android:layout_height="@dimen/local_back_icon_size"
-                android:layout_gravity="center"
-                android:scaleType="centerCrop"
-                android:src="@drawable/icon_agora_large" />
-        </FrameLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
+    </ScrollView>
 </RelativeLayout>

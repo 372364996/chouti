@@ -8,7 +8,8 @@ import java.util.List;
 public interface MyClassContract {
     interface Model {
         void getTabList(OnGetTabListListener listener);
-        void cancelClass(int id, OnCancelClassListener listener);
+        void cancelClass(String orderId, OnCancelClassListener listener);
+        void joinClass(String orderId, OnJoinClassListener listener);
     }
     interface OnGetTabListListener{
         void onGetTabListSuccess(List<MyClassTabBean> list);
@@ -18,13 +19,20 @@ public interface MyClassContract {
         void onCancelClassSuccess(String message);
         void onCancelClassFailure(String message);
     }
+    interface OnJoinClassListener{
+        void onJoinClassListSuccess(String message);
+        void onJoinClassListFailure(String message);
+    }
     interface View extends BaseContract.View {
         void setTabList(List<MyClassTabBean> list, List<String> titleList);
         void refreshList();
+        void joinClassSuccess();
+        void joinClassTips(String message);
     }
 
     interface Presenter {
         void getTabList();
-        void cancelClass(int id);
+        void cancelClass(String orderId);
+        void joinClass(String orderId);
     }
 }

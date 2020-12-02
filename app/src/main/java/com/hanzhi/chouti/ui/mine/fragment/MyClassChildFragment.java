@@ -16,6 +16,9 @@ import com.hanzhi.chouti.ui.mine.MyClassDetailActivity;
 import com.hanzhi.chouti.ui.mine.adapter.MyClassAdapter;
 import com.hanzhi.chouti.ui.mine.contract.MyClassContract;
 import com.hanzhi.chouti.ui.mine.presenter.MyClassPresenter;
+import com.qmuiteam.qmui.skin.QMUISkinManager;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +31,10 @@ import java.util.Map;
 public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> implements MyClassContract.View {
     public static final String ID = "id";
     int id;
+    QMUIDialog qmuiDialog;
     MyClassPresenter myClassPresenter;
+    private int mCurrentDialogStyle = R.style.DialogTheme2;
+    MyClassBean myClassBean;
     public static MyClassChildFragment newInstance(int id) {
         MyClassChildFragment myClassChildFragment = new MyClassChildFragment();
         Bundle args = new Bundle();
@@ -75,7 +81,7 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
     @Override
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemChildClick(adapter, view, position);
-        MyClassBean myClassBean = (MyClassBean) adapter.getItem(position);
+        myClassBean = (MyClassBean) adapter.getItem(position);
         if(myClassBean == null){
             return;
         }
@@ -85,25 +91,27 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
                 break;
             }
             case R.id.btn_cancel:{
-                myClassPresenter.cancelClass(myClassBean.getId());
+                myClassPresenter.cancelClass(myClassBean.getNumber());
                 break;
             }
             case R.id.btn_review:{
-                MyClassDetailActivity.start(getActivity(), myClassBean.getClassId());
+                MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
+                break;
+            }
+            case R.id.btn_join_class:{
+                MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
+//        myClassPresenter.joinClass(myClassBean.getNumber());
                 break;
             }
         }
     }
 
-    @Override
-    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        super.onItemClick(adapter, view, position);
-        MyClassBean myClassBean = (MyClassBean) adapter.getItem(position);
-        if(myClassBean == null){
-            return;
-        }
-        MyClassDetailActivity.start(getActivity(), myClassBean.getClassId());
-    }
+//    @Override
+//    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+//        super.onItemClick(adapter, view, position);
+//        myClassBean = (MyClassBean) adapter.getItem(position);
+//
+//    }
 
     @Override
     public void setTabList(List<MyClassTabBean> list, List<String> titleList) {
@@ -113,5 +121,28 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
     @Override
     public void refreshList() {
         onRefresh();
+    }
+
+    @Override
+    public void joinClassSuccess() {
+        if(myClassBean == null){
+            return;
+        }
+        MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
+    }
+
+    @Override
+    public void joinClassTips(String message) {
+        qmuiDialog = new QMUIDialog.MessageDialogBuilder(getActivity())
+                .setSkinManager(QMUISkinManager.defaultInstance(getContext()))
+                .setMessage(message)
+                .addAction(getString(R.string.my_class_tips_affirm), new QMUIDialogAction.ActionListener() {
+                    @Override
+                    public void onClick(QMUIDialog dialog, int index) {
+                        dialog.dismiss();
+                    }
+                })
+                .create(mCurrentDialogStyle);
+        qmuiDialog.show();
     }
 }

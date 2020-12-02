@@ -1,9 +1,12 @@
 package com.hanzhi.chouti.ui.mine;
 
 import android.Manifest;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceView;
@@ -14,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -21,9 +25,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.chewawa.baselibrary.base.NBaseActivity;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.selectclass.ClassBean;
+import com.hanzhi.chouti.ui.mine.contract.MyClassDetailContract;
+import com.hanzhi.chouti.ui.mine.presenter.MyClassDetailPresenter;
 import com.hanzhi.chouti.ui.selectclass.adapter.ClassDetailAdapter;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassDetailContract;
 import com.hanzhi.chouti.ui.selectclass.presenter.ClassDetailPresenter;
+import com.hanzhi.chouti.utils.CommonUtil;
+import com.hanzhi.chouti.view.WrapContentHeightViewPager;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,26 +40,33 @@ import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;
 import io.agora.rtc.video.VideoEncoderConfiguration;
 
+import static io.agora.rtc.IRtcEngineEventHandler.UserOfflineReason.USER_OFFLINE_DROPPED;
+import static io.agora.rtc.IRtcEngineEventHandler.UserOfflineReason.USER_OFFLINE_QUIT;
+
 /**
  * @class 课程详情
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/28 13:58
  */
-public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> implements ClassDetailContract.View, ViewPager.OnPageChangeListener {
+public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> implements ClassDetailContract.View, ViewPager.OnPageChangeListener, MyClassDetailContract.View {
     @BindView(R.id.tv_page)
     TextView tvPage;
     @BindView(R.id.progress_horizontal)
     ProgressBar progressHorizontal;
     @BindView(R.id.vp_class_detail)
-    ViewPager vpClassDetail;
+    WrapContentHeightViewPager vpClassDetail;
     @BindView(R.id.remote_video_view_container)
     RelativeLayout mRemoteContainer;
     @BindView(R.id.local_video_view_container)
     FrameLayout mLocalContainer;
+
     ClassDetailAdapter classDetailAdapter;
+    MyClassDetailPresenter myClassDetailPresenter;
 
     int classId;
+    String orderId;
     ClassBean classBean;
+    CountDownTimer timer;
 
     private RtcEngine mRtcEngine;
     private boolean mCallEnd;
@@ -65,9 +80,10 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.CAMERA
     };
-    public static void start(Context context, int classId) {
+    public static void start(Context context, int classId, String orderId) {
         Intent starter = new Intent(context, MyClassDetailActivity.class);
         starter.putExtra("classId", classId);
+        starter.putExtra("orderId", orderId);
         context.startActivity(starter);
     }
     /**
@@ -147,6 +163,14 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    switch (reason){
+                        case USER_OFFLINE_QUIT:{
+                            break;
+                        }
+                        case USER_OFFLINE_DROPPED:{
+                            break;
+                        }
+                    }
                     onRemoteUserLeft();
                 }
             });
@@ -160,6 +184,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     @Override
     protected void initView() {
         classId = getIntent().getIntExtra("classId", 0);
+        orderId = getIntent().getStringExtra("orderId");
         initToolBar();
         toolbarLay.setTitle(R.string.title_class_detail);
         vpClassDetail.addOnPageChangeListener(this);
@@ -177,6 +202,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
 
     @Override
     public ClassDetailPresenter initPresenter() {
+        myClassDetailPresenter = new MyClassDetailPresenter(this);
         return new ClassDetailPresenter(this);
     }
 
@@ -189,7 +215,21 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         progressHorizontal.setMax(classBean.getClassMaterials().size());
         progressHorizontal.setProgress(1);
     }
+    @Override
+    public void setRemainingTime(long remainingTime) {
+        timer = new CountDownTimer(remainingTime, 1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
 
+            }
+
+            @Override
+            public void onFinish() {
+
+            }
+        };
+        timer.start();
+    }
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -213,13 +253,35 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     public void onViewClick(View view){
         switch (view.getId()){
             case R.id.remote_video_view_container:{
+
+                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mRemoteContainer.getLayoutParams();
+                if(layoutParams.matchConstraintPercentWidth < 1){
+                    mLocalContainer.setVisibility(View.GONE);
+                    layoutParams.matchConstraintPercentWidth = 1.0f;
+                }else {
+                    mLocalContainer.setVisibility(View.VISIBLE);
+                    layoutParams.matchConstraintPercentWidth = 0.5f;
+                }
+                layoutParams.dimensionRatio = "h,4:3";
+                mRemoteContainer.setLayoutParams(layoutParams);
                 break;
             }
             case R.id.local_video_view_container:{
+                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mLocalContainer.getLayoutParams();;
+                if(layoutParams.matchConstraintPercentWidth < 1){
+                    mRemoteContainer.setVisibility(View.GONE);
+                    layoutParams.matchConstraintPercentWidth = 1.0f;
+                }else {
+                    mRemoteContainer.setVisibility(View.VISIBLE);
+                    layoutParams.matchConstraintPercentWidth = 0.5f;
+                }
+                layoutParams.dimensionRatio = "h,4:3";
+                mLocalContainer.setLayoutParams(layoutParams);
                 break;
             }
         }
     }
+
     private void setupRemoteVideo(int uid) {
         // Only one remote video view is available for this
         // tutorial. Here we check if there exists a surface
@@ -345,11 +407,14 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
             token = null; // default, no token
         }
-        mRtcEngine.joinChannel(token, "demoChannel1", "Extra Optional Data", 0);
+        mRtcEngine.joinChannel(token, orderId, "", CommonUtil.getUserId());
     }
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(timer != null){
+            timer.cancel();
+        }
         if (!mCallEnd) {
             leaveChannel();
         }
@@ -410,4 +475,6 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         }
         mLocalView = null;
     }
+
+
 }

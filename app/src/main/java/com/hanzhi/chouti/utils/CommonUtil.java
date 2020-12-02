@@ -10,7 +10,7 @@ import com.chewawa.baselibrary.utils.SPUtils;
  */
 public class CommonUtil extends BaseCommonUtil {
     public static final String KEY_STORE_ID = "store_id";
-
+    public static final String KEY_USER_ID = "user_id";
     /**
      * 获取店铺id
      *
@@ -27,5 +27,22 @@ public class CommonUtil extends BaseCommonUtil {
      */
     public static void saveStoreId(int storeId) {
         SPUtils.put(KEY_STORE_ID, storeId);
+    }
+    /**
+     * 获取userid
+     *
+     * @return
+     */
+    public static int getUserId() {
+        return (int) SPUtils.get(KEY_USER_ID, 0);
+    }
+
+    /**
+     * 保存店铺id
+     *
+     * @return
+     */
+    public static void saveUserId(int storeId) {
+        SPUtils.put(KEY_USER_ID, storeId);
     }
 }
