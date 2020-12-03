@@ -2,7 +2,7 @@ package com.hanzhi.chouti.ui.selectclass.contract;
 
 import com.chewawa.baselibrary.base.contract.BaseContract;
 import com.hanzhi.chouti.bean.ClassApplyBean;
-import com.hanzhi.chouti.bean.ClassCardBean;
+import com.hanzhi.chouti.bean.mine.ClassCardBean;
 
 import java.util.List;
 

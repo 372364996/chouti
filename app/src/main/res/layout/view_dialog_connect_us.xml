@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/connect_us_bg"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tv_weichat_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            tools:text="@string/my_class_appraise_title"/>
+        <TextView
+            android:id="@+id/tv_weichat_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_4"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            tools:text="@string/my_class_appraise_title"/>
+        <TextView
+            android:id="@+id/tv_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_4"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            tools:text="@string/my_class_appraise_title"/>
+        <TextView
+            android:id="@+id/tv_web_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_4"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_16"
+            tools:text="@string/my_class_appraise_title"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_30"
+        android:background="@drawable/rectangle_round_corner15_gradient_red"
+        android:layout_marginTop="@dimen/dp_8"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:textSize="@dimen/dp_14"
+        android:text="@string/my_class_appraise_submit"/>
+
+</LinearLayout>

@@ -95,4 +95,7 @@
         <item name="qmui_dialog_menu_container_style">@style/DialogTheme2MenuContainerStyle</item>
         <item name="qmui_dialog_menu_item_style">@style/DialogTheme2MenuItemStyle</item>
     </style>
+    <!--自定义评星样式-->
+    <style name="roomRatingBar_small" parent="Widget.AppCompat.RatingBar.Indicator">
+    </style>
 </resources>

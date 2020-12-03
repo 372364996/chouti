@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.chouti.ui.login.LoginActivity;
 import com.hanzhi.chouti.ui.login.RegisterActivity;
+import com.hanzhi.chouti.ui.mine.MineActivity;
 import com.hanzhi.chouti.ui.mine.fragment.MineFragment;
 import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
 import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
@@ -93,6 +94,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
+                    case R.id.nav_home:
+                        MineActivity.start(MainActivity.this, 0);
+//                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
+                        break;
+                    case R.id.nav_gallery:
+                        MineActivity.start(MainActivity.this, 1);
+//                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
+                        break;
+                    case R.id.nav_slideshow:
+                        MineActivity.start(MainActivity.this, 2);
+//                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
+                        break;
+                    case R.id.nav_slideshow1:
+                        MineActivity.start(MainActivity.this, 3);
+//                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
+                        break;
                     case R.id.nav_slideshow7:
                         SharedPreferences.Editor editor = getSharedPreferences("LoginInfo", MODE_PRIVATE).edit();
                         editor.clear();

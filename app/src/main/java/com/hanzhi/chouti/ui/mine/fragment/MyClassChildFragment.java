@@ -24,15 +24,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @class describe
+ * @class 我的课程
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/26 17:24
  */
 public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> implements MyClassContract.View {
     public static final String ID = "id";
     int id;
-    QMUIDialog qmuiDialog;
     MyClassPresenter myClassPresenter;
+    QMUIDialog qmuiDialog;
     private int mCurrentDialogStyle = R.style.DialogTheme2;
     MyClassBean myClassBean;
     public static MyClassChildFragment newInstance(int id) {
@@ -99,19 +99,19 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
                 break;
             }
             case R.id.btn_join_class:{
-                MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
-//        myClassPresenter.joinClass(myClassBean.getNumber());
+//                MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
+                myClassPresenter.joinClass(myClassBean.getNumber());
                 break;
             }
         }
     }
 
 //    @Override
-//    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-//        super.onItemClick(adapter, view, position);
-//        myClassBean = (MyClassBean) adapter.getItem(position);
-//
-//    }
+////    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+////        super.onItemClick(adapter, view, position);
+////        myClassBean = (MyClassBean) adapter.getItem(position);
+////
+////    }
 
     @Override
     public void setTabList(List<MyClassTabBean> list, List<String> titleList) {
@@ -135,6 +135,7 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
     public void joinClassTips(String message) {
         qmuiDialog = new QMUIDialog.MessageDialogBuilder(getActivity())
                 .setSkinManager(QMUISkinManager.defaultInstance(getContext()))
+                .setTitle(R.string.dialog_title)
                 .setMessage(message)
                 .addAction(getString(R.string.my_class_tips_affirm), new QMUIDialogAction.ActionListener() {
                     @Override

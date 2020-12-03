@@ -29,16 +29,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:maxEms="8"
             android:textColor="@color/text_color_33"
             android:textSize="@dimen/sp_14"
-            tools:text="@string/class_apply_table_copyright"/>
+            tools:text="哒哒哒哒哒哒多多多多多多多哒哒哒哒哒哒多多多多哒哒哒哒哒哒多多的"/>
         <TextView
             android:id="@+id/tv_ranking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/tv_user_name"
+            android:layout_toLeftOf="@+id/tv_appraise_time"
             android:layout_marginLeft="@dimen/dp_16"
+            android:drawableLeft="@drawable/xingxing"
+            android:drawablePadding="@dimen/dp_4"
+            android:gravity="center_vertical"
             android:textColor="@color/text_color_33"
             android:textSize="@dimen/sp_12"
             tools:text="@string/class_apply_table_copyright"/>

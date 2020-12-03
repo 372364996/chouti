@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.hanzhi.chouti.R;
-import com.hanzhi.chouti.bean.ClassCardBean;
+import com.hanzhi.chouti.bean.mine.ClassCardBean;
 
 import java.util.List;
 

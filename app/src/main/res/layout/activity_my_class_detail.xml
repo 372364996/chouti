@@ -20,7 +20,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/cl_video_lay"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <FrameLayout
                     android:id="@+id/local_video_view_container"

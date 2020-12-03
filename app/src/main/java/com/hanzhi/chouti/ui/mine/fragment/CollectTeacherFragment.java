@@ -19,7 +19,9 @@ import com.hanzhi.chouti.network.Constants;
 import com.hanzhi.chouti.ui.appointment.AppointmentTimeActivity;
 import com.hanzhi.chouti.ui.mine.MyClassDetailActivity;
 import com.hanzhi.chouti.ui.mine.adapter.MyClassAdapter;
+import com.hanzhi.chouti.ui.mine.contract.CollectTeacherContract;
 import com.hanzhi.chouti.ui.mine.contract.MyClassContract;
+import com.hanzhi.chouti.ui.mine.presenter.CollectTeacherPresenter;
 import com.hanzhi.chouti.ui.mine.presenter.MyClassPresenter;
 import com.hanzhi.chouti.ui.selectclass.ClassApplyActivity;
 import com.hanzhi.chouti.ui.selectclass.SelectClassActivity;
@@ -33,12 +35,13 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @class describe
+ * @class 收藏老师
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/26 17:24
  */
-public class CollectTeacherFragment extends BaseRecycleViewFragment<TeacherBean>{
+public class CollectTeacherFragment extends BaseRecycleViewFragment<TeacherBean> implements CollectTeacherContract.View {
     ClassApplyBean classApplyBean;
+    CollectTeacherPresenter collectTeacherPresenter;
     public static CollectTeacherFragment newInstance() {
         CollectTeacherFragment collectTeacherFragment = new CollectTeacherFragment();
         Bundle args = new Bundle();
@@ -63,6 +66,7 @@ public class CollectTeacherFragment extends BaseRecycleViewFragment<TeacherBean>
 
     @Override
     public BasePresenterImpl initPresenter() {
+        collectTeacherPresenter = new CollectTeacherPresenter(this);
         return super.initPresenter();
     }
 
@@ -76,6 +80,15 @@ public class CollectTeacherFragment extends BaseRecycleViewFragment<TeacherBean>
         return new TeacherAdapter();
     }
 
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        super.onItemChildClick(adapter, view, position);
+        TeacherBean teacherBean = (TeacherBean) adapter.getItem(position);
+        if(teacherBean == null){
+            return;
+        }
+        collectTeacherPresenter.collectTeacher(position, teacherBean.getUserId(), !teacherBean.isFans());
+    }
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
@@ -93,5 +106,11 @@ public class CollectTeacherFragment extends BaseRecycleViewFragment<TeacherBean>
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(RefreshCollectTeacherEvent event) {
         onRefresh();
+    }
+
+    @Override
+    public void collectSuccess(int position, boolean isFans) {
+        ((TeacherBean)baseRecycleViewAdapter.getData().get(position)).setFans(isFans);
+        baseRecycleViewAdapter.notifyItemChanged(position);
     }
 }

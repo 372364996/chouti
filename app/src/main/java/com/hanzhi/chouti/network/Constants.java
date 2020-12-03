@@ -57,8 +57,14 @@ public class Constants extends BaseConstants {
     public static final String GET_MY_CLASS_TAB_URL = "order/GetMyOrderListMenuV2";
     /*获取我的课程列表*/
     public static final String GET_MY_CLASS_URL = "order/GetMyOrderListByUserIdV2";
+    /*获取我的钱包列表*/
+    public static final String GET_MY_WALLET_URL = "classcard/MyClassCard";
     /*获取我的老师列表*/
     public static final String GET_MY_TEACHER_URL = "teacher/GetMyTeachersByUserIdV2";
+    /*获取我的课程详情*/
+    public static final String GET_MY_CLASS_DETAIL_URL = "order/GetClassOrderRemainingTimeV2";
+    /*提交课程评价*/
+    public static final String SUBMIT_CLASS_APPRAISE_URL = "order/ScoreOfOrderV2";
     /*获取课程确认提示信息*/
     public static final String GET_CLASS_APPLY_TIPS = "classcard/GetApplyClassNotesV2";
     /*获取用户课程卡列表*/
@@ -69,7 +75,7 @@ public class Constants extends BaseConstants {
     public static final String REAPPLY_CLASS_APPLY = "class/CreateOrderV2";
     /*取消课程*/
     public static final String CANCEL_CLASS_APPLY = "order/UserCancelOrderV2";
-    /*取消课程*/
+    /*是否可以进入课堂*/
     public static final String JOIN_CLASS_APPLY = "order/IsCanEnterV2";
 
     /**

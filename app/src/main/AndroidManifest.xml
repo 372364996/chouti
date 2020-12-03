@@ -64,6 +64,9 @@
         <activity android:name=".ui.mine.MyClassDetailActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_class_detail"/>
+        <activity android:name=".ui.mine.MineActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_mine"/>
     </application>
 
 </manifest>

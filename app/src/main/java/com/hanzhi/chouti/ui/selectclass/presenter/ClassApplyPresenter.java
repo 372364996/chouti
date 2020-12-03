@@ -3,7 +3,7 @@ package com.hanzhi.chouti.ui.selectclass.presenter;
 import com.chewawa.baselibrary.base.presenter.BasePresenterImpl;
 import com.chewawa.baselibrary.utils.ToastUtils;
 import com.hanzhi.chouti.bean.ClassApplyBean;
-import com.hanzhi.chouti.bean.ClassCardBean;
+import com.hanzhi.chouti.bean.mine.ClassCardBean;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassApplyContract;
 import com.hanzhi.chouti.ui.selectclass.model.ClassApplyModel;
 

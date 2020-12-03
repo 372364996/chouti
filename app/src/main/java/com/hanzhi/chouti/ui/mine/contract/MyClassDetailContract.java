@@ -9,18 +9,23 @@ import com.chewawa.baselibrary.base.contract.BaseContract;
  */
 public interface MyClassDetailContract {
     interface Model {
-        void getClassDetailData(String orderId, OnGetClassDetailDataListener listener);
+        void getMyClassDetailData(String orderId, OnGetMyClassDetailDataListener listener);
+        void submitAppraise(String orderId, float ranking, String content, OnSubmitAppraiseListener listener);
     }
-    interface OnGetClassDetailDataListener{
-        void onGetClassDetailDataSuccess(long remainingTime);
-        void onGetClassDetailDataFailure(String message);
+    interface OnGetMyClassDetailDataListener{
+        void onGetMyClassDetailDataSuccess(long remainingTime);
+        void onGetMyClassDetailDataFailure(String message);
     }
-
+    interface OnSubmitAppraiseListener{
+        void onSubmitAppraiseSuccess(String message);
+        void onSubmitAppraiseFailure(String message);
+    }
     interface View extends BaseContract.View {
         void setRemainingTime(long remainingTime);
     }
 
     interface Presenter {
-        void getClassDetailData(String orderId);
+        void getMyClassDetailData(String orderId);
+        void submitAppraise(String orderId, float ranking, String content);
     }
 }

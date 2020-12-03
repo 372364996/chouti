@@ -11,7 +11,7 @@ import com.chewawa.baselibrary.base.NBaseActivity;
 import com.hanzhi.chouti.MainActivity;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.ClassApplyBean;
-import com.hanzhi.chouti.bean.ClassCardBean;
+import com.hanzhi.chouti.bean.mine.ClassCardBean;
 import com.hanzhi.chouti.ui.selectclass.adapter.ClassCardAdapter;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassApplyContract;
 import com.hanzhi.chouti.ui.selectclass.presenter.ClassApplyPresenter;

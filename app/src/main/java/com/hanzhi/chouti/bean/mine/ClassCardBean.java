@@ -1,4 +1,4 @@
-package com.hanzhi.chouti.bean;
+package com.hanzhi.chouti.bean.mine;
 
 import android.os.Parcel;
 import android.os.Parcelable;

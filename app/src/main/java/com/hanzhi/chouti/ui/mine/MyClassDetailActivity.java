@@ -31,6 +31,7 @@ import com.hanzhi.chouti.ui.selectclass.adapter.ClassDetailAdapter;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassDetailContract;
 import com.hanzhi.chouti.ui.selectclass.presenter.ClassDetailPresenter;
 import com.hanzhi.chouti.utils.CommonUtil;
+import com.hanzhi.chouti.view.SubmitAppraiseDialog;
 import com.hanzhi.chouti.view.WrapContentHeightViewPager;
 
 import butterknife.BindView;
@@ -48,7 +49,7 @@ import static io.agora.rtc.IRtcEngineEventHandler.UserOfflineReason.USER_OFFLINE
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/28 13:58
  */
-public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> implements ClassDetailContract.View, ViewPager.OnPageChangeListener, MyClassDetailContract.View {
+public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> implements ClassDetailContract.View, ViewPager.OnPageChangeListener, MyClassDetailContract.View, SubmitAppraiseDialog.OnAlertDialogListener {
     @BindView(R.id.tv_page)
     TextView tvPage;
     @BindView(R.id.progress_horizontal)
@@ -59,6 +60,8 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     RelativeLayout mRemoteContainer;
     @BindView(R.id.local_video_view_container)
     FrameLayout mLocalContainer;
+    @BindView(R.id.cl_video_lay)
+    ConstraintLayout clVideoLay;
 
     ClassDetailAdapter classDetailAdapter;
     MyClassDetailPresenter myClassDetailPresenter;
@@ -67,6 +70,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     String orderId;
     ClassBean classBean;
     CountDownTimer timer;
+    SubmitAppraiseDialog submitAppraiseDialog;
 
     private RtcEngine mRtcEngine;
     private boolean mCallEnd;
@@ -198,6 +202,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     protected void prepareData() {
         super.prepareData();
         presenter.getClassDetailData(classId);
+        myClassDetailPresenter.getMyClassDetailData(orderId);
     }
 
     @Override
@@ -217,18 +222,25 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     }
     @Override
     public void setRemainingTime(long remainingTime) {
-        timer = new CountDownTimer(remainingTime, 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
+        if(remainingTime>0){
+            clVideoLay.setVisibility(View.VISIBLE);
+            timer = new CountDownTimer(remainingTime, 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
 
-            }
+                }
 
-            @Override
-            public void onFinish() {
-
-            }
-        };
-        timer.start();
+                @Override
+                public void onFinish() {
+                    submitAppraiseDialog = new SubmitAppraiseDialog(MyClassDetailActivity.this);
+                    submitAppraiseDialog.setOnAlertDialogListener(MyClassDetailActivity.this);
+                    submitAppraiseDialog.show();
+                }
+            };
+            timer.start();
+        }else {
+            clVideoLay.setVisibility(View.GONE);
+        }
     }
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -477,4 +489,8 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     }
 
 
+    @Override
+    public void onDialogAffirm(float ranking, String editText) {
+        myClassDetailPresenter.submitAppraise(orderId, ranking, editText);
+    }
 }

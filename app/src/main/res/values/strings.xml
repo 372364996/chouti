@@ -15,6 +15,7 @@
     <string name="title_select_class">选择课程</string>
     <string name="title_class_detail">课程详情</string>
     <string name="title_class_apply">申请</string>
+    <string name="title_mine">我的</string>
     <!--教师镶嵌-->
     <string name="teacher_detail_table_time">选择时间</string>
     <string name="teacher_detail_table_appraise">学生评价</string>
@@ -23,6 +24,8 @@
     <!--预约时间-->
     <string name="appointment_time_no_checked_tips">请选择上课时间</string>
     <string name="appointment_time_submit">确认时间</string>
+    <string name="appointment_time_affirm">选择的上课时间以北京时间为准，\n是否继续？</string>
+    <string name="appointment_time_reelect">重新选择</string>
     <!--课程申请-->
     <string name="class_apply_tips_title">注意事项</string>
     <string name="class_apply_submit">确认申请</string>
@@ -45,6 +48,8 @@
     <string name="mine_table_collect_teacher">收藏老师</string>
     <string name="mine_table_my_profile">我的资料</string>
     <string name="mine_table_my_wallet">我的钱包</string>
+    <!--钱包-->
+    <string name="wallet_connect_us">联系助教</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -53,6 +58,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="main_tab_teacher">外教</string>
+    <string name="main_tab_mine">我的</string>
     <string name="menu_home">我的课程</string>
     <string name="menu_gallery">收藏老师</string>
     <string name="menu_slideshow">我的资料</string>
@@ -66,4 +72,6 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <!--其他-->
+    <string name="dialog_title">提示</string>
 </resources>

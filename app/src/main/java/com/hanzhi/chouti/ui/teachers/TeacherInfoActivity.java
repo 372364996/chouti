@@ -38,8 +38,6 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
     CircleImageView ivHeadImg;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.iv_ranking)
-    ImageView ivRanking;
     @BindView(R.id.tv_score)
     TextView tvScore;
     @BindView(R.id.tv_school_name)
@@ -93,6 +91,7 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
         mViewPager.setOffscreenPageLimit(titleList.size());
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mViewPager.setCurrentItem(0, false);
 //        getSupportFragmentManager()
 //                .beginTransaction()
 //                .replace(R.id.teacher_info_selected_time, mContent)

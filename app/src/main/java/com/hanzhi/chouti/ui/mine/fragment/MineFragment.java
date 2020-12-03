@@ -29,9 +29,14 @@ public class MineFragment extends NBaseFragment implements CommonTabPagerAdapter
     @BindView(R.id.sc_vp_main)
     ViewPager mViewPager;
     private CommonTabPagerAdapter adapter;
+    int position;
     public static MineFragment newInstance() {
+        return newInstance(0);
+    }
+    public static MineFragment newInstance(int position) {
         MineFragment mineFragment = new MineFragment();
         Bundle args = new Bundle();
+        args.putInt("position", position);
         mineFragment.setArguments(args);
         return mineFragment;
     }
@@ -44,6 +49,9 @@ public class MineFragment extends NBaseFragment implements CommonTabPagerAdapter
     @Override
     public void initView() {
         super.initView();
+        if(getArguments() != null){
+            position = getArguments().getInt("position", 0);
+        }
         List<String> titleList = new ArrayList<>();
         titleList.add(getString(R.string.mine_table_my_class));
         titleList.add(getString(R.string.mine_table_collect_teacher));
@@ -56,6 +64,7 @@ public class MineFragment extends NBaseFragment implements CommonTabPagerAdapter
         mViewPager.setOffscreenPageLimit(titleList.size());
         mTabLayout.setupWithViewPager(mViewPager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mViewPager.setCurrentItem(position);
     }
 
     @Override
@@ -72,7 +81,7 @@ public class MineFragment extends NBaseFragment implements CommonTabPagerAdapter
         }else if(position == 2){
             return MyProfileFragment.newInstance();
         }else if(position == 3){
-            return MyClassFragment.newInstance();
+            return WalletFragment.newInstance();
         }
         return MyProfileFragment.newInstance();
     }

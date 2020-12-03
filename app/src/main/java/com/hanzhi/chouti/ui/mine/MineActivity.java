@@ -1,4 +1,4 @@
-package com.hanzhi.chouti.ui.teachers;
+package com.hanzhi.chouti.ui.mine;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment;
 import com.chewawa.baselibrary.base.NBaseActivity;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.ClassApplyBean;
+import com.hanzhi.chouti.ui.mine.fragment.MineFragment;
 import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
-import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
 
 
 /**
@@ -18,12 +18,12 @@ import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/7/21 9:41
  */
-public class TeacherActivity extends NBaseActivity {
+public class MineActivity extends NBaseActivity {
     private Fragment mContent;
-    ClassApplyBean classApplyBean;
-    public static void start(Context context, ClassApplyBean classApplyBean) {
-        Intent starter = new Intent(context, TeacherActivity.class);
-        starter.putExtra("classApplyBean", classApplyBean);
+    int position;
+    public static void start(Context context, int position) {
+        Intent starter = new Intent(context, MineActivity.class);
+        starter.putExtra("position", position);
         context.startActivity(starter);
     }
 
@@ -35,18 +35,18 @@ public class TeacherActivity extends NBaseActivity {
     @Override
     protected void beforeContentView(Bundle savedInstanceState) {
         super.beforeContentView(savedInstanceState);
-        classApplyBean = getIntent().getParcelableExtra("classApplyBean");
+        position = getIntent().getIntExtra("position", 0);
         if (savedInstanceState != null)
             mContent = getSupportFragmentManager().getFragment(savedInstanceState, "mContent");
         if (mContent == null) {
-            mContent = TeacherFragment.newInstance(classApplyBean);
+            mContent = MineFragment.newInstance(position);
         }
     }
 
     @Override
     protected void initView() {
         initToolBar();
-        toolbarLay.setTitle(R.string.title_select_teacher);
+        toolbarLay.setTitle(R.string.title_mine);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.content_frame, mContent)

@@ -8,7 +8,7 @@ import com.chewawa.baselibrary.networkutils.HttpManager;
 import com.chewawa.baselibrary.networkutils.bean.ResultBean;
 import com.chewawa.baselibrary.networkutils.callback.ApiCallBack;
 import com.hanzhi.chouti.bean.ClassApplyBean;
-import com.hanzhi.chouti.bean.ClassCardBean;
+import com.hanzhi.chouti.bean.mine.ClassCardBean;
 import com.hanzhi.chouti.network.Constants;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassApplyContract;
 import com.hanzhi.chouti.utils.RequestParamsUtils;

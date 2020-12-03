@@ -19,9 +19,13 @@ import com.hanzhi.chouti.ui.appointment.adapter.AppointmentTimeAdapter;
 import com.hanzhi.chouti.ui.selectclass.SelectClassActivity;
 import com.hanzhi.chouti.ui.teachers.TeacherActivity;
 import com.hanzhi.chouti.utils.RequestParamsUtils;
+import com.qmuiteam.qmui.skin.QMUISkinManager;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  * @class describe
@@ -34,6 +38,8 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
     String date;
     public int teacherId;
     ClassApplyBean classApplyBean;
+    QMUIDialog qmuiDialog;
+    private int mCurrentDialogStyle = R.style.DialogTheme2;
     public static AppointmentTimeChildFragment newInstance(String date, ClassApplyBean classApplyBean) {
         AppointmentTimeChildFragment appointmentTimeChildFragment = new AppointmentTimeChildFragment();
         Bundle args = new Bundle();
@@ -116,15 +122,33 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
                     ToastUtils.showToast(R.string.appointment_time_no_checked_tips);
                     return;
                 }
-                if(classApplyBean == null){
-                    classApplyBean = new ClassApplyBean();
-                }
-                classApplyBean.setDateTimeStr(checkedItems.get(0).getDate());
-                if(classApplyBean.getTeacherId() == 0){
-                    TeacherActivity.start(getActivity(), classApplyBean);
-                }else {
-                    SelectClassActivity.start(getActivity(), classApplyBean);
-                }
+                qmuiDialog = new QMUIDialog.MessageDialogBuilder(getActivity())
+                        .setSkinManager(QMUISkinManager.defaultInstance(getContext()))
+                        .setTitle(R.string.dialog_title)
+                        .setMessage(R.string.appointment_time_affirm)
+                        .addAction(getString(R.string.appointment_time_reelect), new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .addAction(getString(R.string.my_class_tips_affirm), new QMUIDialogAction.ActionListener() {
+                            @Override
+                            public void onClick(QMUIDialog dialog, int index) {
+                                dialog.dismiss();
+                                if(classApplyBean == null){
+                                    classApplyBean = new ClassApplyBean();
+                                }
+                                classApplyBean.setDateTimeStr(checkedItems.get(0).getDate());
+                                if(classApplyBean.getTeacherId() == 0){
+                                    TeacherActivity.start(getActivity(), classApplyBean);
+                                }else {
+                                    SelectClassActivity.start(getActivity(), classApplyBean);
+                                }
+                            }
+                        })
+                        .create(mCurrentDialogStyle);
+                qmuiDialog.show();
                 break;
             }
         }

@@ -8,6 +8,7 @@ import android.view.View;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewFragment;
+import com.chewawa.baselibrary.base.presenter.BasePresenterImpl;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.ClassApplyBean;
 import com.hanzhi.chouti.bean.teachers.TeacherBean;
@@ -17,6 +18,9 @@ import com.hanzhi.chouti.ui.selectclass.ClassApplyActivity;
 import com.hanzhi.chouti.ui.selectclass.SelectClassActivity;
 import com.hanzhi.chouti.ui.teachers.TeacherInfoActivity;
 import com.hanzhi.chouti.ui.teachers.adapter.TeacherAdapter;
+import com.hanzhi.chouti.ui.teachers.contract.TeacherListContract;
+import com.hanzhi.chouti.ui.teachers.presenter.TeacherInfoPresenter;
+import com.hanzhi.chouti.ui.teachers.presenter.TeacherListPresenter;
 import com.hanzhi.chouti.utils.RequestParamsUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -24,8 +28,9 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Map;
 
-public class TeacherFragment extends BaseRecycleViewFragment<TeacherBean>  {
+public class TeacherFragment extends BaseRecycleViewFragment<TeacherBean> implements TeacherListContract.View {
     ClassApplyBean classApplyBean;
+    TeacherListPresenter teacherListPresenter;
     public static TeacherFragment newInstance(ClassApplyBean classApplyBean) {
         TeacherFragment teacherFragment = new TeacherFragment();
         Bundle args = new Bundle();
@@ -63,9 +68,25 @@ public class TeacherFragment extends BaseRecycleViewFragment<TeacherBean>  {
     }
 
     @Override
+    public BasePresenterImpl initPresenter() {
+        teacherListPresenter = new TeacherListPresenter(this);
+        return super.initPresenter();
+    }
+
+    @Override
     protected View addHeaderView() {
         headerView = inflater.inflate(R.layout.teacherlistviewheader, null);
         return headerView;
+    }
+
+    @Override
+    public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+        super.onItemChildClick(adapter, view, position);
+        TeacherBean teacherBean = (TeacherBean) adapter.getItem(position);
+        if(teacherBean == null){
+            return;
+        }
+        teacherListPresenter.collectTeacher(position, teacherBean.getUserId(), !teacherBean.isFans());
     }
 
     @Override
@@ -93,6 +114,12 @@ public class TeacherFragment extends BaseRecycleViewFragment<TeacherBean>  {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(RefreshTeacherListEvent event) {
         onRefresh();
+    }
+
+    @Override
+    public void collectSuccess(int position, boolean isFans) {
+        ((TeacherBean)baseRecycleViewAdapter.getData().get(position)).setFans(isFans);
+        baseRecycleViewAdapter.notifyItemChanged(position+baseRecycleViewAdapter.getHeaderLayoutCount());
     }
 }
 

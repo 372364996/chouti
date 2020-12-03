@@ -38,8 +38,8 @@ public class TeacherAdapter extends BaseRecycleViewAdapter<TeacherBean> {
         TextView title;
         @BindView(R.id.score)
         TextView score;
-        @BindView(R.id.zan)
-        ImageView zan;
+        @BindView(R.id.iv_collect)
+        ImageView ivCollect;
         @BindView(R.id.info)
         TextView info;
         @BindView(R.id.tags)
@@ -59,7 +59,8 @@ public class TeacherAdapter extends BaseRecycleViewAdapter<TeacherBean> {
             info.setVisibility(TextUtils.isEmpty(data.getDescription()) ? View.GONE : View.VISIBLE);
             tags.setText(data.getTags());
             score.setText(data.getAvgScore());
-            zan.setImageResource(data.isFans() ? R.drawable.favorites_fill : R.drawable.favorites);
+            ivCollect.setImageResource(data.isFans() ? R.drawable.favorites_fill : R.drawable.favorites);
+            addOnClickListener(R.id.iv_collect);
         }
     }
 }
