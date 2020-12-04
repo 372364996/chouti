@@ -192,10 +192,6 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         initToolBar();
         toolbarLay.setTitle(R.string.title_class_detail);
         vpClassDetail.addOnPageChangeListener(this);
-        if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
-                checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID)) {
-            initEngineAndJoinChannel();
-        }
     }
 
     @Override
@@ -223,6 +219,10 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     @Override
     public void setRemainingTime(long remainingTime) {
         if(remainingTime>0){
+            if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
+                    checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID)) {
+                initEngineAndJoinChannel();
+            }
             clVideoLay.setVisibility(View.VISIBLE);
             timer = new CountDownTimer(remainingTime, 1000) {
                 @Override

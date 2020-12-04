@@ -101,6 +101,10 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
+        AppointmentTimeBean appointmentTimeBean = (AppointmentTimeBean) adapter.getItem(position);
+        if(appointmentTimeBean == null||!appointmentTimeBean.getIsCanUse()){
+            return;
+        }
         ((AppointmentTimeAdapter)adapter).clickItem(position, false);
     }
 
@@ -139,7 +143,7 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
                                 if(classApplyBean == null){
                                     classApplyBean = new ClassApplyBean();
                                 }
-                                classApplyBean.setDateTimeStr(checkedItems.get(0).getDate());
+                                classApplyBean.setDateTimeStr(checkedItems.get(0).getDateTimeStr());
                                 if(classApplyBean.getTeacherId() == 0){
                                     TeacherActivity.start(getActivity(), classApplyBean);
                                 }else {

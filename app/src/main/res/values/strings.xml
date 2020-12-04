@@ -16,6 +16,7 @@
     <string name="title_class_detail">课程详情</string>
     <string name="title_class_apply">申请</string>
     <string name="title_mine">我的</string>
+    <string name="title_wallet">钱包</string>
     <!--教师镶嵌-->
     <string name="teacher_detail_table_time">选择时间</string>
     <string name="teacher_detail_table_appraise">学生评价</string>

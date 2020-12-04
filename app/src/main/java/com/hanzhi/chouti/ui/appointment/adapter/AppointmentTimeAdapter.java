@@ -49,8 +49,8 @@ public class AppointmentTimeAdapter extends BaseCheckRecycleViewAdapter<Appointm
             }
             tvTime.setText(data.getTime());
             if(data.getIsCanUse()){
-                cbCheck.setClickable(true);
                 tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_33));
+                tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
                 if(data.isChecked()){
                     tvTime.setTextColor(ContextCompat.getColor(context, R.color.color_red));
                     tvTime.setBackgroundResource(R.drawable.rectangle_round_corner6_light_primary);
@@ -59,8 +59,8 @@ public class AppointmentTimeAdapter extends BaseCheckRecycleViewAdapter<Appointm
                     tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
                 }
             }else {
-                cbCheck.setClickable(false);
                 tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_99));
+                tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
             }
             getAdapter().handleCompoundButton(cbCheck, data);
             cbCheck.setVisibility(View.GONE);

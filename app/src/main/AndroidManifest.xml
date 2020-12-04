@@ -67,6 +67,9 @@
         <activity android:name=".ui.mine.MineActivity"
             android:screenOrientation="portrait"
             android:label="@string/title_mine"/>
+        <activity android:name=".ui.mine.WalletActivity"
+            android:screenOrientation="portrait"
+            android:label="@string/title_wallet"/>
     </application>
 
 </manifest>
