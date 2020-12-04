@@ -1,6 +1,8 @@
 package com.chewawa.baselibrary.utils;
 
 import android.app.ActivityManager;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -185,5 +187,24 @@ public class BaseCommonUtil {
         }
 
         return false;
+    }
+    /**
+     * 实现文本复制功能
+     * add by wangqianzhou
+     *
+     * @param content
+     */
+    public static void copy(String content) {
+        if (TextUtils.isEmpty(content)) {
+            return;
+        }
+        // 得到剪贴板管理器
+        ClipboardManager clipboardManager = (ClipboardManager) BaseApplication.getInstance()
+                .getSystemService(Context.CLIPBOARD_SERVICE);
+        assert clipboardManager != null;
+        clipboardManager.setPrimaryClip(ClipData.newPlainText(null, content));
+        if (clipboardManager.hasPrimaryClip()) {
+            clipboardManager.getPrimaryClip().getItemAt(0).getText();
+        }
     }
 }

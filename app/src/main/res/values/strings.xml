@@ -50,6 +50,16 @@
     <string name="mine_table_my_wallet">我的钱包</string>
     <!--钱包-->
     <string name="wallet_connect_us">联系助教</string>
+    <string name="wallet_weichat_1" formatted="false">助教微信1号：%s</string>
+    <string name="wallet_weichat_2" formatted="false">助教微信2号：%s</string>
+    <string name="wallet_phone" formatted="false">在线电话：%s</string>
+    <string name="wallet_web_url" formatted="false">官网：%s</string>
+    <string name="wallet_close">关闭</string>
+    <string name="wallet_to_weichat_affirm">确认</string>
+    <string name="wallet_to_weichat_cancel">取消</string>
+    <string name="wallet_to_weichat_tips">助教微信号已复制，前往微信搜索并添加助教</string>
+    <string name="wallet_to_weichat_no_install">检查到您手机没有安装微信，请安装后使用该功能</string>
+
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

@@ -97,7 +97,7 @@ public abstract class BaseApplication extends Application implements Application
      *
      * @return
      */
-    public  Activity getTopActivity() {
+    public Activity getTopActivity() {
         return activity;
     }
 }

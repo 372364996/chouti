@@ -12,13 +12,16 @@ import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.mine.ClassCardBean;
 import com.hanzhi.chouti.bean.mine.MyClassBean;
 import com.hanzhi.chouti.bean.mine.MyClassTabBean;
+import com.hanzhi.chouti.bean.mine.UsInfoBean;
 import com.hanzhi.chouti.network.Constants;
 import com.hanzhi.chouti.ui.appointment.AppointmentTimeActivity;
 import com.hanzhi.chouti.ui.mine.MyClassDetailActivity;
 import com.hanzhi.chouti.ui.mine.adapter.MyClassAdapter;
 import com.hanzhi.chouti.ui.mine.adapter.WalletCardAdapter;
 import com.hanzhi.chouti.ui.mine.contract.MyClassContract;
+import com.hanzhi.chouti.ui.mine.contract.WalletContract;
 import com.hanzhi.chouti.ui.mine.presenter.MyClassPresenter;
+import com.hanzhi.chouti.ui.mine.presenter.WalletPresenter;
 import com.hanzhi.chouti.view.ConnectUsDialog;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
@@ -32,8 +35,9 @@ import java.util.Map;
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/26 17:24
  */
-public class WalletFragment extends BaseRecycleViewFragment<ClassCardBean> implements View.OnClickListener {
+public class WalletFragment extends BaseRecycleViewFragment<ClassCardBean> implements View.OnClickListener, WalletContract.View {
     Button btnConnectUs;
+    WalletPresenter walletPresenter;
     ConnectUsDialog connectUsDialog;
     public static WalletFragment newInstance() {
         WalletFragment myClassChildFragment = new WalletFragment();
@@ -60,7 +64,14 @@ public class WalletFragment extends BaseRecycleViewFragment<ClassCardBean> imple
     }
 
     @Override
+    protected void prepareData() {
+        super.prepareData();
+        walletPresenter.getUsInfo();
+    }
+
+    @Override
     public BasePresenterImpl initPresenter() {
+        walletPresenter = new WalletPresenter(this);
         return super.initPresenter();
     }
 
@@ -90,5 +101,16 @@ public class WalletFragment extends BaseRecycleViewFragment<ClassCardBean> imple
                 break;
             }
         }
+    }
+
+    @Override
+    public void setUserInfo(UsInfoBean usInfoBean) {
+        if(connectUsDialog == null){
+            connectUsDialog = new ConnectUsDialog(getActivity());
+        }
+        connectUsDialog.setWeichat1(usInfoBean.getWeiXin1());
+        connectUsDialog.setWeichat2(usInfoBean.getWeiXin2());
+        connectUsDialog.setPhone(usInfoBean.getTel());
+        connectUsDialog.setWebUrl(usInfoBean.getOfficialWebsite());
     }
 }

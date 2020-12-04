@@ -4,10 +4,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_24"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:src="@drawable/connect_us_top_bg"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/connect_us_bg"
+        android:layout_marginLeft="@dimen/dp_24"
+        android:layout_marginRight="@dimen/dp_24"
         android:orientation="vertical">
         <TextView
             android:id="@+id/tv_weichat_1"
@@ -17,7 +27,7 @@
             android:paddingRight="@dimen/dp_16"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            tools:text="@string/my_class_appraise_title"/>
+            android:text="@string/wallet_weichat_1"/>
         <TextView
             android:id="@+id/tv_weichat_2"
             android:layout_width="match_parent"
@@ -27,7 +37,7 @@
             android:paddingRight="@dimen/dp_16"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            tools:text="@string/my_class_appraise_title"/>
+            android:text="@string/wallet_weichat_2"/>
         <TextView
             android:id="@+id/tv_phone"
             android:layout_width="match_parent"
@@ -37,7 +47,7 @@
             android:paddingRight="@dimen/dp_16"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            tools:text="@string/my_class_appraise_title"/>
+            android:text="@string/wallet_phone"/>
         <TextView
             android:id="@+id/tv_web_url"
             android:layout_width="match_parent"
@@ -47,7 +57,7 @@
             android:paddingRight="@dimen/dp_16"
             android:textColor="@color/white"
             android:textSize="@dimen/sp_16"
-            tools:text="@string/my_class_appraise_title"/>
+            android:text="@string/wallet_web_url"/>
     </LinearLayout>
 
     <Button
@@ -59,6 +69,6 @@
         android:layout_gravity="center_horizontal"
         android:textColor="@color/white"
         android:textSize="@dimen/dp_14"
-        android:text="@string/my_class_appraise_submit"/>
+        android:text="@string/wallet_close"/>
 
 </LinearLayout>
