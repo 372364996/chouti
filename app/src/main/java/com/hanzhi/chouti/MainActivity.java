@@ -19,6 +19,7 @@ import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.chouti.ui.login.LoginActivity;
 import com.hanzhi.chouti.ui.login.RegisterActivity;
 import com.hanzhi.chouti.ui.mine.MineActivity;
+import com.hanzhi.chouti.ui.mine.WalletActivity;
 import com.hanzhi.chouti.ui.mine.fragment.MineFragment;
 import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
 import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
@@ -43,18 +44,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AppBarConfiguration mAppBarConfiguration;
     int tabIndex;
     private Intent intent;
+
     public static void startMainActivity(FragmentActivity activity, int pos) {
         Intent intent = new Intent(activity, MainActivity.class);
         intent.putExtra("tab_index", pos);
         activity.startActivity(intent);
     }
-    @Override protected void onNewIntent(Intent intent) {
+
+    @Override
+    protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         if (intent != null) {
             tabIndex = intent.getIntExtra("tab_index", 0);
-            ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(tabIndex);
+            ((CustomFragmentTabHost) findViewById(android.R.id.tabhost)).setCurrentTab(tabIndex);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
         }
         toolbarLay.addLeftImageButton(R.drawable.ic_action_menu, R.id.home_toolbar_drawer)
-        .setOnClickListener(this);
-        toolbarLay.addRightImageButton(R.drawable.ic_action_qianbao, R.id.home_toolbar_wallet);
+                .setOnClickListener(this);
+        toolbarLay.addRightImageButton(R.drawable.ic_home_qianbao, R.id.home_toolbar_wallet).setOnClickListener(this);
         toolbarLay.setTitle(R.string.main_tab_teacher);
 //        Toolbar toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);                   //传入ToolBar实例
@@ -149,11 +154,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.home_toolbar_drawer:{
+        switch (v.getId()) {
+            case R.id.home_toolbar_drawer:
                 drawerLayout.openDrawer(Gravity.LEFT);
                 break;
-            }
+            case R.id.home_toolbar_wallet:
+                Log.i("qianbao", "点击了钱包按钮");
+                Intent intent = new Intent(this, WalletActivity.class);
+                super.startActivity(intent);
+                break;
         }
     }
 }
