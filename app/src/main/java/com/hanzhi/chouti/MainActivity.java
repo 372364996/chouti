@@ -14,6 +14,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.chewawa.baselibrary.utils.SPUtils;
 import com.google.android.material.navigation.NavigationView;
 import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.chouti.ui.login.LoginActivity;
@@ -111,9 +112,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
                         break;
                     case R.id.nav_slideshow7:
-                        SharedPreferences.Editor editor = getSharedPreferences("LoginInfo", MODE_PRIVATE).edit();
-                        editor.clear();
-                        editor.commit();
+                        CommonUtil.clearUserData();
                         intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();

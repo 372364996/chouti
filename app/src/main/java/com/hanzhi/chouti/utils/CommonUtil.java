@@ -3,6 +3,9 @@ package com.hanzhi.chouti.utils;
 import com.chewawa.baselibrary.utils.BaseCommonUtil;
 import com.chewawa.baselibrary.utils.SPUtils;
 
+import static com.chewawa.baselibrary.utils.SPConstants.KEY_MOBILE;
+import static com.chewawa.baselibrary.utils.SPConstants.KEY_TOKEN;
+
 /**
  * @class describe
  * @anthor nanfeifei email:18600752302@163.com
@@ -44,5 +47,13 @@ public class CommonUtil extends BaseCommonUtil {
      */
     public static void saveUserId(int storeId) {
         SPUtils.put(KEY_USER_ID, storeId);
+    }
+    /**
+     * 清空用户数据
+     */
+    public static void clearUserData() {
+        SPUtils.remove(KEY_TOKEN);
+        SPUtils.remove(KEY_MOBILE);
+        SPUtils.remove(KEY_USER_ID);
     }
 }
