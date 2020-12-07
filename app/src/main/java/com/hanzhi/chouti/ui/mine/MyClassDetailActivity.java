@@ -34,12 +34,23 @@ import com.hanzhi.chouti.utils.CommonUtil;
 import com.hanzhi.chouti.view.SubmitAppraiseDialog;
 import com.hanzhi.chouti.view.WrapContentHeightViewPager;
 
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
 import io.agora.rtc.video.VideoCanvas;
 import io.agora.rtc.video.VideoEncoderConfiguration;
+import io.agora.rtm.ErrorInfo;
+import io.agora.rtm.ResultCallback;
+import io.agora.rtm.RtmClient;
+import io.agora.rtm.RtmClientListener;
+import io.agora.rtm.RtmFileMessage;
+import io.agora.rtm.RtmImageMessage;
+import io.agora.rtm.RtmMediaOperationProgress;
+import io.agora.rtm.RtmMessage;
+import io.agora.rtm.SendMessageOptions;
 
 import static io.agora.rtc.IRtcEngineEventHandler.UserOfflineReason.USER_OFFLINE_DROPPED;
 import static io.agora.rtc.IRtcEngineEventHandler.UserOfflineReason.USER_OFFLINE_QUIT;
@@ -65,7 +76,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
 
     ClassDetailAdapter classDetailAdapter;
     MyClassDetailPresenter myClassDetailPresenter;
-
+    int userId;
     int classId;
     String orderId;
     ClassBean classBean;
@@ -73,6 +84,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     SubmitAppraiseDialog submitAppraiseDialog;
 
     private RtcEngine mRtcEngine;
+    private RtmClient mRtmClient;
     private boolean mCallEnd;
     private boolean mMuted;
 
@@ -84,12 +96,14 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             Manifest.permission.RECORD_AUDIO,
             Manifest.permission.CAMERA
     };
+
     public static void start(Context context, int classId, String orderId) {
         Intent starter = new Intent(context, MyClassDetailActivity.class);
         starter.putExtra("classId", classId);
         starter.putExtra("orderId", orderId);
         context.startActivity(starter);
     }
+
     /**
      * Event handler registered into RTC engine for RTC callbacks.
      * Note that UI operations needs to be in UI thread because RTC
@@ -136,6 +150,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
                 @Override
                 public void run() {
                     setupRemoteVideo(uid);
+                    userId = uid;
                 }
             });
         }
@@ -167,11 +182,11 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    switch (reason){
-                        case USER_OFFLINE_QUIT:{
+                    switch (reason) {
+                        case USER_OFFLINE_QUIT: {
                             break;
                         }
-                        case USER_OFFLINE_DROPPED:{
+                        case USER_OFFLINE_DROPPED: {
                             break;
                         }
                     }
@@ -180,6 +195,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             });
         }
     };
+
     @Override
     public int initLoadResId() {
         return R.layout.activity_my_class_detail;
@@ -192,6 +208,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         initToolBar();
         toolbarLay.setTitle(R.string.title_class_detail);
         vpClassDetail.addOnPageChangeListener(this);
+
     }
 
     @Override
@@ -216,9 +233,10 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         progressHorizontal.setMax(classBean.getClassMaterials().size());
         progressHorizontal.setProgress(1);
     }
+
     @Override
     public void setRemainingTime(long remainingTime) {
-        if(remainingTime>0){
+        if (remainingTime > 0) {
             if (checkSelfPermission(REQUESTED_PERMISSIONS[0], PERMISSION_REQ_ID) &&
                     checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID)) {
                 initEngineAndJoinChannel();
@@ -238,10 +256,11 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
                 }
             };
             timer.start();
-        }else {
+        } else {
             clVideoLay.setVisibility(View.GONE);
         }
     }
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -261,16 +280,17 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     public void onPageScrollStateChanged(int state) {
 
     }
+
     @OnClick({R.id.remote_video_view_container, R.id.local_video_view_container})
-    public void onViewClick(View view){
-        switch (view.getId()){
-            case R.id.remote_video_view_container:{
+    public void onViewClick(View view) {
+        switch (view.getId()) {
+            case R.id.remote_video_view_container: {
 
                 ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mRemoteContainer.getLayoutParams();
-                if(layoutParams.matchConstraintPercentWidth < 1){
+                if (layoutParams.matchConstraintPercentWidth < 1) {
                     mLocalContainer.setVisibility(View.GONE);
                     layoutParams.matchConstraintPercentWidth = 1.0f;
-                }else {
+                } else {
                     mLocalContainer.setVisibility(View.VISIBLE);
                     layoutParams.matchConstraintPercentWidth = 0.5f;
                 }
@@ -278,12 +298,13 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
                 mRemoteContainer.setLayoutParams(layoutParams);
                 break;
             }
-            case R.id.local_video_view_container:{
-                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mLocalContainer.getLayoutParams();;
-                if(layoutParams.matchConstraintPercentWidth < 1){
+            case R.id.local_video_view_container: {
+                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mLocalContainer.getLayoutParams();
+                ;
+                if (layoutParams.matchConstraintPercentWidth < 1) {
                     mRemoteContainer.setVisibility(View.GONE);
                     layoutParams.matchConstraintPercentWidth = 1.0f;
-                }else {
+                } else {
                     mRemoteContainer.setVisibility(View.VISIBLE);
                     layoutParams.matchConstraintPercentWidth = 0.5f;
                 }
@@ -292,6 +313,11 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
                 break;
             }
         }
+    }
+
+    //发送翻页消息
+    private void sendMessage() {
+
     }
 
     private void setupRemoteVideo(int uid) {
@@ -336,6 +362,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         // Destroys remote view
         mRemoteView = null;
     }
+
     private boolean checkSelfPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) !=
                 PackageManager.PERMISSION_GRANTED) {
@@ -345,6 +372,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
 
         return true;
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -362,6 +390,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             initEngineAndJoinChannel();
         }
     }
+
     private void initEngineAndJoinChannel() {
         // This is our usual steps for joining
         // a channel and starting a call.
@@ -377,6 +406,67 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         } catch (Exception e) {
             throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));
         }
+        try {
+            mRtmClient = RtmClient.createInstance(getBaseContext(), getString(R.string.agora_app_id),
+                    new RtmClientListener() {
+                        @Override
+                        public void onConnectionStateChanged(int state, int reason) {
+                            Log.d("asdf", "Connection state changes to "
+                                    + state + " reason: " + reason);
+                        }
+
+                        @Override
+                        public void onMessageReceived(RtmMessage rtmMessage, String peerId) {
+                            String msg = rtmMessage.getText();
+                            Log.d("asdf", "Message received " + " from " + peerId + msg
+                            );
+                        }
+
+                        @Override
+                        public void onImageMessageReceivedFromPeer(RtmImageMessage rtmImageMessage, String s) {
+
+                        }
+
+                        @Override
+                        public void onFileMessageReceivedFromPeer(RtmFileMessage rtmFileMessage, String s) {
+
+                        }
+
+                        @Override
+                        public void onMediaUploadingProgress(RtmMediaOperationProgress rtmMediaOperationProgress, long l) {
+
+                        }
+
+                        @Override
+                        public void onMediaDownloadingProgress(RtmMediaOperationProgress rtmMediaOperationProgress, long l) {
+
+                        }
+
+                        @Override
+                        public void onTokenExpired() {
+
+                        }
+
+                        @Override
+                        public void onPeersOnlineStatusChanged(Map<String, Integer> map) {
+
+                        }
+                    });
+        } catch (Exception e) {
+            Log.d("asdf", "RTM SDK init fatal error!");
+            throw new RuntimeException("You need to check the RTM init process.");
+        }
+        mRtmClient.login(null, String.valueOf(userId), new ResultCallback<Void>() {
+            @Override
+            public void onSuccess(Void responseInfo) {
+                Log.d("asdf", "login success!");
+            }
+
+            @Override
+            public void onFailure(ErrorInfo errorInfo) {
+                Log.d("asdf", "login failure!");
+            }
+        });
     }
 
     private void setupVideoConfig() {
@@ -419,12 +509,14 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
             token = null; // default, no token
         }
+        sendPeerMessage("1054","3");
         mRtcEngine.joinChannel(token, orderId, "", CommonUtil.getUserId());
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(timer != null){
+        if (timer != null) {
             timer.cancel();
         }
         if (!mCallEnd) {
@@ -442,6 +534,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     private void leaveChannel() {
         mRtcEngine.leaveChannel();
     }
+
     /*静音的点击事件*/
     public void onLocalAudioMuteClicked(View view) {
 //        mMuted = !mMuted;
@@ -450,11 +543,13 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
 //        int res = mMuted ? R.drawable.btn_mute : R.drawable.btn_unmute;
 //        mMuteBtn.setImageResource(res);
     }
+
     /*切换摄像头的点击事件*/
     public void onSwitchCameraClicked(View view) {
         // Switches between front and rear cameras.
         mRtcEngine.switchCamera();
     }
+
     /*开始视频的点击事件*/
     public void onCallClicked(View view) {
 //        if (mCallEnd) {
@@ -488,7 +583,27 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         mLocalView = null;
     }
 
+    public void sendPeerMessage(String dst, String content) {
 
+        final RtmMessage message = mRtmClient.createMessage();
+        message.setText(content);
+
+        SendMessageOptions option = new SendMessageOptions();
+        option.enableOfflineMessaging = true;
+
+        mRtmClient.sendMessageToPeer(dst, message, option, new ResultCallback<Void>() {
+
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+
+            @Override
+            public void onFailure(ErrorInfo errorInfo) {
+
+            }
+        });
+    }
     @Override
     public void onDialogAffirm(float ranking, String editText) {
         myClassDetailPresenter.submitAppraise(orderId, ranking, editText);
