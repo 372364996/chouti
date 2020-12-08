@@ -216,6 +216,67 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         super.prepareData();
         presenter.getClassDetailData(classId);
         myClassDetailPresenter.getMyClassDetailData(orderId);
+        try {
+            mRtmClient = RtmClient.createInstance(getBaseContext(), getString(R.string.agora_app_id),
+                    new RtmClientListener() {
+                        @Override
+                        public void onConnectionStateChanged(int state, int reason) {
+                            Log.d("asdf", "Connection state changes to "
+                                    + state + " reason: " + reason);
+                        }
+
+                        @Override
+                        public void onMessageReceived(RtmMessage rtmMessage, String peerId) {
+                            String msg = rtmMessage.getText();
+                            Log.d("asdf", "Message received " + " from " + peerId + msg
+                            );
+                        }
+
+                        @Override
+                        public void onImageMessageReceivedFromPeer(RtmImageMessage rtmImageMessage, String s) {
+
+                        }
+
+                        @Override
+                        public void onFileMessageReceivedFromPeer(RtmFileMessage rtmFileMessage, String s) {
+
+                        }
+
+                        @Override
+                        public void onMediaUploadingProgress(RtmMediaOperationProgress rtmMediaOperationProgress, long l) {
+
+                        }
+
+                        @Override
+                        public void onMediaDownloadingProgress(RtmMediaOperationProgress rtmMediaOperationProgress, long l) {
+
+                        }
+
+                        @Override
+                        public void onTokenExpired() {
+
+                        }
+
+                        @Override
+                        public void onPeersOnlineStatusChanged(Map<String, Integer> map) {
+
+                        }
+                    });
+        } catch (Exception e) {
+            Log.d("asdf", "RTM SDK init fatal error!");
+            throw new RuntimeException("You need to check the RTM init process.");
+        }
+        mRtmClient.login(null, String.valueOf(CommonUtil.getUserId()), new ResultCallback<Void>() {
+            @Override
+            public void onSuccess(Void responseInfo) {
+                Log.d("asdf", "login success!");
+            }
+
+            @Override
+            public void onFailure(ErrorInfo errorInfo) {
+                Log.d("asdf", "login failure!");
+            }
+        });
     }
 
     @Override
@@ -406,67 +467,8 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         } catch (Exception e) {
             throw new RuntimeException("NEED TO check rtc sdk init fatal error\n" + Log.getStackTraceString(e));
         }
-        try {
-            mRtmClient = RtmClient.createInstance(getBaseContext(), getString(R.string.agora_app_id),
-                    new RtmClientListener() {
-                        @Override
-                        public void onConnectionStateChanged(int state, int reason) {
-                            Log.d("asdf", "Connection state changes to "
-                                    + state + " reason: " + reason);
-                        }
 
-                        @Override
-                        public void onMessageReceived(RtmMessage rtmMessage, String peerId) {
-                            String msg = rtmMessage.getText();
-                            Log.d("asdf", "Message received " + " from " + peerId + msg
-                            );
-                        }
 
-                        @Override
-                        public void onImageMessageReceivedFromPeer(RtmImageMessage rtmImageMessage, String s) {
-
-                        }
-
-                        @Override
-                        public void onFileMessageReceivedFromPeer(RtmFileMessage rtmFileMessage, String s) {
-
-                        }
-
-                        @Override
-                        public void onMediaUploadingProgress(RtmMediaOperationProgress rtmMediaOperationProgress, long l) {
-
-                        }
-
-                        @Override
-                        public void onMediaDownloadingProgress(RtmMediaOperationProgress rtmMediaOperationProgress, long l) {
-
-                        }
-
-                        @Override
-                        public void onTokenExpired() {
-
-                        }
-
-                        @Override
-                        public void onPeersOnlineStatusChanged(Map<String, Integer> map) {
-
-                        }
-                    });
-        } catch (Exception e) {
-            Log.d("asdf", "RTM SDK init fatal error!");
-            throw new RuntimeException("You need to check the RTM init process.");
-        }
-        mRtmClient.login(null, String.valueOf(userId), new ResultCallback<Void>() {
-            @Override
-            public void onSuccess(Void responseInfo) {
-                Log.d("asdf", "login success!");
-            }
-
-            @Override
-            public void onFailure(ErrorInfo errorInfo) {
-                Log.d("asdf", "login failure!");
-            }
-        });
     }
 
     private void setupVideoConfig() {
