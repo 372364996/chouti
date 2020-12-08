@@ -10,6 +10,7 @@ import java.util.List;
 public class Utils {
     /**
      * 获取日期间日期
+     *
      * @param start
      * @param end
      * @return
@@ -28,8 +29,10 @@ public class Utils {
         }
         return result;
     }
+
     /**
      * 根据日期获取 星期 （2019-05-06 ——> 星期一）
+     *
      * @param datetime
      * @return
      */
@@ -50,5 +53,12 @@ public class Utils {
         if (w < 0)
             w = 0;
         return weekDays[w];
+    }
+
+    public static boolean canParseInt(String str) {
+        if (str == null) { //验证是否为空
+            return false;
+        }
+        return str.matches("\\d+"); //使用正则表达式判断该字符串是否为数字，第一个\是转义符，\d+表示匹配1个或  //多个连续数字，"+"和"*"类似，"*"表示0个或多个
     }
 }

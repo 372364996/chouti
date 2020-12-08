@@ -31,6 +31,7 @@ import com.hanzhi.chouti.ui.selectclass.adapter.ClassDetailAdapter;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassDetailContract;
 import com.hanzhi.chouti.ui.selectclass.presenter.ClassDetailPresenter;
 import com.hanzhi.chouti.utils.CommonUtil;
+import com.hanzhi.chouti.utils.Utils;
 import com.hanzhi.chouti.view.SubmitAppraiseDialog;
 import com.hanzhi.chouti.view.WrapContentHeightViewPager;
 
@@ -221,15 +222,24 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
                     new RtmClientListener() {
                         @Override
                         public void onConnectionStateChanged(int state, int reason) {
-                            Log.d("asdf", "Connection state changes to "
-                                    + state + " reason: " + reason);
+                            Log.d("asdf", "Connection state changes to " + state + " reason: " + reason);
                         }
 
                         @Override
                         public void onMessageReceived(RtmMessage rtmMessage, String peerId) {
                             String msg = rtmMessage.getText();
-                            Log.d("asdf", "Message received " + " from " + peerId + msg
-                            );
+                            Log.d("asdf", "Message received " + " from " + peerId + msg);
+                            if (Utils.canParseInt(msg)) {
+                                MyClassDetailActivity.this.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        int currentItem = Integer.parseInt(msg);
+                                        vpClassDetail.setCurrentItem(currentItem);
+                                    }
+                                });
+                            }
+
+
                         }
 
                         @Override
@@ -511,7 +521,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         if (TextUtils.isEmpty(token) || TextUtils.equals(token, "#YOUR ACCESS TOKEN#")) {
             token = null; // default, no token
         }
-        sendPeerMessage("1054","3");
+        // sendPeerMessage("1054", "3");
         mRtcEngine.joinChannel(token, orderId, "", CommonUtil.getUserId());
     }
 
@@ -606,6 +616,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             }
         });
     }
+
     @Override
     public void onDialogAffirm(float ranking, String editText) {
         myClassDetailPresenter.submitAppraise(orderId, ranking, editText);
