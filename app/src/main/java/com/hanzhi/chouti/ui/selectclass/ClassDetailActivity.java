@@ -18,6 +18,7 @@ import com.hanzhi.chouti.ui.appointment.AppointmentTimeActivity;
 import com.hanzhi.chouti.ui.selectclass.adapter.ClassDetailAdapter;
 import com.hanzhi.chouti.ui.selectclass.contract.ClassDetailContract;
 import com.hanzhi.chouti.ui.selectclass.presenter.ClassDetailPresenter;
+import com.hanzhi.chouti.utils.CommonUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,11 +40,13 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
     ClassDetailAdapter classDetailAdapter;
     ClassApplyBean classApplyBean;
     ClassBean classBean;
+
     public static void start(Context context, ClassApplyBean classApplyBean) {
         Intent starter = new Intent(context, ClassDetailActivity.class);
         starter.putExtra("classApplyBean", classApplyBean);
         context.startActivity(starter);
     }
+
     @Override
     public int initLoadResId() {
         return R.layout.activity_class_detail;
@@ -54,13 +57,16 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
         classApplyBean = getIntent().getParcelableExtra("classApplyBean");
         initToolBar();
         toolbarLay.setTitle(R.string.title_class_detail);
+        if (CommonUtil.getTeacherId() > 0) {
+            btnSubmit.setVisibility(View.GONE);
+        }
         vpClassDetail.addOnPageChangeListener(this);
     }
 
     @Override
     protected void prepareData() {
         super.prepareData();
-        if(classApplyBean != null){
+        if (classApplyBean != null) {
             presenter.getClassDetailData(classApplyBean.getClassId());
         }
     }
@@ -75,7 +81,7 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
         this.classBean = classBean;
         classDetailAdapter = new ClassDetailAdapter(this, classBean.getClassMaterials());
         vpClassDetail.setAdapter(classDetailAdapter);
-        tvPage.setText("1/"+classBean.getClassMaterials().size());
+        tvPage.setText("1/" + classBean.getClassMaterials().size());
         progressHorizontal.setMax(classBean.getClassMaterials().size());
         progressHorizontal.setProgress(1);
     }
@@ -87,11 +93,11 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
 
     @Override
     public void onPageSelected(int position) {
-        if(classBean == null){
+        if (classBean == null) {
             return;
         }
         int index = position + 1;
-        tvPage.setText(index+"/"+classBean.getClassMaterials().size());
+        tvPage.setText(index + "/" + classBean.getClassMaterials().size());
         progressHorizontal.setProgress(index);
     }
 
@@ -99,16 +105,17 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
     public void onPageScrollStateChanged(int state) {
 
     }
+
     @OnClick(R.id.btn_submit)
     public void onViewClicked(View view) {
-        switch (view.getId()){
-            case R.id.btn_submit:{
-                if(classApplyBean == null){
+        switch (view.getId()) {
+            case R.id.btn_submit: {
+                if (classApplyBean == null) {
                     classApplyBean = new ClassApplyBean();
                 }
-                if(TextUtils.isEmpty(classApplyBean.getDateTimeStr())){
+                if (TextUtils.isEmpty(classApplyBean.getDateTimeStr())) {
                     AppointmentTimeActivity.start(ClassDetailActivity.this, classApplyBean);
-                }else {
+                } else {
                     ClassApplyActivity.start(ClassDetailActivity.this, classApplyBean);
                 }
                 break;

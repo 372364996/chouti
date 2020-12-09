@@ -22,6 +22,7 @@ import com.hanzhi.chouti.ui.login.RegisterActivity;
 import com.hanzhi.chouti.ui.mine.MineActivity;
 import com.hanzhi.chouti.ui.mine.WalletActivity;
 import com.hanzhi.chouti.ui.mine.fragment.MineFragment;
+import com.hanzhi.chouti.ui.mine.fragment.MyClassFragment;
 import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
 import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
 import com.hanzhi.chouti.utils.CommonUtil;
@@ -132,23 +133,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return true;
             }
         });
+        if (CommonUtil.getTeacherId() > 0) {
+            bottomTabBar.init(getSupportFragmentManager())
+                    .setImgSize(50, 50)   //图片大小
+                    .setFontSize(12)//字体大小
+                    .setTabPadding(20, 6, 10)//选项卡的间距
+                    .addTabItem("连接课程", R.drawable.ic_teacher_tab, MyClassFragment.class)
+                    .addTabItem("记录", R.drawable.ic_yuyue_tab, AppointmentTimeFragment.class)
+                    .addTabItem("选择课程", R.drawable.ic_selectclass_tab, SelectClassFragment.class)
+                    .addTabItem("我的", R.drawable.ic_mine_tab, MineFragment.class)
+                    .isShowDivider(true)  //是否包含分割线
+                    .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
+                        @Override
+                        public void onTabChange(int position, String name) {
+                            Log.i("TGA", "位置：" + position + "   选项卡：" + name);
+                            toolbarLay.setTitle(name);
+                        }
+                    });
+        } else {
+            bottomTabBar.init(getSupportFragmentManager())
+                    .setImgSize(50, 50)   //图片大小
+                    .setFontSize(12)//字体大小
+                    .setTabPadding(20, 6, 10)//选项卡的间距
+                    .addTabItem(getString(R.string.main_tab_teacher), R.drawable.ic_teacher_tab, TeacherFragment.class)
+                    .addTabItem("预约", R.drawable.ic_yuyue_tab, AppointmentTimeFragment.class)
+                    .addTabItem("选择课程", R.drawable.ic_selectclass_tab, SelectClassFragment.class)
+                    .addTabItem("我的", R.drawable.ic_mine_tab, MineFragment.class)
+                    .isShowDivider(true)  //是否包含分割线
+                    .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
+                        @Override
+                        public void onTabChange(int position, String name) {
+                            Log.i("TGA", "位置：" + position + "   选项卡：" + name);
+                            toolbarLay.setTitle(name);
+                        }
+                    });
+        }
         //初始化Fragment
-        bottomTabBar.init(getSupportFragmentManager())
-                .setImgSize(50, 50)   //图片大小
-                .setFontSize(12)//字体大小
-                .setTabPadding(20, 6, 10)//选项卡的间距
-                .addTabItem(getString(R.string.main_tab_teacher), R.drawable.ic_teacher_tab, TeacherFragment.class)
-                .addTabItem("预约", R.drawable.ic_yuyue_tab, AppointmentTimeFragment.class)
-                .addTabItem("选择课程", R.drawable.ic_selectclass_tab, SelectClassFragment.class)
-                .addTabItem("我的", R.drawable.ic_mine_tab, MineFragment.class)
-                .isShowDivider(true)  //是否包含分割线
-                .setOnTabChangeListener(new BottomTabBar.OnTabChangeListener() {
-                    @Override
-                    public void onTabChange(int position, String name) {
-                        Log.i("TGA", "位置：" + position + "   选项卡：" + name);
-                        toolbarLay.setTitle(name);
-                    }
-                });
+
     }
 
     @Override

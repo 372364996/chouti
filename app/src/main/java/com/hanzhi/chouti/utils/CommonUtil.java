@@ -12,25 +12,27 @@ import static com.chewawa.baselibrary.utils.SPConstants.KEY_TOKEN;
  * @time 2020/8/18 18:43
  */
 public class CommonUtil extends BaseCommonUtil {
-    public static final String KEY_STORE_ID = "store_id";
+    public static final String KEY_TEACHER_ID = "teacher_id";
     public static final String KEY_USER_ID = "user_id";
+
     /**
-     * 获取店铺id
+     * 获取当前用户教师身份Id
      *
      * @return
      */
-    public static int getStoreId() {
-        return (int) SPUtils.get(KEY_STORE_ID, 0);
+    public static int getTeacherId() {
+        return (int) SPUtils.get(KEY_TEACHER_ID, 0);
     }
 
     /**
-     * 保存店铺id
+     * 保存当前用户教师身份Id
      *
      * @return
      */
-    public static void saveStoreId(int storeId) {
-        SPUtils.put(KEY_STORE_ID, storeId);
+    public static void saveTeacherId(int teacherId) {
+        SPUtils.put(KEY_TEACHER_ID, teacherId);
     }
+
     /**
      * 获取userid
      *
@@ -41,13 +43,14 @@ public class CommonUtil extends BaseCommonUtil {
     }
 
     /**
-     * 保存店铺id
+     * 保存userid
      *
      * @return
      */
     public static void saveUserId(int storeId) {
         SPUtils.put(KEY_USER_ID, storeId);
     }
+
     /**
      * 清空用户数据
      */
@@ -55,5 +58,6 @@ public class CommonUtil extends BaseCommonUtil {
         SPUtils.remove(KEY_TOKEN);
         SPUtils.remove(KEY_MOBILE);
         SPUtils.remove(KEY_USER_ID);
+        SPUtils.remove(KEY_TEACHER_ID);
     }
 }

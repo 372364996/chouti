@@ -1,17 +1,16 @@
 package com.hanzhi.chouti.ui.mine;
 
 import android.Manifest;
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,6 +37,7 @@ import com.hanzhi.chouti.view.WrapContentHeightViewPager;
 import java.util.Map;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
@@ -71,9 +71,13 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     @BindView(R.id.remote_video_view_container)
     RelativeLayout mRemoteContainer;
     @BindView(R.id.local_video_view_container)
-    FrameLayout mLocalContainer;
+    RelativeLayout mLocalContainer;
     @BindView(R.id.cl_video_lay)
     ConstraintLayout clVideoLay;
+    @BindView(R.id.tv_countdown)
+    TextView tvCountdown;
+    @BindView(R.id.view_cut_off)
+    View viewCutOff;
 
     ClassDetailAdapter classDetailAdapter;
     MyClassDetailPresenter myClassDetailPresenter;
@@ -83,6 +87,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     ClassBean classBean;
     CountDownTimer timer;
     SubmitAppraiseDialog submitAppraiseDialog;
+
 
     private RtcEngine mRtcEngine;
     private RtmClient mRtmClient;
@@ -312,11 +317,18 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
                     checkSelfPermission(REQUESTED_PERMISSIONS[1], PERMISSION_REQ_ID)) {
                 initEngineAndJoinChannel();
             }
+
             clVideoLay.setVisibility(View.VISIBLE);
-            timer = new CountDownTimer(remainingTime, 1000) {
+
+            timer = new CountDownTimer(remainingTime*1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
-
+                    if (tvCountdown != null) {
+                        tvCountdown.setClickable(false);
+                        tvCountdown.setEnabled(false);
+                        tvCountdown.setText(Utils.ConvertTotalSecondToHourMinuteSecond(String.valueOf(millisUntilFinished/1000)));
+                        tvCountdown.setTextColor(Color.parseColor("#999999"));
+                    }
                 }
 
                 @Override
@@ -621,4 +633,5 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     public void onDialogAffirm(float ranking, String editText) {
         myClassDetailPresenter.submitAppraise(orderId, ranking, editText);
     }
+
 }
