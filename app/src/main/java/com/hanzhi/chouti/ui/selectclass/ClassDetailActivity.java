@@ -58,7 +58,7 @@ public class ClassDetailActivity extends NBaseActivity<ClassDetailPresenter> imp
         initToolBar();
         toolbarLay.setTitle(R.string.title_class_detail);
         if (CommonUtil.getTeacherId() > 0) {
-            btnSubmit.setVisibility(View.GONE);
+            btnSubmit.setVisibility(View.INVISIBLE);
         }
         vpClassDetail.addOnPageChangeListener(this);
     }
