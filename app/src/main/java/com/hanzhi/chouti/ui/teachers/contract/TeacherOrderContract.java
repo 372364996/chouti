@@ -1,33 +1,39 @@
 package com.hanzhi.chouti.ui.teachers.contract;
 
 import com.chewawa.baselibrary.base.contract.BaseContract;
-import com.hanzhi.chouti.bean.teachers.TeacherBean;
+import com.hanzhi.chouti.bean.mine.MyClassTabBean;
+import com.hanzhi.chouti.ui.mine.contract.MyClassContract;
 
-/**
- * @class describe
- * @anthor nanfeifei email:18600752302@163.com
- * @time 2020/11/27 17:21
- */
-public interface TeacherInfoContract {
+import java.util.List;
+
+public interface TeacherOrderContract {
     interface Model {
-        void getTeacherInfo(int teacherId, OnGetTeacherInfoListener listener);
-        void collectTeacher(int teacherId, boolean isFans, OnCollectTeacherListener listener);
+        void getTabList(MyClassContract.OnGetTabListListener listener);
+        void cancelClass(String orderId, MyClassContract.OnCancelClassListener listener);
+        void joinClass(String orderId, MyClassContract.OnJoinClassListener listener);
     }
-    interface OnGetTeacherInfoListener{
-        void onGetTeacherInfoSuccess(TeacherBean teacherBean);
-        void onGetTeacherInfoFailure(String message);
+    interface OnGetTabListListener{
+        void onGetTabListSuccess(List<MyClassTabBean> list);
+        void onGetTabListFailure(String message);
     }
-    interface OnCollectTeacherListener{
-        void onCollectTeacherSuccess(boolean isFans);
-        void onCollectTeacherFailure(String message);
+    interface OnCancelClassListener{
+        void onCancelClassSuccess(String message);
+        void onCancelClassFailure(String message);
+    }
+    interface OnJoinClassListener{
+        void onJoinClassListSuccess(String message);
+        void onJoinClassListFailure(String message);
     }
     interface View extends BaseContract.View {
-        void setTeacherInfo(TeacherBean teacherBean);
-        void collectSuccess(boolean isFans);
+        void setTabList(List<MyClassTabBean> list, List<String> titleList);
+        void refreshList();
+        void joinClassSuccess();
+        void joinClassTips(String message);
     }
 
     interface Presenter {
-        void getTeacherInfo(int teacherId);
-        void collectTeacher(int teacherId, boolean isFans);
+        void getTabList();
+        void cancelClass(String orderId);
+        void joinClass(String orderId);
     }
 }

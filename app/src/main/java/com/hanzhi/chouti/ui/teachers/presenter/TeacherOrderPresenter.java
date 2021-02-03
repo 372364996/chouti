@@ -1,4 +1,20 @@
 package com.hanzhi.chouti.ui.teachers.presenter;
 
-class TeacherOrderPresenter {
+import com.hanzhi.chouti.ui.teachers.contract.TeacherOrderContract;
+
+public class TeacherOrderPresenter implements TeacherOrderContract.Presenter {
+    @Override
+    public void getTabList() {
+
+    }
+
+    @Override
+    public void cancelClass(String orderId) {
+
+    }
+
+    @Override
+    public void joinClass(String orderId) {
+
+    }
 }
