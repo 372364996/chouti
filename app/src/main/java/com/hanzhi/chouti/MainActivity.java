@@ -25,6 +25,7 @@ import com.hanzhi.chouti.ui.mine.fragment.MineFragment;
 import com.hanzhi.chouti.ui.mine.fragment.MyClassFragment;
 import com.hanzhi.chouti.ui.selectclass.fragment.SelectClassFragment;
 import com.hanzhi.chouti.ui.teachers.fragment.TeacherFragment;
+import com.hanzhi.chouti.ui.teachers.fragment.TeacherOrderFragment;
 import com.hanzhi.chouti.utils.CommonUtil;
 import com.hjm.bottomtabbar.BottomTabBar;
 import com.hjm.bottomtabbar.custom.CustomFragmentTabHost;
@@ -138,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .setImgSize(50, 50)   //图片大小
                     .setFontSize(12)//字体大小
                     .setTabPadding(20, 6, 10)//选项卡的间距
-                    .addTabItem("连接课程", R.drawable.ic_teacher_tab, MyClassFragment.class)
+                    .addTabItem("连接课程", R.drawable.ic_teacher_tab, TeacherOrderFragment.class)
                     .addTabItem("记录", R.drawable.ic_yuyue_tab, AppointmentTimeFragment.class)
                     .addTabItem("选择课程", R.drawable.ic_selectclass_tab, SelectClassFragment.class)
                     .addTabItem("我的", R.drawable.ic_mine_tab, MineFragment.class)
