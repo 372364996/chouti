@@ -16,12 +16,15 @@ import com.hanzhi.chouti.ui.mine.MyClassDetailActivity;
 import com.hanzhi.chouti.ui.mine.adapter.MyClassAdapter;
 import com.hanzhi.chouti.ui.mine.contract.MyClassContract;
 import com.hanzhi.chouti.ui.mine.presenter.MyClassPresenter;
+import com.hanzhi.chouti.utils.CommonUtil;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.internal.Util;
 
 /**
  * @class 我的课程
@@ -35,6 +38,7 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
     QMUIDialog qmuiDialog;
     private int mCurrentDialogStyle = R.style.DialogTheme2;
     MyClassBean myClassBean;
+
     public static MyClassChildFragment newInstance(int id) {
         MyClassChildFragment myClassChildFragment = new MyClassChildFragment();
         Bundle args = new Bundle();
@@ -42,22 +46,30 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
         myClassChildFragment.setArguments(args);
         return myClassChildFragment;
     }
+
     @Override
     protected String getUrl() {
-        return Constants.GET_MY_CLASS_URL;
+        if (CommonUtil.getTeacherId() > 0) {
+            return Constants.GET_TEACHER_CLASS_URL;
+        } else {
+            return Constants.GET_MY_CLASS_URL;
+        }
     }
 
     @Override
     protected Map<String, Object> getParams() {
-        params.put("size", 20);
+        if (CommonUtil.getTeacherId() > 0) {
+            params.put("teacherId", CommonUtil.getTeacherId());
+        }
         params.put("status", id);
+        params.put("size", 20);
         return params;
     }
 
     @Override
     public void initView() {
         super.initView();
-        if(getArguments() != null){
+        if (getArguments() != null) {
             id = getArguments().getInt(ID, 0);
         }
     }
@@ -82,23 +94,23 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
     public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemChildClick(adapter, view, position);
         myClassBean = (MyClassBean) adapter.getItem(position);
-        if(myClassBean == null){
+        if (myClassBean == null) {
             return;
         }
-        switch (view.getId()){
-            case R.id.btn_reapply:{
+        switch (view.getId()) {
+            case R.id.btn_reapply: {
                 AppointmentTimeActivity.start(getActivity(), null);
                 break;
             }
-            case R.id.btn_cancel:{
+            case R.id.btn_cancel: {
                 myClassPresenter.cancelClass(myClassBean.getNumber());
                 break;
             }
-            case R.id.btn_review:{
+            case R.id.btn_review: {
                 MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
                 break;
             }
-            case R.id.btn_join_class:{
+            case R.id.btn_join_class: {
 //                MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
                 myClassPresenter.joinClass(myClassBean.getNumber());
                 break;
@@ -125,7 +137,7 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
 
     @Override
     public void joinClassSuccess() {
-        if(myClassBean == null){
+        if (myClassBean == null) {
             return;
         }
         MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());

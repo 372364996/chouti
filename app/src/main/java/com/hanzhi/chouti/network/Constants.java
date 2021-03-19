@@ -57,6 +57,8 @@ public class Constants extends BaseConstants {
     public static final String GET_MY_CLASS_TAB_URL = "order/GetMyOrderListMenuV2";
     /*获取我的课程列表*/
     public static final String GET_MY_CLASS_URL = "order/GetMyOrderListByUserIdV2";
+    /*教师获取报名他的的课程列表*/
+    public static final String GET_TEACHER_CLASS_URL = "order/GetMyOrderListByTeacherIdV2";
     /*获取我的钱包列表*/
     public static final String GET_MY_WALLET_URL = "classcard/MyClassCard";
     /*获取我的老师列表*/
