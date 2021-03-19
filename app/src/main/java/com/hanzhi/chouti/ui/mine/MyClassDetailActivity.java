@@ -83,6 +83,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     MyClassDetailPresenter myClassDetailPresenter;
     int userId;
     int classId;
+    int studentUserId;
     String orderId;
     ClassBean classBean;
     CountDownTimer timer;
@@ -103,10 +104,11 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             Manifest.permission.CAMERA
     };
 
-    public static void start(Context context, int classId, String orderId) {
+    public static void start(Context context, int classId, String orderId, int studentUserId) {
         Intent starter = new Intent(context, MyClassDetailActivity.class);
         starter.putExtra("classId", classId);
         starter.putExtra("orderId", orderId);
+        starter.putExtra("studentUserId", studentUserId);
         context.startActivity(starter);
     }
 
@@ -211,6 +213,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     protected void initView() {
         classId = getIntent().getIntExtra("classId", 0);
         orderId = getIntent().getStringExtra("orderId");
+        studentUserId = getIntent().getIntExtra("studentUserId", 0);
         initToolBar();
         toolbarLay.setTitle(R.string.title_class_detail);
         vpClassDetail.addOnPageChangeListener(this);
@@ -320,13 +323,13 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
 
             clVideoLay.setVisibility(View.VISIBLE);
 
-            timer = new CountDownTimer(remainingTime*1000, 1000) {
+            timer = new CountDownTimer(remainingTime * 1000, 1000) {
                 @Override
                 public void onTick(long millisUntilFinished) {
                     if (tvCountdown != null) {
                         tvCountdown.setClickable(false);
                         tvCountdown.setEnabled(false);
-                        tvCountdown.setText(Utils.ConvertTotalSecondToHourMinuteSecond(String.valueOf(millisUntilFinished/1000)));
+                        tvCountdown.setText(Utils.ConvertTotalSecondToHourMinuteSecond(String.valueOf(millisUntilFinished / 1000)));
                         tvCountdown.setTextColor(Color.parseColor("#999999"));
                     }
                 }
@@ -357,6 +360,10 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
         int index = position + 1;
         tvPage.setText(index + "/" + classBean.getClassMaterials().size());
         progressHorizontal.setProgress(index);
+        if (CommonUtil.getTeacherId() > 0) {
+            sendPeerMessage(String.valueOf(studentUserId), String.valueOf(position));
+        }
+
     }
 
     @Override
@@ -399,8 +406,25 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
     }
 
     //发送翻页消息
-    private void sendMessage() {
+    private void sendMessage(String dst, String content) {
+        final RtmMessage message = mRtmClient.createMessage();
+        message.setText(content);
 
+        SendMessageOptions option = new SendMessageOptions();
+        option.enableOfflineMessaging = true;
+
+        mRtmClient.sendMessageToPeer(dst, message, option, new ResultCallback<Void>() {
+
+            @Override
+            public void onSuccess(Void aVoid) {
+
+            }
+
+            @Override
+            public void onFailure(ErrorInfo errorInfo) {
+
+            }
+        });
     }
 
     private void setupRemoteVideo(int uid) {

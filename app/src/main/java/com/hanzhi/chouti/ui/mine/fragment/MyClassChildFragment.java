@@ -107,7 +107,7 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
                 break;
             }
             case R.id.btn_review: {
-                MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
+                MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber(),myClassBean.getUserId());
                 break;
             }
             case R.id.btn_join_class: {
@@ -140,7 +140,7 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
         if (myClassBean == null) {
             return;
         }
-        MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber());
+        MyClassDetailActivity.start(getActivity(), myClassBean.getClassId(), myClassBean.getNumber(),myClassBean.getUserId());
     }
 
     @Override
