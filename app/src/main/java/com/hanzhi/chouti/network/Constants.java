@@ -81,6 +81,8 @@ public class Constants extends BaseConstants {
     public static final String JOIN_CLASS_APPLY = "order/IsCanEnterV2";
     /*获取我们的联系方式（官方联系方式）*/
     public static final String GET_US_INFO_APPLY = "teacher/ContactInfoV2";
+    /*开启视频录制*/
+    public static final String START_RECORD_URL = "Record/Index";
 
     /**
      * Bundle的key

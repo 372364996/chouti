@@ -21,9 +21,14 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
 
+import com.alibaba.fastjson.JSONObject;
 import com.chewawa.baselibrary.base.NBaseActivity;
+import com.chewawa.baselibrary.networkutils.HttpManager;
+import com.chewawa.baselibrary.networkutils.bean.ResultBean;
+import com.chewawa.baselibrary.networkutils.callback.ApiCallBack;
 import com.hanzhi.chouti.R;
 import com.hanzhi.chouti.bean.selectclass.ClassBean;
+import com.hanzhi.chouti.network.Constants;
 import com.hanzhi.chouti.ui.mine.contract.MyClassDetailContract;
 import com.hanzhi.chouti.ui.mine.presenter.MyClassDetailPresenter;
 import com.hanzhi.chouti.ui.selectclass.adapter.ClassDetailAdapter;
@@ -34,6 +39,7 @@ import com.hanzhi.chouti.utils.Utils;
 import com.hanzhi.chouti.view.SubmitAppraiseDialog;
 import com.hanzhi.chouti.view.WrapContentHeightViewPager;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -52,6 +58,7 @@ import io.agora.rtm.RtmImageMessage;
 import io.agora.rtm.RtmMediaOperationProgress;
 import io.agora.rtm.RtmMessage;
 import io.agora.rtm.SendMessageOptions;
+import io.reactivex.disposables.Disposable;
 
 import static io.agora.rtc.IRtcEngineEventHandler.UserOfflineReason.USER_OFFLINE_DROPPED;
 import static io.agora.rtc.IRtcEngineEventHandler.UserOfflineReason.USER_OFFLINE_QUIT;
@@ -158,6 +165,8 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
                 @Override
                 public void run() {
                     setupRemoteVideo(uid);
+                    //开启录制
+                    startRecord(orderId,0);
                     userId = uid;
                 }
             });
@@ -203,6 +212,24 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
             });
         }
     };
+
+    private void startRecord(String orderId,Integer userId) {
+        String url = Constants.START_RECORD_URL;
+        Map<String, Object> map = new HashMap<>();
+        map.put("cname", orderId);
+        Disposable disposable = HttpManager.post(url).upJsonObject(map).execute(new ApiCallBack() {
+            @Override
+            public void onError(int status, String message) {
+            }
+
+            @Override
+            public void onSuccess(ResultBean resultBean) {
+                if(!TextUtils.isEmpty(resultBean.getData())){
+
+                }
+            }
+        });
+    }
 
     @Override
     public int initLoadResId() {
