@@ -30,7 +30,7 @@
             android:title="联系助教" />
         <item
             android:id="@+id/nav_slideshow6"
-            android:title="当前版本号:20201205" />
+            android:title="当前版本号:20210405" />
         <item
             android:id="@+id/nav_slideshow7"
             android:title="退出登陆" />
