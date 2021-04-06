@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.ui.AppBarConfiguration;
 
+import com.bumptech.glide.Glide;
 import com.chewawa.baselibrary.utils.SPUtils;
 import com.google.android.material.navigation.NavigationView;
 import com.hanzhi.chouti.ui.appointment.fragment.AppointmentTimeFragment;
@@ -98,6 +101,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 //      //  NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
 //        NavigationUI.setupWithNavController(navigationView, navController);
+        TextView tvUserName = navView.getHeaderView(0).findViewById(R.id.tvUserName);
+        tvUserName.setText(CommonUtil.getUserName());
+        ImageView ivUserHeadImg = navView.getHeaderView(0).findViewById(R.id.ivUserHeadImg);
+
+        Glide.with(this).load(CommonUtil.getUserHeadImg()).into(ivUserHeadImg);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -140,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     .setFontSize(12)//字体大小
                     .setTabPadding(20, 6, 10)//选项卡的间距
                     .addTabItem("连接课程", R.drawable.ic_teacher_tab, MyClassFragment.class)
-                   // .addTabItem("记录", R.drawable.ic_yuyue_tab, AppointmentTimeFragment.class)
+                    // .addTabItem("记录", R.drawable.ic_yuyue_tab, AppointmentTimeFragment.class)
                     .addTabItem("教材", R.drawable.ic_selectclass_tab, SelectClassFragment.class)
                     .addTabItem("我的", R.drawable.ic_mine_tab, MineFragment.class)
                     .isShowDivider(true)  //是否包含分割线

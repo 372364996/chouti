@@ -112,6 +112,8 @@ public class LoginActivity extends AppCompatActivity {
                                                                             CommonUtil.saveToken(String.valueOf(userBean.getId()));
                                                                             CommonUtil.saveUserId(userBean.getId());
                                                                             CommonUtil.saveTeacherId(userBean.getTeacherid());
+                                                                            CommonUtil.saveUserName(userBean.getUserName());
+                                                                            CommonUtil.saveUserHeadImg(userBean.getHeadImg());
                                                                             Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                                                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                                             startActivity(intent);

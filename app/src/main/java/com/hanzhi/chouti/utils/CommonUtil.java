@@ -14,6 +14,8 @@ import static com.chewawa.baselibrary.utils.SPConstants.KEY_TOKEN;
 public class CommonUtil extends BaseCommonUtil {
     public static final String KEY_TEACHER_ID = "teacher_id";
     public static final String KEY_USER_ID = "user_id";
+    public static final String KEY_USER_NAME = "user_name";
+    public static final String KEY_USER_HEADIMG = "user_headimg";
 
     /**
      * 获取当前用户教师身份Id
@@ -50,6 +52,42 @@ public class CommonUtil extends BaseCommonUtil {
     public static void saveUserId(int storeId) {
         SPUtils.put(KEY_USER_ID, storeId);
     }
+
+    /**
+     * 获取userName
+     *
+     * @return
+     */
+    public static String getUserName() {
+        return (String) SPUtils.get(KEY_USER_NAME, "点击设置昵称");
+    }
+
+    /**
+     * 保存userName
+     *
+     * @return
+     */
+    public static void saveUserName(String userName) {
+        SPUtils.put(KEY_USER_NAME, userName);
+    }
+    /**
+     * 获取userHeadImg
+     *
+     * @return
+     */
+    public static String getUserHeadImg() {
+        return (String) SPUtils.get(KEY_USER_HEADIMG, "");
+    }
+
+    /**
+     * 保存userHeadImg
+     *
+     * @return
+     */
+    public static void saveUserHeadImg(String userHeadImg) {
+        SPUtils.put(KEY_USER_HEADIMG, userHeadImg);
+    }
+
 
     /**
      * 清空用户数据

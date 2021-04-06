@@ -27,6 +27,16 @@ public class UserBean implements Parcelable {
     private boolean isTeacher;
     private int teacherid;
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    private String userName;
+
     public boolean isSuccess() {
         return success;
     }
@@ -115,6 +125,7 @@ public class UserBean implements Parcelable {
         dest.writeString(this.Mobile);
         dest.writeByte(this.isTeacher ? (byte) 1 : (byte) 0);
         dest.writeInt(this.teacherid);
+        dest.writeString(this.userName);
     }
 
     public UserBean() {
@@ -128,6 +139,7 @@ public class UserBean implements Parcelable {
         this.HeadImg = in.readString();
         this.imtoken = in.readString();
         this.Mobile = in.readString();
+        this.userName = in.readString();
         this.isTeacher = in.readByte() != 0;
         this.teacherid = in.readInt();
     }

@@ -13,7 +13,7 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivUserHeadImg"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:contentDescription="@string/nav_header_desc"
@@ -23,16 +23,11 @@
         app:srcCompat="@drawable/hanzhilogo" />
 
     <TextView
+        android:id="@+id/tvUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/nav_header_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="174dp"
-        android:layout_height="wrap_content"
-        android:text="www.hanzhi.com" />
 
 </LinearLayout>
