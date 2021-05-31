@@ -82,13 +82,13 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.hanzhi.chouti.view.WrapContentHeightViewPager
+            <com.hanzhi.onlineclassroom.view.WrapContentHeightViewPager
                 android:id="@+id/vp_class_detail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/cl_video_lay">
 
-            </com.hanzhi.chouti.view.WrapContentHeightViewPager>
+            </com.hanzhi.onlineclassroom.view.WrapContentHeightViewPager>
 
             <ProgressBar
                 android:id="@+id/progress_horizontal"
