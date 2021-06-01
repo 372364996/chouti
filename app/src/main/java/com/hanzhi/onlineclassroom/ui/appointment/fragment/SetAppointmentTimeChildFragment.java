@@ -3,6 +3,7 @@ package com.hanzhi.onlineclassroom.ui.appointment.fragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +16,7 @@ import com.hanzhi.onlineclassroom.R;
 import com.hanzhi.onlineclassroom.bean.ClassApplyBean;
 import com.hanzhi.onlineclassroom.bean.appointment.AppointmentTimeBean;
 import com.hanzhi.onlineclassroom.network.Constants;
-import com.hanzhi.onlineclassroom.ui.appointment.adapter.AppointmentTimeAdapter;
+import com.hanzhi.onlineclassroom.ui.appointment.adapter.SetAppointmentTimeAdapter;
 import com.hanzhi.onlineclassroom.ui.selectclass.SelectClassActivity;
 import com.hanzhi.onlineclassroom.ui.teachers.TeacherActivity;
 import com.hanzhi.onlineclassroom.utils.RequestParamsUtils;
@@ -31,7 +32,7 @@ import java.util.Map;
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/26 17:24
  */
-public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<AppointmentTimeBean> implements View.OnClickListener {
+public class SetAppointmentTimeChildFragment extends BaseRecycleViewFragment<AppointmentTimeBean> implements View.OnClickListener {
     public Button btnSubmit;
     public static final String Date = "date";
     String date;
@@ -39,14 +40,16 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
     ClassApplyBean classApplyBean;
     QMUIDialog qmuiDialog;
     private int mCurrentDialogStyle = R.style.DialogTheme2;
-    public static AppointmentTimeChildFragment newInstance(String date, ClassApplyBean classApplyBean) {
-        AppointmentTimeChildFragment appointmentTimeChildFragment = new AppointmentTimeChildFragment();
+
+    public static SetAppointmentTimeChildFragment newInstance(String date, ClassApplyBean classApplyBean) {
+        SetAppointmentTimeChildFragment appointmentTimeChildFragment = new SetAppointmentTimeChildFragment();
         Bundle args = new Bundle();
         args.putString(Date, date);
         args.putParcelable("classApplyBean", classApplyBean);
         appointmentTimeChildFragment.setArguments(args);
         return appointmentTimeChildFragment;
     }
+
     @Override
     protected String getUrl() {
         return Constants.GET_CLASS_TIME_URL;
@@ -63,12 +66,12 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
     @Override
     public void initView() {
         super.initView();
-        if(getArguments() != null){
+        if (getArguments() != null) {
             classApplyBean = getArguments().getParcelable("classApplyBean");
             date = getArguments().getString(Date);
         }
-        ((AppointmentTimeAdapter)baseRecycleViewAdapter).enableCheckMode();
-        ((AppointmentTimeAdapter)baseRecycleViewAdapter).setSingleMode(false);
+        ((SetAppointmentTimeAdapter) baseRecycleViewAdapter).enableCheckMode();
+        ((SetAppointmentTimeAdapter) baseRecycleViewAdapter).setSingleMode(false);
         swipeRefresh.setEnabled(false);
         setEnableLoadMore(false);
     }
@@ -80,7 +83,7 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
 
     @Override
     protected BaseRecycleViewAdapter<AppointmentTimeBean> getAdapter() {
-        return new AppointmentTimeAdapter();
+        return new SetAppointmentTimeAdapter();
     }
 
     @Override
@@ -101,10 +104,10 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
         super.onItemClick(adapter, view, position);
         AppointmentTimeBean appointmentTimeBean = (AppointmentTimeBean) adapter.getItem(position);
-        if(appointmentTimeBean == null||!appointmentTimeBean.getIsCanUse()){
-            return;
-        }
-        ((AppointmentTimeAdapter)adapter).clickItem(position, false);
+//        if(appointmentTimeBean == null||!appointmentTimeBean.getIsCanUse()){
+//            return;
+//        }
+        ((SetAppointmentTimeAdapter) adapter).clickItem(position, false);
     }
 
     @Override
@@ -115,20 +118,20 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btn_submit:{
-                if(baseRecycleViewAdapter == null){
+        switch (view.getId()) {
+            case R.id.btn_submit: {
+                if (baseRecycleViewAdapter == null) {
                     return;
                 }
-                List<AppointmentTimeBean> checkedItems = ((AppointmentTimeAdapter)baseRecycleViewAdapter).getCheckedItems();
-                if(checkedItems == null || checkedItems.size() == 0){
+                List<AppointmentTimeBean> checkedItems = ((SetAppointmentTimeAdapter) baseRecycleViewAdapter).getCheckedItems();
+                if (checkedItems == null || checkedItems.size() == 0) {
                     ToastUtils.showToast(R.string.appointment_time_no_checked_tips);
                     return;
                 }
                 qmuiDialog = new QMUIDialog.MessageDialogBuilder(getActivity())
                         .setSkinManager(QMUISkinManager.defaultInstance(getContext()))
                         .setTitle(R.string.dialog_title)
-                        .setMessage(R.string.appointment_time_affirm)
+                        .setMessage(R.string.set_appointment_time_affirm)
                         .addAction(getString(R.string.appointment_time_reelect), new QMUIDialogAction.ActionListener() {
                             @Override
                             public void onClick(QMUIDialog dialog, int index) {
@@ -139,15 +142,20 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
                             @Override
                             public void onClick(QMUIDialog dialog, int index) {
                                 dialog.dismiss();
-                                if(classApplyBean == null){
-                                    classApplyBean = new ClassApplyBean();
-                                }
-                                classApplyBean.setDateTimeStr(checkedItems.get(0).getDateTimeStr());
-                                if(classApplyBean.getTeacherId() == 0){
-                                    TeacherActivity.start(getActivity(), classApplyBean);
-                                }else {
-                                    SelectClassActivity.start(getActivity(), classApplyBean);
-                                }
+//                                if(classApplyBean == null){
+//                                    classApplyBean = new ClassApplyBean();
+//                                }
+//                                classApplyBean.setDateTimeStr(checkedItems.get(0).getDateTimeStr());
+//                                if(classApplyBean.getTeacherId() == 0){
+//                                    TeacherActivity.start(getActivity(), classApplyBean);
+//                                }else {
+//                                    SelectClassActivity.start(getActivity(), classApplyBean);
+//                                }
+                                Toast.makeText(getActivity(), "设置成功", Toast.LENGTH_SHORT).show();
+
+//                                Toast toast = Toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
+//                                toast.setText("设置成功");
+//                                toast.show();
                             }
                         })
                         .create(mCurrentDialogStyle);
