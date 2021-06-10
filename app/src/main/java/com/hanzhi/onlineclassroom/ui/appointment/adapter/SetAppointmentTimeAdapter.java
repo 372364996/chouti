@@ -38,6 +38,7 @@ public class SetAppointmentTimeAdapter extends BaseCheckRecycleViewAdapter<Appoi
         TextView tvTime;
         @BindView(R.id.fl_time_lay)
         FrameLayout flTimeLay;
+
         public ViewHolder(SetAppointmentTimeAdapter adapter, View itemView) {
             super(adapter, itemView);
         }
@@ -48,35 +49,21 @@ public class SetAppointmentTimeAdapter extends BaseCheckRecycleViewAdapter<Appoi
                 return;
             }
             tvTime.setText(data.getTime());
-            if(data.getIsCanUse()){
+            if (data.getIsCanUse()) {
                 tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_33));
-//                tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
                 tvTime.setBackgroundResource(R.drawable.rectangle_round_corner6_light_primary);
-                data.setChecked(true);
 
-            }else {
+            } else {
                 tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_99));
                 tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
-
             }
-            if(data.isChecked()){
-                //data.setChecked(false);
+            if (data.isChecked()) {
                 tvTime.setTextColor(ContextCompat.getColor(context, R.color.color_red));
                 tvTime.setBackgroundResource(R.drawable.rectangle_round_corner6_light_primary);
-            }else {
-                //data.setChecked(false);
+            } else {
                 tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_33));
                 tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
             }
-//            tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_33));
-//            tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
-//            if(data.isChecked()){
-//                tvTime.setTextColor(ContextCompat.getColor(context, R.color.color_red));
-//                tvTime.setBackgroundResource(R.drawable.rectangle_round_corner6_light_primary);
-//            }else {
-//                tvTime.setTextColor(ContextCompat.getColor(context, R.color.text_color_33));
-//                tvTime.setBackgroundColor(ContextCompat.getColor(context, R.color.transparent));
-//            }
             getAdapter().handleCompoundButton(cbCheck, data);
             cbCheck.setVisibility(View.GONE);
         }

@@ -68,7 +68,7 @@ public class AppointmentTimeChildFragment extends BaseRecycleViewFragment<Appoin
             date = getArguments().getString(Date);
         }
         ((AppointmentTimeAdapter)baseRecycleViewAdapter).enableCheckMode();
-        ((AppointmentTimeAdapter)baseRecycleViewAdapter).setSingleMode(false);
+        ((AppointmentTimeAdapter)baseRecycleViewAdapter).setSingleMode(true);
         swipeRefresh.setEnabled(false);
         setEnableLoadMore(false);
     }

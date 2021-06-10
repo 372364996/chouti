@@ -1,6 +1,7 @@
 package com.hanzhi.onlineclassroom.ui.appointment.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -107,11 +108,17 @@ public class SetAppointmentTimeChildFragment extends BaseRecycleViewFragment<App
 //        if(appointmentTimeBean == null||!appointmentTimeBean.getIsCanUse()){
 //            return;
 //        }
+
         ((SetAppointmentTimeAdapter) adapter).clickItem(position, false);
     }
 
     @Override
     public void setListData(boolean isRefresh, List list, boolean isShowMore) {
+        for (int i = 0; i < list.size(); i++) {
+            if (((AppointmentTimeBean) list.get(i)).getIsCanUse()) {
+                ((AppointmentTimeBean) list.get(i)).setChecked(true);
+            }
+        }
         super.setListData(isRefresh, list, isShowMore);
         footerView.setVisibility(View.VISIBLE);
     }
@@ -145,6 +152,7 @@ public class SetAppointmentTimeChildFragment extends BaseRecycleViewFragment<App
 //                                if(classApplyBean == null){
 //                                    classApplyBean = new ClassApplyBean();
 //                                }
+                                Log.i("选择时间", checkedItems.toString());
 //                                classApplyBean.setDateTimeStr(checkedItems.get(0).getDateTimeStr());
 //                                if(classApplyBean.getTeacherId() == 0){
 //                                    TeacherActivity.start(getActivity(), classApplyBean);
