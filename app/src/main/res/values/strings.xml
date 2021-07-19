@@ -26,6 +26,7 @@
     <string name="appointment_time_no_checked_tips">请选择上课时间</string>
     <string name="appointment_time_submit">确认时间</string>
     <string name="appointment_time_affirm">选择的上课时间以北京时间为准，\n是否继续？</string>
+    <string name="set_appointment_time_affirm">本次编辑的上课时间有效期为5周,如需变动时间请随时自行调整，\n是否继续？</string>
     <string name="appointment_time_reelect">重新选择</string>
     <!--课程申请-->
     <string name="class_apply_tips_title">注意事项</string>
@@ -47,6 +48,7 @@
     <!--我的-->
     <string name="mine_table_my_class">我的课程</string>
     <string name="mine_table_collect_teacher">收藏老师</string>
+    <string name="mine_table_class_time">上课时间</string>
     <string name="mine_table_my_profile">我的资料</string>
     <string name="mine_table_my_wallet">我的钱包</string>
     <!--钱包-->

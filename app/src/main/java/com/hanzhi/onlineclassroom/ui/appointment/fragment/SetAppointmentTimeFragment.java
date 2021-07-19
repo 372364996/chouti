@@ -17,14 +17,16 @@ import com.hanzhi.onlineclassroom.R;
 import com.hanzhi.onlineclassroom.bean.ClassApplyBean;
 import com.hanzhi.onlineclassroom.bean.appointment.AppointmentTabBean;
 import com.hanzhi.onlineclassroom.ui.appointment.contract.AppointmentTimeContract;
+import com.hanzhi.onlineclassroom.ui.appointment.contract.SetAppointmentTimeContract;
 import com.hanzhi.onlineclassroom.ui.appointment.presenter.AppointmentTimePresenter;
+import com.hanzhi.onlineclassroom.ui.appointment.presenter.SetAppointmentTimePresenter;
 import com.hanzhi.onlineclassroom.view.ColorTrackTabLayout;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresenter> implements AppointmentTimeContract.View, CommonTabPagerAdapter.TabPagerListener {
+public class SetAppointmentTimeFragment extends NBaseFragment<SetAppointmentTimePresenter> implements SetAppointmentTimeContract.View, CommonTabPagerAdapter.TabPagerListener {
 
     @BindView(R.id.tabs)
     ColorTrackTabLayout tabLayout;
@@ -33,9 +35,8 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
     private CommonTabPagerAdapter adapter;
     List<AppointmentTabBean> list;
     ClassApplyBean classApplyBean;
-
-    public static AppointmentTimeFragment newInstance(ClassApplyBean classApplyBean) {
-        AppointmentTimeFragment appointmentTimeFragment = new AppointmentTimeFragment();
+    public static SetAppointmentTimeFragment newInstance(ClassApplyBean classApplyBean) {
+        SetAppointmentTimeFragment appointmentTimeFragment = new SetAppointmentTimeFragment();
         Bundle args = new Bundle();
         args.putParcelable("classApplyBean", classApplyBean);
         appointmentTimeFragment.setArguments(args);
@@ -61,8 +62,8 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
     }
 
     @Override
-    public AppointmentTimePresenter initPresenter() {
-        return new AppointmentTimePresenter(this);
+    public SetAppointmentTimePresenter initPresenter() {
+        return new SetAppointmentTimePresenter(this);
     }
 
     @Override
@@ -90,8 +91,8 @@ public class AppointmentTimeFragment extends NBaseFragment<AppointmentTimePresen
     @Override
     public Fragment getFragment(int position) {
         if(list == null){
-            return AppointmentTimeChildFragment.newInstance("", classApplyBean);
+            return SetAppointmentTimeChildFragment.newInstance("", classApplyBean);
         }
-        return AppointmentTimeChildFragment.newInstance(list.get(position).getDate(), classApplyBean);
+        return SetAppointmentTimeChildFragment.newInstance(list.get(position).getDate(), classApplyBean);
     }
 }
