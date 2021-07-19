@@ -1,7 +1,6 @@
 package com.hanzhi.onlineclassroom.ui.appointment.fragment;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -152,7 +151,6 @@ public class SetAppointmentTimeChildFragment extends BaseRecycleViewFragment<App
 //                                if(classApplyBean == null){
 //                                    classApplyBean = new ClassApplyBean();
 //                                }
-                                Log.i("选择时间", checkedItems.toString());
 //                                classApplyBean.setDateTimeStr(checkedItems.get(0).getDateTimeStr());
 //                                if(classApplyBean.getTeacherId() == 0){
 //                                    TeacherActivity.start(getActivity(), classApplyBean);

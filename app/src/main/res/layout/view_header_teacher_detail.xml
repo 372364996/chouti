@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,14 +57,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tv_title"
+                android:layout_alignBottom="@+id/tv_score"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="4dp"
                 android:layout_toRightOf="@id/iv_head_img"
-                android:layout_alignBottom="@+id/tv_score"
                 android:gravity="center_vertical"
-                tools:text="庆熙大学"
                 android:textColor="#484848"
-                android:textSize="13sp"></TextView>
+                android:textSize="13sp"
+                tools:text="庆熙大学"></TextView>
 
             <TextView
                 android:id="@+id/tv_teacher_name"
@@ -71,9 +73,10 @@
                 android:layout_alignTop="@+id/tv_school_name"
                 android:layout_marginTop="-25dp"
                 android:layout_toRightOf="@id/tv_title"
-                tools:text="金河斌"
                 android:textColor="#484848"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                tools:text="金河斌" />
+
             <ImageView
                 android:id="@+id/iv_collect"
                 android:layout_width="30dp"
@@ -99,10 +102,12 @@
                 android:layout_marginTop="15dp"
                 android:ellipsize="end"
                 android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:scrollbars="vertical"
                 android:singleLine="false"
-                tools:text="金河斌金河斌金河斌金河斌金河斌金河斌"
                 android:textColor="#484848"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                tools:text="金河斌金河斌金河斌金河斌金河斌金河斌" />
 
         </RelativeLayout>
 
