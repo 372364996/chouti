@@ -3,6 +3,8 @@ package com.hanzhi.onlineclassroom.ui.teachers;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -81,6 +83,21 @@ public class TeacherInfoActivity extends NBaseActivity<TeacherInfoPresenter> imp
         from = getIntent().getIntExtra("from", 0);
         initToolBar();
         toolbarLay.setTitle(R.string.title_teacher_detail);
+        tvInfo.setMovementMethod(ScrollingMovementMethod.getInstance());
+        tvInfo.setOnTouchListener((v, event) -> {
+            if(event.getAction()==MotionEvent.ACTION_DOWN){
+                //通知父控件不要干扰,即屏蔽父控件的该事件以及该事件之后的一切action
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+            }
+            if(event.getAction()==MotionEvent.ACTION_MOVE){
+                //通知父控件不要干扰,即屏蔽父控件的该事件以及该事件之后的一切action
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+            }
+            if(event.getAction()==MotionEvent.ACTION_UP){
+                v.getParent().requestDisallowInterceptTouchEvent(false);
+            }
+            return false;
+        });
         List<String> titleList = new ArrayList<>();
         titleList.add(getString(R.string.teacher_detail_table_time));
         titleList.add(getString(R.string.teacher_detail_table_appraise));

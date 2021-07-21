@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
+import com.hanzhi.onlineclassroom.bean.ClassApplyBean;
 import com.hanzhi.onlineclassroom.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.onlineclassroom.ui.login.LoginActivity;
 import com.hanzhi.onlineclassroom.ui.login.RegisterActivity;
@@ -24,12 +26,17 @@ import com.hanzhi.onlineclassroom.ui.mine.MineActivity;
 import com.hanzhi.onlineclassroom.ui.mine.WalletActivity;
 import com.hanzhi.onlineclassroom.ui.mine.fragment.MineFragment;
 import com.hanzhi.onlineclassroom.ui.mine.fragment.MyClassFragment;
+import com.hanzhi.onlineclassroom.ui.selectclass.SelectClassActivity;
 import com.hanzhi.onlineclassroom.ui.selectclass.fragment.SelectClassFragment;
+import com.hanzhi.onlineclassroom.ui.teachers.TeacherActivity;
 import com.hanzhi.onlineclassroom.ui.teachers.fragment.TeacherFragment;
 import com.hanzhi.onlineclassroom.utils.CommonUtil;
 import com.hjm.bottomtabbar.BottomTabBar;
 import com.hjm.bottomtabbar.custom.CustomFragmentTabHost;
+import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.widget.QMUITopBar;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
+import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private AppBarConfiguration mAppBarConfiguration;
     int tabIndex;
     private Intent intent;
+    QMUIDialog qmuiDialog;
+    private int mCurrentDialogStyle = R.style.DialogTheme2;
 
     public static void startMainActivity(FragmentActivity activity, int pos) {
         Intent intent = new Intent(activity, MainActivity.class);
@@ -133,6 +142,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         intent = new Intent(MainActivity.this, RegisterActivity.class);
                         startActivity(intent);
                         finish();
+                    case R.id.nav_slideshow3:
+                        qmuiDialog = new QMUIDialog.MessageDialogBuilder(MainActivity.this)
+                                .setSkinManager(QMUISkinManager.defaultInstance(MainActivity.this))
+                                .setTitle(R.string.dialog_title)
+                                .setMessage(R.string.clear_cache)
+                                .addAction(getString(R.string.wallet_to_weichat_cancel), new QMUIDialogAction.ActionListener() {
+                                    @Override
+                                    public void onClick(QMUIDialog dialog, int index) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .addAction(getString(R.string.wallet_to_weichat_affirm), new QMUIDialogAction.ActionListener() {
+                                    @Override
+                                    public void onClick(QMUIDialog dialog, int index) {
+                                        dialog.dismiss();
+                                        Toast.makeText(getBaseContext(), "缓存已清理", Toast.LENGTH_LONG).show();
+                                    }
+                                })
+                                .create(mCurrentDialogStyle);
+                        qmuiDialog.show();
                     default:
                         break;
                 }

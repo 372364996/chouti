@@ -26,6 +26,7 @@
     <string name="appointment_time_no_checked_tips">请选择上课时间</string>
     <string name="appointment_time_submit">确认时间</string>
     <string name="appointment_time_affirm">选择的上课时间以北京时间为准，\n是否继续？</string>
+    <string name="clear_cache">清理缓存后,部分界面下次加载时间会变长,是否确认清理？</string>
     <string name="set_appointment_time_affirm">本次编辑的上课时间有效期为5周,如需变动时间请随时自行调整，\n是否继续？</string>
     <string name="appointment_time_reelect">重新选择</string>
     <!--课程申请-->
