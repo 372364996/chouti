@@ -510,8 +510,7 @@ public class MyClassDetailActivity extends NBaseActivity<ClassDetailPresenter> i
 
         if (requestCode == PERMISSION_REQ_ID) {
             if (grantResults[0] != PackageManager.PERMISSION_GRANTED ||
-                    grantResults[1] != PackageManager.PERMISSION_GRANTED ||
-                    grantResults[2] != PackageManager.PERMISSION_GRANTED) {
+                    grantResults[1] != PackageManager.PERMISSION_GRANTED ) {
                 finish();
                 return;
             }
