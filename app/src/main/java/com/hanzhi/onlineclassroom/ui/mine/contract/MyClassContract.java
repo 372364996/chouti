@@ -10,6 +10,7 @@ public interface MyClassContract {
         void getTabList(OnGetTabListListener listener);
         void cancelClass(String orderId, OnCancelClassListener listener);
         void joinClass(String orderId, OnJoinClassListener listener);
+        void confirmClass(String orderId, OnConfrimClassListener listener);
     }
     interface OnGetTabListListener{
         void onGetTabListSuccess(List<MyClassTabBean> list);
@@ -23,6 +24,12 @@ public interface MyClassContract {
         void onJoinClassListSuccess(String message);
         void onJoinClassListFailure(String message);
     }
+
+    interface OnConfrimClassListener{
+        void onConfrimListSuccess(String message);
+        void onConfrimListFailure(String message);
+    }
+
     interface View extends BaseContract.View {
         void setTabList(List<MyClassTabBean> list, List<String> titleList);
         void refreshList();
@@ -34,5 +41,6 @@ public interface MyClassContract {
         void getTabList();
         void cancelClass(String orderId);
         void joinClass(String orderId);
+        void confirmClass(String orderId);
     }
 }

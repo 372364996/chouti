@@ -39,6 +39,16 @@ public class MyClassBean implements Parcelable {
     private int UserId;
     private int ClassId;
     private String ClassTime;
+
+    public String getUserName() {
+        return UserName;
+    }
+
+    public void setUserName(String userName) {
+        UserName = userName;
+    }
+
+    private String UserName;
     private String CreateTime;
     private String UserFirstIntoClassTime;
     private String TeacherFirstIntoClassTime;
@@ -158,6 +168,7 @@ public class MyClassBean implements Parcelable {
     public void setPayNumber(String payNumber) {
         PayNumber = payNumber;
     }
+
 
     public String getNumber() {
         return Number;
@@ -302,6 +313,7 @@ public class MyClassBean implements Parcelable {
         dest.writeInt(this.UserId);
         dest.writeInt(this.ClassId);
         dest.writeString(this.ClassTime);
+        dest.writeString(this.UserName);
         dest.writeString(this.CreateTime);
         dest.writeString(this.UserFirstIntoClassTime);
         dest.writeString(this.TeacherFirstIntoClassTime);
@@ -333,6 +345,7 @@ public class MyClassBean implements Parcelable {
         this.UserId = in.readInt();
         this.ClassId = in.readInt();
         this.ClassTime = in.readString();
+        this.UserName = in.readString();
         this.CreateTime = in.readString();
         this.UserFirstIntoClassTime = in.readString();
         this.TeacherFirstIntoClassTime = in.readString();

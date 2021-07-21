@@ -10,6 +10,7 @@ import com.chewawa.baselibrary.networkutils.callback.ApiCallBack;
 import com.hanzhi.onlineclassroom.bean.mine.MyClassTabBean;
 import com.hanzhi.onlineclassroom.network.Constants;
 import com.hanzhi.onlineclassroom.ui.mine.contract.MyClassContract;
+import com.hanzhi.onlineclassroom.utils.CommonUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +31,7 @@ public class MyClassModel extends BaseModelImpl implements MyClassContract.Model
 
             @Override
             public void onSuccess(ResultBean resultBean) {
-                if(!TextUtils.isEmpty(resultBean.getData())){
+                if (!TextUtils.isEmpty(resultBean.getData())) {
                     List<MyClassTabBean> list = JSONObject.parseArray(resultBean.getData(), MyClassTabBean.class);
                     listener.onGetTabListSuccess(list);
                 }
@@ -41,21 +42,43 @@ public class MyClassModel extends BaseModelImpl implements MyClassContract.Model
 
     @Override
     public void cancelClass(String orderId, MyClassContract.OnCancelClassListener listener) {
-        String url = Constants.CANCEL_CLASS_APPLY;
-        Map<String, String> map = new HashMap<>();
-        map.put("number", orderId);
-        Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
-            @Override
-            public void onError(int status, String message) {
-                listener.onCancelClassFailure(message);
-            }
+        int teacherId = CommonUtil.getTeacherId();
+        if (teacherId > 0) {
+            String url = Constants.TEACHER_CANCEL_CLASS_APPLY;
+            Map<String, String> map = new HashMap<>();
+            map.put("number", orderId);
+            map.put("teacherId", String.valueOf(teacherId));
+            map.put("status", String.valueOf(2));
+            Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
+                @Override
+                public void onError(int status, String message) {
+                    listener.onCancelClassFailure(message);
+                }
 
-            @Override
-            public void onSuccess(ResultBean resultBean) {
-                listener.onCancelClassSuccess(resultBean.getMsg());
-            }
-        });
-        disposableList.add(disposable);
+                @Override
+                public void onSuccess(ResultBean resultBean) {
+                    listener.onCancelClassSuccess(resultBean.getMsg());
+                }
+            });
+            disposableList.add(disposable);
+        } else {
+            String url = Constants.USER_CANCEL_CLASS_APPLY;
+            Map<String, String> map = new HashMap<>();
+            map.put("number", orderId);
+            Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
+                @Override
+                public void onError(int status, String message) {
+                    listener.onCancelClassFailure(message);
+                }
+
+                @Override
+                public void onSuccess(ResultBean resultBean) {
+                    listener.onCancelClassSuccess(resultBean.getMsg());
+                }
+            });
+            disposableList.add(disposable);
+        }
+
     }
 
     @Override
@@ -76,4 +99,28 @@ public class MyClassModel extends BaseModelImpl implements MyClassContract.Model
         });
         disposableList.add(disposable);
     }
+
+    @Override
+    public void confirmClass(String orderId, MyClassContract.OnConfrimClassListener listener) {
+        int teacherId = CommonUtil.getTeacherId();
+        String url = Constants.TEACHER_CANCEL_CLASS_APPLY;
+        Map<String, String> map = new HashMap<>();
+        map.put("number", orderId);
+        map.put("teacherId", String.valueOf(teacherId));
+        map.put("status", String.valueOf(1));
+        Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {
+            @Override
+            public void onError(int status, String message) {
+                listener.onConfrimListFailure(message);
+            }
+
+            @Override
+            public void onSuccess(ResultBean resultBean) {
+                listener.onConfrimListSuccess(resultBean.getMsg());
+            }
+        });
+        disposableList.add(disposable);
+    }
+
+
 }

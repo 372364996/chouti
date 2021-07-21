@@ -42,6 +42,7 @@
     <string name="my_class_reapply">重新申请</string>
     <string name="my_class_join">开始上课</string>
     <string name="my_class_cancel">取消课程</string>
+    <string name="my_class_confirm">确认课程</string>
     <string name="my_class_review">复习课程</string>
     <string name="my_class_tips_affirm">确认</string>
     <string name="my_class_appraise_submit">提交</string>

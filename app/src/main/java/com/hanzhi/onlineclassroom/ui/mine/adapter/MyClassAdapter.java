@@ -8,6 +8,7 @@ import com.chewawa.baselibrary.base.BaseRecycleViewAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewHolder;
 import com.hanzhi.onlineclassroom.R;
 import com.hanzhi.onlineclassroom.bean.mine.MyClassBean;
+import com.hanzhi.onlineclassroom.utils.CommonUtil;
 import com.hanzhi.onlineclassroom.utils.DateUtils;
 
 import butterknife.BindView;
@@ -44,6 +45,8 @@ public class MyClassAdapter extends BaseRecycleViewAdapter<MyClassBean> {
         TextView tvClassName;
         @BindView(R.id.tv_class_time)
         TextView tvClassTime;
+        @BindView(R.id.tv_user_name)
+        TextView tvUserName;
         @BindView(R.id.tv_teacher_level)
         TextView tvTeacherLevel;
         @BindView(R.id.btn_reapply)
@@ -54,6 +57,9 @@ public class MyClassAdapter extends BaseRecycleViewAdapter<MyClassBean> {
         Button btnReview;
         @BindView(R.id.btn_join_class)
         Button btnJoinClass;
+        @BindView(R.id.btn_confirm)
+        Button btnConfirm;
+
         public ViewHolder(MyClassAdapter adapter, View itemView) {
             super(adapter, itemView);
         }
@@ -69,33 +75,43 @@ public class MyClassAdapter extends BaseRecycleViewAdapter<MyClassBean> {
             tvTeacherLevel.setText(data.getClassTypeName());
             tvClassDate.setText(YMD_DOT.format(DateUtils.getDate(YMDS, data.getClassTime())));
             tvClassTime.setText(data.getStartAndEndTime());
-            if(data.getStatus() == 0){
+            tvUserName.setText(data.getUserName());
+            if (data.getStatus() == 0) {
                 btnCancel.setVisibility(View.VISIBLE);
                 btnReapply.setVisibility(View.GONE);
                 btnReview.setVisibility(View.GONE);
                 btnJoinClass.setVisibility(View.GONE);
-            }else if(data.getStatus() == 1){
+                if (CommonUtil.getTeacherId() > 0) {
+                    btnConfirm.setVisibility(View.VISIBLE);
+                } else {
+                    btnConfirm.setVisibility(View.GONE);
+                }
+            } else if (data.getStatus() == 1) {
                 btnCancel.setVisibility(View.VISIBLE);
                 btnReapply.setVisibility(View.GONE);
                 btnReview.setVisibility(View.GONE);
                 btnJoinClass.setVisibility(View.VISIBLE);
-            }else if(data.getStatus() == 2){
+                btnConfirm.setVisibility(View.GONE);
+            } else if (data.getStatus() == 2) {
                 btnCancel.setVisibility(View.GONE);
                 btnReapply.setVisibility(View.VISIBLE);
                 btnReview.setVisibility(View.GONE);
                 btnJoinClass.setVisibility(View.GONE);
-            }else if(data.getStatus() == 4){
+                btnConfirm.setVisibility(View.GONE);
+            } else if (data.getStatus() == 4) {
                 btnCancel.setVisibility(View.GONE);
                 btnReapply.setVisibility(View.GONE);
                 btnReview.setVisibility(View.VISIBLE);
                 btnJoinClass.setVisibility(View.GONE);
-            }else {
+                btnConfirm.setVisibility(View.GONE);
+            } else {
                 btnCancel.setVisibility(View.GONE);
                 btnReapply.setVisibility(View.GONE);
                 btnReview.setVisibility(View.GONE);
                 btnJoinClass.setVisibility(View.GONE);
+                btnConfirm.setVisibility(View.GONE);
             }
-            addOnClickListener(R.id.btn_reapply, R.id.btn_cancel, R.id.btn_review, R.id.btn_join_class);
+            addOnClickListener(R.id.btn_reapply, R.id.btn_cancel, R.id.btn_review, R.id.btn_join_class, R.id.btn_confirm);
         }
     }
 }

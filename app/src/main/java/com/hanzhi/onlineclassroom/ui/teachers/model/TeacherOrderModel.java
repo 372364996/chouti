@@ -42,7 +42,7 @@ public class TeacherOrderModel extends BaseModelImpl implements TeacherOrderCont
 
     @Override
     public void cancelClass(String orderId, MyClassContract.OnCancelClassListener listener) {
-        String url = Constants.CANCEL_CLASS_APPLY;
+        String url = Constants.USER_CANCEL_CLASS_APPLY;
         Map<String, String> map = new HashMap<>();
         map.put("number", orderId);
         Disposable disposable = HttpManager.get(url).params(map).execute(new ApiCallBack() {

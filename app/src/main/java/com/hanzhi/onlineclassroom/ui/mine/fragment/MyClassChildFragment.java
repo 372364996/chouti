@@ -113,6 +113,10 @@ public class MyClassChildFragment extends BaseRecycleViewFragment<MyClassBean> i
                 myClassPresenter.joinClass(myClassBean.getNumber());
                 break;
             }
+            case R.id.btn_confirm: {
+                myClassPresenter.confirmClass(myClassBean.getNumber());
+                break;
+            }
         }
     }
 

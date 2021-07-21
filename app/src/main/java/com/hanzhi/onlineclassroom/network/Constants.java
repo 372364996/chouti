@@ -75,8 +75,10 @@ public class Constants extends BaseConstants {
     public static final String SUBMIT_CLASS_APPLY = "class/CreateOrderV2";
     /*重新申请课程*/
     public static final String REAPPLY_CLASS_APPLY = "class/CreateOrderV2";
-    /*取消课程*/
-    public static final String CANCEL_CLASS_APPLY = "order/UserCancelOrderV2";
+    /*用户取消课程*/
+    public static final String USER_CANCEL_CLASS_APPLY = "order/UserCancelOrderV2";
+    /*教师取消课程*/
+    public static final String TEACHER_CANCEL_CLASS_APPLY = "order/TeacherUpdateOrderStatusV2";
     /*是否可以进入课堂*/
     public static final String JOIN_CLASS_APPLY = "order/IsCanEnterV2";
     /*获取我们的联系方式（官方联系方式）*/
