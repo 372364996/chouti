@@ -41,12 +41,22 @@ public class LoginActivity extends AppCompatActivity {
         final Button loginButton = findViewById(R.id.login);
         final TextView registerTextView = findViewById(R.id.register);
         final TextView forgetpasswordTextView = findViewById(R.id.forgetpassword);
+        final TextView serviceAgreementTextView = findViewById(R.id.tv_service_agreement);
+
+        serviceAgreementTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ServiceAgreementActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
         registerTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                finish();
+                //finish();
             }
         });
         forgetpasswordTextView.setOnClickListener(new View.OnClickListener() {

@@ -66,9 +66,9 @@
                 android:id="@+id/forgetpassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_marginTop="20dp"
                 android:gravity="right"
-                android:layout_alignParentRight="true"
                 android:text="忘记密码?"
                 android:textColor="#58b4b7" />
         </RelativeLayout>
@@ -96,27 +96,37 @@
             android:layout_height="wrap_content"
             android:gravity="center">
 
-            <TextView
+            <CheckBox
+                android:id="@+id/cb_confirm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="登陆即代表已阅读并同意" />
+                android:layout_marginRight="-6dp"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                android:text="" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用户协议"
+                android:text="已阅读并同意" />
+
+            <TextView
+                android:id="@+id/tv_service_agreement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="用户服务协议"
                 android:textColor="#58b4b7" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="和" />
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="和" />-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="用户政策"
-                android:textColor="#58b4b7" />
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="用户政策"-->
+            <!--                android:textColor="#58b4b7" />-->
         </LinearLayout>
 
 

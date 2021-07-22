@@ -13,32 +13,37 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" />
+
     <application
-        android:name="com.hanzhi.onlineclassroom.SysApplication"
+        android:name=".SysApplication"
         android:allowBackup="true"
         android:icon="@drawable/hanzhilogo"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.hanzhi.onlineclassroom.ui.teachers.TeacherInfoActivity"
+            android:name=".ui.login.ServiceAgreementActivity"
+            android:label="用户服务协议"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.teachers.TeacherInfoActivity"
+            android:label="@string/title_select_class"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:label="@string/title_select_class"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.hanzhi.onlineclassroom.ui.login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.hanzhi.onlineclassroom.ui.login.RegisterActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name="com.hanzhi.onlineclassroom.MainActivity"
+            android:name=".ui.login.RegisterActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,30 +51,38 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.hanzhi.onlineclassroom.ui.teachers.TeacherActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_select_teacher"/>
-        <activity android:name="com.hanzhi.onlineclassroom.ui.selectclass.SelectClassActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_select_class"/>
-        <activity android:name="com.hanzhi.onlineclassroom.ui.appointment.AppointmentTimeActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_select_time"/>
-        <activity android:name="com.hanzhi.onlineclassroom.ui.selectclass.ClassDetailActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_class_detail"/>
-        <activity android:name="com.hanzhi.onlineclassroom.ui.selectclass.ClassApplyActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_class_apply"/>
-        <activity android:name="com.hanzhi.onlineclassroom.ui.mine.MyClassDetailActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_class_detail"/>
-        <activity android:name="com.hanzhi.onlineclassroom.ui.mine.MineActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_mine"/>
-        <activity android:name="com.hanzhi.onlineclassroom.ui.mine.WalletActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_wallet"/>
+        <activity
+            android:name=".ui.teachers.TeacherActivity"
+            android:label="@string/title_select_teacher"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.selectclass.SelectClassActivity"
+            android:label="@string/title_select_class"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.appointment.AppointmentTimeActivity"
+            android:label="@string/title_select_time"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.selectclass.ClassDetailActivity"
+            android:label="@string/title_class_detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.selectclass.ClassApplyActivity"
+            android:label="@string/title_class_apply"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mine.MyClassDetailActivity"
+            android:label="@string/title_class_detail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mine.MineActivity"
+            android:label="@string/title_mine"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.mine.WalletActivity"
+            android:label="@string/title_wallet"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
