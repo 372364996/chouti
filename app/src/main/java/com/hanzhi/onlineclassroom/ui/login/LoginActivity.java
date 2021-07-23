@@ -7,6 +7,7 @@ import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         final TextView registerTextView = findViewById(R.id.register);
         final TextView forgetpasswordTextView = findViewById(R.id.forgetpassword);
         final TextView serviceAgreementTextView = findViewById(R.id.tv_service_agreement);
+        final CheckBox serviceAgreementCheckBox = findViewById(R.id.cb_confirm);
+
 
         serviceAgreementTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +81,11 @@ public class LoginActivity extends AppCompatActivity {
                     StrictMode.setThreadPolicy(policy);
                 }
                 try {
+                    if (!serviceAgreementCheckBox.isChecked()) {
+                        Toast.makeText(LoginActivity.this, "请阅读用户服务协议并勾选，再进行登录操作", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     LoginGet();
                 } catch (IOException e) {
                     e.printStackTrace();
