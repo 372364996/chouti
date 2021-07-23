@@ -29,6 +29,10 @@
             android:label="用户服务协议"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
+            android:name=".ui.login.AboutActivity"
+            android:label="关于韩知"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
             android:name=".ui.teachers.TeacherInfoActivity"
             android:label="@string/title_select_class"
             android:screenOrientation="portrait" />

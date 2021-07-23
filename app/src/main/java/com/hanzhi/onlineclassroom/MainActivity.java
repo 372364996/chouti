@@ -18,17 +18,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
-import com.hanzhi.onlineclassroom.bean.ClassApplyBean;
 import com.hanzhi.onlineclassroom.ui.appointment.fragment.AppointmentTimeFragment;
+import com.hanzhi.onlineclassroom.ui.login.AboutActivity;
 import com.hanzhi.onlineclassroom.ui.login.LoginActivity;
 import com.hanzhi.onlineclassroom.ui.login.RegisterActivity;
 import com.hanzhi.onlineclassroom.ui.mine.MineActivity;
 import com.hanzhi.onlineclassroom.ui.mine.WalletActivity;
 import com.hanzhi.onlineclassroom.ui.mine.fragment.MineFragment;
 import com.hanzhi.onlineclassroom.ui.mine.fragment.MyClassFragment;
-import com.hanzhi.onlineclassroom.ui.selectclass.SelectClassActivity;
 import com.hanzhi.onlineclassroom.ui.selectclass.fragment.SelectClassFragment;
-import com.hanzhi.onlineclassroom.ui.teachers.TeacherActivity;
 import com.hanzhi.onlineclassroom.ui.teachers.fragment.TeacherFragment;
 import com.hanzhi.onlineclassroom.utils.CommonUtil;
 import com.hjm.bottomtabbar.BottomTabBar;
@@ -138,10 +136,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         startActivity(intent);
                         finish();
                         break;
-                    case R.id.nav_slideshow6:
-                        intent = new Intent(MainActivity.this, RegisterActivity.class);
+                    case R.id.nav_slideshow4:
+                        intent = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(intent);
-                        finish();
+                        break;
                     case R.id.nav_slideshow3:
                         qmuiDialog = new QMUIDialog.MessageDialogBuilder(MainActivity.this)
                                 .setSkinManager(QMUISkinManager.defaultInstance(MainActivity.this))
