@@ -1,125 +1,55 @@
 package com.hanzhi.onlineclassroom.ui.login;
 
-import android.content.Context;
-import android.content.Intent;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import androidx.viewpager.widget.ViewPager;
+import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.chewawa.baselibrary.base.NBaseActivity;
 import com.hanzhi.onlineclassroom.R;
-import com.hanzhi.onlineclassroom.bean.ClassApplyBean;
-import com.hanzhi.onlineclassroom.bean.selectclass.ClassBean;
-import com.hanzhi.onlineclassroom.ui.appointment.AppointmentTimeActivity;
-import com.hanzhi.onlineclassroom.ui.selectclass.adapter.ClassDetailAdapter;
-import com.hanzhi.onlineclassroom.ui.selectclass.contract.ClassDetailContract;
-import com.hanzhi.onlineclassroom.ui.selectclass.presenter.ClassDetailPresenter;
-import com.hanzhi.onlineclassroom.utils.CommonUtil;
+import com.qmuiteam.qmui.widget.QMUITopBar;
 
 import butterknife.BindView;
-import butterknife.OnClick;
+import butterknife.ButterKnife;
 
 /**
- * @class 课程详情
+ * @class 用户服务协议
  * @anthor nanfeifei email:18600752302@163.com
  * @time 2020/11/28 13:58
  */
-public class ServiceAgreementActivity extends NBaseActivity<ClassDetailPresenter> implements ClassDetailContract.View, ViewPager.OnPageChangeListener {
-    @BindView(R.id.btn_submit)
-    Button btnSubmit;
-    @BindView(R.id.tv_page)
-    TextView tvPage;
-    @BindView(R.id.progress_horizontal)
-    ProgressBar progressHorizontal;
-    @BindView(R.id.vp_class_detail)
-    ViewPager vpClassDetail;
-    ClassDetailAdapter classDetailAdapter;
-    ClassApplyBean classApplyBean;
-    ClassBean classBean;
-
-    public static void start(Context context, ClassApplyBean classApplyBean) {
-        Intent starter = new Intent(context, ServiceAgreementActivity.class);
-        starter.putExtra("classApplyBean", classApplyBean);
-        context.startActivity(starter);
-    }
+public class ServiceAgreementActivity extends NBaseActivity {
+    @BindView(R.id.toolbar_lay)
+    QMUITopBar toolbarLay;
+    @BindView(R.id.wv_service_agreement)
+    WebView wvServiceAgreement;
 
     @Override
     public int initLoadResId() {
-        return R.layout.activity_class_detail;
+        return R.layout.activity_service_agreement;
     }
 
     @Override
     protected void initView() {
-        classApplyBean = getIntent().getParcelableExtra("classApplyBean");
         initToolBar();
-        toolbarLay.setTitle(R.string.title_class_detail);
-        if (CommonUtil.getTeacherId() > 0) {
-            btnSubmit.setVisibility(View.INVISIBLE);
-        }
-        vpClassDetail.addOnPageChangeListener(this);
-    }
-
-    @Override
-    protected void prepareData() {
-        super.prepareData();
-        if (classApplyBean != null) {
-            presenter.getClassDetailData(classApplyBean.getClassId());
-        }
-    }
-
-    @Override
-    public ClassDetailPresenter initPresenter() {
-        return new ClassDetailPresenter(this);
-    }
-
-    @Override
-    public void setClassDetailData(ClassBean classBean) {
-        this.classBean = classBean;
-        classDetailAdapter = new ClassDetailAdapter(this, classBean.getClassMaterials());
-        vpClassDetail.setAdapter(classDetailAdapter);
-        tvPage.setText("1/" + classBean.getClassMaterials().size());
-        progressHorizontal.setMax(classBean.getClassMaterials().size());
-        progressHorizontal.setProgress(1);
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-        if (classBean == null) {
-            return;
-        }
-        int index = position + 1;
-        tvPage.setText(index + "/" + classBean.getClassMaterials().size());
-        progressHorizontal.setProgress(index);
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-
-    @OnClick(R.id.btn_submit)
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_submit: {
-                if (classApplyBean == null) {
-                    classApplyBean = new ClassApplyBean();
-                }
-                if (TextUtils.isEmpty(classApplyBean.getDateTimeStr())) {
-                    AppointmentTimeActivity.start(ServiceAgreementActivity.this, classApplyBean);
-                } else {
-                    ServiceAgreementActivity.start(ServiceAgreementActivity.this, classApplyBean);
-                }
-                break;
+        toolbarLay.setTitle(R.string.title_service_agreement);
+        //设置自适应屏幕
+        WebSettings settings = wvServiceAgreement.getSettings();
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        //访问网页
+        wvServiceAgreement.loadUrl("http://hanzhiapp.hdlebaobao.cn/home/agreement");
+        //系统默认会通过手机浏览器打开网页，为了能够直接通过WebView显示网页，则必须设置
+        wvServiceAgreement.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //使用WebView加载显示url
+                view.loadUrl(url);
+                //返回true
+                return true;
             }
-        }
+        });
+
     }
+
+
 }
