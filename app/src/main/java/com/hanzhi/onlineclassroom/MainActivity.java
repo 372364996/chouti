@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.hanzhi.onlineclassroom.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.onlineclassroom.ui.login.AboutActivity;
+import com.hanzhi.onlineclassroom.ui.login.ChangePasswordActivity;
 import com.hanzhi.onlineclassroom.ui.login.LoginActivity;
 import com.hanzhi.onlineclassroom.ui.login.RegisterActivity;
 import com.hanzhi.onlineclassroom.ui.mine.MineActivity;
@@ -114,33 +115,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.nav_home:
+                    case R.id.nav_home://我的课程
                         MineActivity.start(MainActivity.this, 0);
 //                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
                         break;
-                    case R.id.nav_gallery:
+                    case R.id.nav_gallery://我收藏的老师
                         MineActivity.start(MainActivity.this, 1);
 //                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
                         break;
-                    case R.id.nav_slideshow:
+                    case R.id.nav_slideshow://我的资料
                         MineActivity.start(MainActivity.this, 2);
 //                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
                         break;
-                    case R.id.nav_slideshow1:
+                    case R.id.nav_slideshow1://我的钱包
                         MineActivity.start(MainActivity.this, 3);
 //                        ((CustomFragmentTabHost)findViewById(android.R.id.tabhost)).setCurrentTab(3);
                         break;
-                    case R.id.nav_slideshow7:
+                    case R.id.nav_slideshow2://更改密码
+                        intent = new Intent(MainActivity.this, ChangePasswordActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_slideshow7://退出登录
                         CommonUtil.clearUserData();
                         intent = new Intent(MainActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
                         break;
-                    case R.id.nav_slideshow4:
+                    case R.id.nav_slideshow4://关于韩知
                         intent = new Intent(MainActivity.this, AboutActivity.class);
                         startActivity(intent);
                         break;
-                    case R.id.nav_slideshow3:
+                    case R.id.nav_slideshow3://清理缓存
                         qmuiDialog = new QMUIDialog.MessageDialogBuilder(MainActivity.this)
                                 .setSkinManager(QMUISkinManager.defaultInstance(MainActivity.this))
                                 .setTitle(R.string.dialog_title)
