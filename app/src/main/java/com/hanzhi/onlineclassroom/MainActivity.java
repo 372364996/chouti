@@ -21,6 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.hanzhi.onlineclassroom.ui.appointment.fragment.AppointmentTimeFragment;
 import com.hanzhi.onlineclassroom.ui.login.AboutActivity;
 import com.hanzhi.onlineclassroom.ui.login.ChangePasswordActivity;
+import com.hanzhi.onlineclassroom.ui.login.ContactActivity;
 import com.hanzhi.onlineclassroom.ui.login.LoginActivity;
 import com.hanzhi.onlineclassroom.ui.login.RegisterActivity;
 import com.hanzhi.onlineclassroom.ui.mine.MineActivity;
@@ -133,6 +134,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         break;
                     case R.id.nav_slideshow2://更改密码
                         intent = new Intent(MainActivity.this, ChangePasswordActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_slideshow5://联系助教
+                        intent = new Intent(MainActivity.this, ContactActivity.class);
                         startActivity(intent);
                         break;
                     case R.id.nav_slideshow7://退出登录
