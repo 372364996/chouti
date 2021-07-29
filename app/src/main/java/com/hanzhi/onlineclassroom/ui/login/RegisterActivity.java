@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -39,6 +40,8 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText usernameEditText = findViewById(R.id.username);
         final EditText passwordEditText = findViewById(R.id.password);
         final EditText confirmpasswordEditText = findViewById(R.id.confirmpassword);
+        final CheckBox serviceAgreementCheckBox = findViewById(R.id.cb_confirm);
+
         returnLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +58,10 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             public void RegisterSubmit() {
-
+                if (!serviceAgreementCheckBox.isChecked()) {
+                    Toast.makeText(RegisterActivity.this, "请阅读用户服务协议并勾选，再进行注册操作", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 dialog = ProgressDialog.show(RegisterActivity.this, "", "正在注册...");
                 final String name = usernameEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
@@ -105,7 +111,6 @@ public class RegisterActivity extends AppCompatActivity {
 
                             }
                         });
-
 
 
                     }
