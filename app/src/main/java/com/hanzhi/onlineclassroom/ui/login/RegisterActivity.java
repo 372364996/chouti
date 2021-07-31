@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,7 +42,15 @@ public class RegisterActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final EditText confirmpasswordEditText = findViewById(R.id.confirmpassword);
         final CheckBox serviceAgreementCheckBox = findViewById(R.id.cb_confirm);
-
+        final TextView serviceAgreementTextView = findViewById(R.id.tv_service_agreement);
+        serviceAgreementTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, ServiceAgreementActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
         returnLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
