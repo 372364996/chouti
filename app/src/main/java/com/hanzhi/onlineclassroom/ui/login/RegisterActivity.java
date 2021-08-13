@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.hanzhi.onlineclassroom.R;
+import com.umeng.commonsdk.UMConfigure;
 
 
 import java.io.IOException;
@@ -70,6 +71,9 @@ public class RegisterActivity extends AppCompatActivity {
                 if (!serviceAgreementCheckBox.isChecked()) {
                     Toast.makeText(RegisterActivity.this, "请阅读用户服务协议并勾选，再进行注册操作", Toast.LENGTH_SHORT).show();
                     return;
+                } else {
+
+                    UMConfigure.init(RegisterActivity.this, UMConfigure.DEVICE_TYPE_BOX, "");
                 }
                 dialog = ProgressDialog.show(RegisterActivity.this, "", "正在注册...");
                 final String name = usernameEditText.getText().toString();

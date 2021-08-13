@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.chewawa.baselibrary.utils.LogUtils;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -38,6 +39,7 @@ public abstract class BaseApplication extends Application implements Application
         super.onCreate();
         application = this;
         //initLocation();
+        UMConfigure.preInit(application,"6114d04ce623447a331ba828","hanzhiapp");
         activityLinkedList = new LinkedList<>();
         registerActivityLifecycleCallbacks(this);
         setRxJavaErrorHandler();

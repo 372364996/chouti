@@ -19,6 +19,7 @@ import com.hanzhi.onlineclassroom.MainActivity;
 import com.hanzhi.onlineclassroom.R;
 import com.hanzhi.onlineclassroom.bean.login.UserBean;
 import com.hanzhi.onlineclassroom.utils.CommonUtil;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.io.IOException;
 
@@ -84,6 +85,9 @@ public class LoginActivity extends AppCompatActivity {
                     if (!serviceAgreementCheckBox.isChecked()) {
                         Toast.makeText(LoginActivity.this, "请阅读用户服务协议并勾选，再进行登录操作", Toast.LENGTH_SHORT).show();
                         return;
+                    }else{
+
+                        UMConfigure.init(LoginActivity.this,UMConfigure.DEVICE_TYPE_BOX,"");
                     }
 
                     LoginGet();

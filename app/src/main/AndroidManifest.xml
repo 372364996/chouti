@@ -90,6 +90,9 @@
             android:name=".ui.mine.WalletActivity"
             android:label="@string/title_wallet"
             android:screenOrientation="portrait" />
+        <meta-data
+        android:name="hanzhiapp"
+        android:value="6114d04ce623447a331ba828" />
     </application>
 
 </manifest>
