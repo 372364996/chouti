@@ -19,6 +19,7 @@ import com.hanzhi.onlineclassroom.MainActivity;
 import com.hanzhi.onlineclassroom.R;
 import com.hanzhi.onlineclassroom.bean.login.UserBean;
 import com.hanzhi.onlineclassroom.utils.CommonUtil;
+import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.io.IOException;
@@ -87,7 +88,11 @@ public class LoginActivity extends AppCompatActivity {
                         return;
                     }else{
 
-                        UMConfigure.init(LoginActivity.this,UMConfigure.DEVICE_TYPE_BOX,"");
+                        UMConfigure.setLogEnabled(true);
+                        UMConfigure.preInit(LoginActivity.this, "61167004e623447a331e6d49", "hanzhiapp");
+                        UMConfigure.init(LoginActivity.this, UMConfigure.DEVICE_TYPE_PHONE, "");
+//                        int num1=0;
+//                        int num2=2/num1;
                     }
 
                     LoginGet();
@@ -195,5 +200,17 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

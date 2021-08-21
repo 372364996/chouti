@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hanzhi.onlineclassroom">
 
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- <uses-permission android:name="android.permission.READ_PHONE_STATE" /> -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -90,9 +90,10 @@
             android:name=".ui.mine.WalletActivity"
             android:label="@string/title_wallet"
             android:screenOrientation="portrait" />
+
         <meta-data
-        android:name="hanzhiapp"
-        android:value="6114d04ce623447a331ba828" />
+            android:name="hanzhiapp"
+            android:value="61167004e623447a331e6d49" />
     </application>
 
 </manifest>

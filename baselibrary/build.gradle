@@ -101,11 +101,17 @@ dependencies {
     //检查更新
     api 'com.github.yjfnypeu:UpdatePlugin:3.1.3'
     //PushSDK必须依赖基础组件库，所以需要加入对应依赖
-    api 'com.umeng.umsdk:common:9.1.0'
+    // 下面各SDK根据宿主App是否使用相关业务按需引入。
+    // 友盟统计SDK
+    implementation 'com.umeng.umsdk:common:9.4.2'// 必选
+    implementation 'com.umeng.umsdk:asms:1.4.0'// 必选
+    implementation 'com.umeng.umsdk:apm:1.4.0' // 错误分析升级为独立SDK，看crash数据请一定集成，可选
+    implementation 'com.umeng.umsdk:abtest:1.0.0'//使用U-App中ABTest能力，可选
+//    api 'com.umeng.umsdk:common:9.1.0'
 
     // (必选)
     api 'com.umeng.umsdk:utdid:1.5.2'
-    api 'com.umeng.umsdk:asms:1.1.3'
+//    api 'com.umeng.umsdk:asms:1.1.3'
 
     // asms包依赖(必选)
 //    api 'com.umeng.umsdk:crash:0.0.4'
