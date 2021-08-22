@@ -1,6 +1,8 @@
 package com.hanzhi.onlineclassroom.ui.appointment.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -8,24 +10,37 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewAdapter;
 import com.chewawa.baselibrary.base.BaseRecycleViewFragment;
+import com.chewawa.baselibrary.networkutils.HttpManager;
+import com.chewawa.baselibrary.networkutils.bean.ResultBean;
+import com.chewawa.baselibrary.networkutils.callback.ApiCallBack;
 import com.chewawa.baselibrary.utils.ToastUtils;
+import com.chewawa.baselibrary.view.XProgressDialog;
 import com.hanzhi.onlineclassroom.R;
 import com.hanzhi.onlineclassroom.bean.ClassApplyBean;
+import com.hanzhi.onlineclassroom.bean.appointment.AppointmentTabBean;
 import com.hanzhi.onlineclassroom.bean.appointment.AppointmentTimeBean;
 import com.hanzhi.onlineclassroom.network.Constants;
 import com.hanzhi.onlineclassroom.ui.appointment.adapter.SetAppointmentTimeAdapter;
+import com.hanzhi.onlineclassroom.ui.login.ChangePasswordActivity;
+import com.hanzhi.onlineclassroom.ui.login.LoginActivity;
 import com.hanzhi.onlineclassroom.ui.selectclass.SelectClassActivity;
 import com.hanzhi.onlineclassroom.ui.teachers.TeacherActivity;
+import com.hanzhi.onlineclassroom.utils.CommonUtil;
 import com.hanzhi.onlineclassroom.utils.RequestParamsUtils;
 import com.qmuiteam.qmui.skin.QMUISkinManager;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialog;
 import com.qmuiteam.qmui.widget.dialog.QMUIDialogAction;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import io.reactivex.disposables.Disposable;
 
 /**
  * @class describe
@@ -130,10 +145,10 @@ public class SetAppointmentTimeChildFragment extends BaseRecycleViewFragment<App
                     return;
                 }
                 List<AppointmentTimeBean> checkedItems = ((SetAppointmentTimeAdapter) baseRecycleViewAdapter).getCheckedItems();
-                if (checkedItems == null || checkedItems.size() == 0) {
-                    ToastUtils.showToast(R.string.appointment_time_no_checked_tips);
-                    return;
-                }
+//                if (checkedItems == null || checkedItems.size() == 0) {
+//                    ToastUtils.showToast(R.string.appointment_time_no_checked_tips);
+//                    return;
+//                }
                 qmuiDialog = new QMUIDialog.MessageDialogBuilder(getActivity())
                         .setSkinManager(QMUISkinManager.defaultInstance(getContext()))
                         .setTitle(R.string.dialog_title)
@@ -147,21 +162,38 @@ public class SetAppointmentTimeChildFragment extends BaseRecycleViewFragment<App
                         .addAction(getString(R.string.my_class_tips_affirm), new QMUIDialogAction.ActionListener() {
                             @Override
                             public void onClick(QMUIDialog dialog, int index) {
-                                dialog.dismiss();
-//                                if(classApplyBean == null){
-//                                    classApplyBean = new ClassApplyBean();
-//                                }
-//                                classApplyBean.setDateTimeStr(checkedItems.get(0).getDateTimeStr());
-//                                if(classApplyBean.getTeacherId() == 0){
-//                                    TeacherActivity.start(getActivity(), classApplyBean);
-//                                }else {
-//                                    SelectClassActivity.start(getActivity(), classApplyBean);
-//                                }
-                                Toast.makeText(getActivity(), "设置成功", Toast.LENGTH_SHORT).show();
 
-//                                Toast toast = Toast.makeText(getActivity(),"", Toast.LENGTH_LONG);
-//                                toast.setText("设置成功");
-//                                toast.show();
+                                dialog.dismiss();
+                                loadingDialog = new XProgressDialog(getActivity(), "设置中,请稍等...");
+                                loadingDialog.show();
+                                String url = Constants.ADD_TEACHER_TIME;
+                                Map<String, Object> map = new HashMap<>();
+                                map.put("teacherId", String.valueOf(CommonUtil.getTeacherId()));
+                                List<String> classTimeList = new ArrayList<String>();
+                                if (checkedItems.isEmpty()) {
+                                    classTimeList.add(date);
+                                    map.put("isChecked", false);
+                                } else {
+                                    for (AppointmentTimeBean item :
+                                            checkedItems) {
+                                        classTimeList.add(item.getDateTimeStr());
+                                    }
+                                }
+
+                                map.put("classTimeList", classTimeList);
+                                Disposable disposable = HttpManager.post(url).upJsonObject(map).execute(new ApiCallBack() {
+                                    @Override
+                                    public void onError(int status, String message) {
+                                        loadingDialog.hide();
+                                        Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                                    }
+
+                                    @Override
+                                    public void onSuccess(ResultBean resultBean) {
+                                        loadingDialog.hide();
+                                        Toast.makeText(getActivity(), resultBean.getMsg(), Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
                         })
                         .create(mCurrentDialogStyle);

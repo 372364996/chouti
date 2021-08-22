@@ -18,8 +18,8 @@ public class Constants extends BaseConstants {
     //中间版本服务器地址
     public static final String BASE_PREVIEW_IP = "https://api.cyb.yz.chewawa.com.cn/shunshoutui";
     // 服务器地址
-//    public static final String BASE_IP = "http://hanzhiapp.hdlebaobao.cn";
-    public static final String BASE_IP = "http://192.168.1.11:9693";
+    public static final String BASE_IP = "http://hanzhiapp.hdlebaobao.cn";
+    //    public static final String BASE_IP = "http://192.168.1.11:9693";
     public static final String IMAGE_IP = BASE_IP;
 
     /*全局公共参数统一配置接口*/
@@ -88,6 +88,8 @@ public class Constants extends BaseConstants {
     public static final String START_RECORD_URL = "Record/Index";
     /*更改用户信息*/
     public static final String UPDATE_USER_INFO = "User/UpdateUserInfo";
+    /*教师设置时间*/
+    public static final String ADD_TEACHER_TIME = "Teacher/AddTeacherTimeV2";
 
     /**
      * Bundle的key
