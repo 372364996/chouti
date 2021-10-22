@@ -31,6 +31,7 @@ public class MineFragment extends NBaseFragment implements CommonTabPagerAdapter
     private CommonTabPagerAdapter adapter;
     int position;
     ClassApplyBean classApplyBean;
+
     public static MineFragment newInstance() {
         return newInstance(0);
     }
@@ -58,7 +59,9 @@ public class MineFragment extends NBaseFragment implements CommonTabPagerAdapter
         List<String> titleList = new ArrayList<>();
         if (CommonUtil.getTeacherId() > 0) {
             titleList.add(getString(R.string.mine_table_my_class));
+            titleList.add(getString(R.string.mine_table_my_profile));
             titleList.add(getString(R.string.mine_table_class_time));
+            titleList.add(getString(R.string.mine_table_class_statistics));
         } else {
             titleList.add(getString(R.string.mine_table_my_class));
             titleList.add(getString(R.string.mine_table_collect_teacher));
@@ -84,29 +87,36 @@ public class MineFragment extends NBaseFragment implements CommonTabPagerAdapter
     @Override
     public Fragment getFragment(int position) {
 
-        if (position == 0) {
-            return MyClassFragment.newInstance();
-        }
+
         if (CommonUtil.getTeacherId() > 0) {
-            if (position == 1) {
-                classApplyBean=new ClassApplyBean();
-                classApplyBean.setTeacherId(CommonUtil.getTeacherId());
-                return SetAppointmentTimeFragment.newInstance(classApplyBean);
-            }
 
+            switch (position) {
+                case 0:
+                    return MyClassFragment.newInstance();
+                case 1:
+                    return MyProfileFragment.newInstance();
+                case 2:
+                    classApplyBean = new ClassApplyBean();
+                    classApplyBean.setTeacherId(CommonUtil.getTeacherId());
+                    return SetAppointmentTimeFragment.newInstance(classApplyBean);
+                case 3:
+                    return WalletFragment.newInstance();
+                default:
+                    return null;
+            }
         } else {
-            if (position == 1) {
-                return CollectTeacherFragment.newInstance();
-            }
-            if (position == 2) {
-                return MyProfileFragment.newInstance();
-            }
-            if (position == 3) {
-                return WalletFragment.newInstance();
+            switch (position) {
+                case 0:
+                    return MyClassFragment.newInstance();
+                case 1:
+                    return CollectTeacherFragment.newInstance();
+                case 2:
+                    return MyProfileFragment.newInstance();
+                case 3:
+                    return WalletFragment.newInstance();
+                default:
+                    return null;
             }
         }
-
-        return MyProfileFragment.newInstance();
     }
-
 }

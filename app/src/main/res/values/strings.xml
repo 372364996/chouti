@@ -54,6 +54,7 @@
     <!--我的-->
     <string name="mine_table_my_class">我的课程</string>
     <string name="mine_table_collect_teacher">收藏老师</string>
+    <string name="mine_table_class_statistics">课程统计</string>
     <string name="mine_table_class_time">上课时间</string>
     <string name="mine_table_my_profile">我的资料</string>
     <string name="mine_table_my_wallet">我的钱包</string>
