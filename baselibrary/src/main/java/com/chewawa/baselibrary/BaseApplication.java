@@ -3,6 +3,7 @@ package com.chewawa.baselibrary;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +17,7 @@ import java.util.List;
 import io.reactivex.functions.Consumer;
 import io.reactivex.plugins.RxJavaPlugins;
 
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * 父类Application
@@ -39,6 +41,11 @@ public abstract class BaseApplication extends Application implements Application
         super.onCreate();
         application = this;
         //initLocation();
+        //TODO: 设置开启日志,发布时请关闭日志
+        JPushInterface.setDebugMode(false);
+        //初始化极光推送
+        JPushInterface.init(this);
+        Log.e("极光Id", JPushInterface.getRegistrationID(this));
         UMConfigure.preInit(application,"6114d04ce623447a331ba828","hanzhiapp");
         activityLinkedList = new LinkedList<>();
         registerActivityLifecycleCallbacks(this);

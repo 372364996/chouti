@@ -18,12 +18,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.hanzhi.onlineclassroom.MainActivity;
 import com.hanzhi.onlineclassroom.R;
 import com.hanzhi.onlineclassroom.bean.login.UserBean;
+import com.hanzhi.onlineclassroom.network.Constants;
 import com.hanzhi.onlineclassroom.utils.CommonUtil;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 
 import java.io.IOException;
 
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -106,7 +108,10 @@ public class LoginActivity extends AppCompatActivity {
                 dialog = ProgressDialog.show(LoginActivity.this, "", "正在登录...");
                 final String name = usernameEditText.getText().toString();
                 final String password = passwordEditText.getText().toString();
-                String path = "http://hanzhiapp.hdlebaobao.cn/home/applogin?phone=" + name + "&password=" + password;
+                Log.e("极光Id", JPushInterface.getRegistrationID(LoginActivity.this));
+
+                final String registrationId = JPushInterface.getRegistrationID(LoginActivity.this);
+                String path = Constants.BASE_IP + "/home/applogin?phone=" + name + "&password=" + password + "&registrationId=" + registrationId;
                 System.out.println(path);
                 System.out.println("用户名：" + name);
                 System.out.println("密码：" + password);
