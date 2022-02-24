@@ -109,8 +109,8 @@ dependencies {
     implementation 'com.umeng.umsdk:abtest:1.0.0'//使用U-App中ABTest能力，可选
 
 //极光推送
-    implementation 'cn.jiguang.sdk:jpush:3.0.9'  // 此处以JPush 3.0.9 版本为例。
-    implementation 'cn.jiguang.sdk:jcore:1.1.7'  // 此处以JCore 1.1.7 版本为例。
+//    implementation 'cn.jiguang.sdk:jpush:3.0.9'  // 此处以JPush 3.0.9 版本为例。
+//    implementation 'cn.jiguang.sdk:jcore:1.1.7'  // 此处以JCore 1.1.7 版本为例。
 //    api 'com.umeng.umsdk:common:9.1.0'
 
     // (必选)

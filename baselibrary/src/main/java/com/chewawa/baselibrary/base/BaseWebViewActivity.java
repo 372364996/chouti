@@ -79,6 +79,7 @@ public abstract class BaseWebViewActivity extends NBaseActivity<DownloadPresente
     public static final int PERMISSION_APPLY = 2001;
     public static final int PERMISSION_RETRY = 2002;
     public static final int PERMISSION_DENIED = 2003;
+
     @Override
     protected void initView() {
         initBar();
@@ -115,7 +116,7 @@ public abstract class BaseWebViewActivity extends NBaseActivity<DownloadPresente
         mAgentWeb.getWebCreator().getWebView().setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                WebView.HitTestResult result = ((WebView)view).getHitTestResult();
+                WebView.HitTestResult result = ((WebView) view).getHitTestResult();
                 if (null == result)
                     return false;
                 int type = result.getType();
@@ -133,7 +134,8 @@ public abstract class BaseWebViewActivity extends NBaseActivity<DownloadPresente
         });
 
     }
-    public void setTextAlertShow(int permissionStatus, String title){
+
+    public void setTextAlertShow(int permissionStatus, String title) {
         this.permissionStatus = permissionStatus;
         qmuiDialog = new QMUIDialog.MessageDialogBuilder(BaseWebViewActivity.this)
                 .setMessage(title)
@@ -141,11 +143,11 @@ public abstract class BaseWebViewActivity extends NBaseActivity<DownloadPresente
                 .setOnDecorationListener(new QMUIDialogView.OnDecorationListener() {
                     @Override
                     public void onDraw(Canvas canvas, QMUIDialogView view) {
-                        if(PERMISSION_APPLY == permissionStatus){
+                        if (PERMISSION_APPLY == permissionStatus) {
                             saveImage(imagePath);
-                        }else if(PERMISSION_RETRY == permissionStatus){
+                        } else if (PERMISSION_RETRY == permissionStatus) {
                             saveImage(imagePath);
-                        }else {
+                        } else {
                             try {
                                 PermissionPageUtils.toPermissionSetting(BaseWebViewActivity.this);
                             } catch (NoSuchFieldException e) {
@@ -162,15 +164,16 @@ public abstract class BaseWebViewActivity extends NBaseActivity<DownloadPresente
                     }
                 }).show();
     }
-    public void saveImage(String imagePath){
+
+    public void saveImage(String imagePath) {
         rxPermissions
                 .requestEachCombined(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .subscribe(permission -> { // will emit 1 Permission object
                     if (permission.granted) {
                         // All permissions are granted !
-                        if(imagePath.startsWith("http")){
+                        if (imagePath.startsWith("http")) {
                             presenter.downloadImage(imagePath, FileUtils.photoPath);
-                        }else if(imagePath.contains("base64")){
+                        } else if (imagePath.contains("base64")) {
                             presenter.saveImage(imagePath, FileUtils.photoPath);
                         }
 
@@ -182,6 +185,7 @@ public abstract class BaseWebViewActivity extends NBaseActivity<DownloadPresente
                     }
                 });
     }
+
     @Override
     public DownloadPresenter initPresenter() {
         return new DownloadPresenter(this);
@@ -299,7 +303,8 @@ public abstract class BaseWebViewActivity extends NBaseActivity<DownloadPresente
 
         @Override
         public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-            handler.proceed();  // 接受所有网站的证书
+//            handler.proceed();  // 接受所有网站的证书
+            handler.cancel();
         }
 
         @Override

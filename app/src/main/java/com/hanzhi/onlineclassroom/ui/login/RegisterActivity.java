@@ -91,6 +91,8 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call call, IOException e) {
                         //异常
+
+
                     }
 
                     @Override
